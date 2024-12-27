@@ -3,6 +3,7 @@ import BubbleBasic from '../src/bubble/demo/basic.vue'
 import BubbleAvatarAndPlacement from '../src/bubble/demo/avatar-and-placement.vue'
 import BubbleHeaderAndFooter from '../src/bubble/demo/header-and-footer.vue'
 import BubbleLoading from '../src/bubble/demo/loading.vue'
+import BubbleTyping from '../src/bubble/demo/typing.vue'
 </script>
 
 # Bubble 对话气泡
@@ -38,3 +39,9 @@ import BubbleLoading from '../src/bubble/demo/loading.vue'
 通过 `loading` 属性控制加载状态。
 
 <BubbleLoading />
+
+### 打字效果
+
+通过设置 `typing` 属性，开启打字效果。更新 `content` 如果是之前的子集，则会继续输出，否则会重新输出。
+
+<BubbleTyping />
