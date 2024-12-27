@@ -2,15 +2,11 @@
 import { UserOutlined } from '@ant-design/icons-vue';
 import { Flex, Switch } from 'ant-design-vue';
 import { Bubble } from '../../index';
-import { ref, watch } from 'vue';
+import { ref } from 'vue';
 
 defineOptions({ name: 'BubbleLoading' });
 
 const loading = ref(true);
-
-watch([loading], () => {
-  console.log('watch', loading.value)
-})
 
 defineRender(() => {
   return (
