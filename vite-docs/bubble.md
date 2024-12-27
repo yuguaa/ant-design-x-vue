@@ -2,6 +2,7 @@
 import BubbleBasic from '../src/bubble/demo/basic.vue'
 import BubbleAvatarAndPlacement from '../src/bubble/demo/avatar-and-placement.vue'
 import BubbleHeaderAndFooter from '../src/bubble/demo/header-and-footer.vue'
+import BubbleLoading from '../src/bubble/demo/loading.vue'
 </script>
 
 # Bubble 对话气泡
@@ -31,3 +32,9 @@ import BubbleHeaderAndFooter from '../src/bubble/demo/header-and-footer.vue'
 通过 `header` 和 `footer` 属性设置气泡的头部和底部。
 
 <BubbleHeaderAndFooter />
+
+### 加载中
+
+通过 `loading` 属性控制加载状态。
+
+<BubbleLoading />
