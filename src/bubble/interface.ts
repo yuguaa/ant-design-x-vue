@@ -38,8 +38,8 @@ export interface BubbleProps extends /* @vue-ignore */ Omit<HTMLAttributes, 'con
   variant?: 'filled' | 'borderless' | 'outlined' | 'shadow';
   shape?: 'round' | 'corner';
   onTypingComplete?: VoidFunction;
-  header?: VNode;
-  footer?: VNode;
+  header?: VNode | string;
+  footer?: VNode | string;
 }
 
 export interface BubbleRef {
