@@ -17,7 +17,8 @@ defineOptions({ name: "AXBubble" });
 const {
   prefixCls: customizePrefixCls,
   rootClassName,
-  style = {},
+  // TODO: Vue's style is not necessarily an object, reconsider the design method in tsx.
+  // style = {},
   classNames = {},
   styles = {},
   avatar,
@@ -37,7 +38,9 @@ const {
 
 const { onUpdate } = unref(useBubbleContextInject());
 
-const divRef = useTemplateRef<HTMLDivElement>(null);
+// TODO: useTemplateRef will trigger warning when expose: [Vue warn] Set operation on key "value" failed: target is readonly.
+// const divRef = useTemplateRef<HTMLDivElement>('div');
+const divRef = ref<HTMLDivElement>(null);
 
 // ============================ Prefix ============================
 const { direction, getPrefixCls } = useXProviderContext();
@@ -172,7 +175,7 @@ defineRender(() => {
     <div
       style={{
         ...(contextConfig.style as object),
-        ...(style as object),
+        // ...(style as object),
       }}
       class={mergedCls}
       {...otherHtmlProps}
@@ -202,6 +205,6 @@ defineRender(() => {
 });
 
 defineExpose({
-  nativeElement: divRef.value,
+  nativeElement: divRef,
 });
 </script>
