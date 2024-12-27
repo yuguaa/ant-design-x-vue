@@ -1,9 +1,11 @@
-<template>
-  <Bubble content="hello world !" />
-</template>
-
 <script setup lang="tsx">
-import Bubble from '../Bubble.vue';
+import { Bubble } from '../../index';
 
 defineOptions({ name: 'AXBubbleBasic' });
+
+defineRender(() => {
+  return (
+    <Bubble content="hello world !" />
+  )
+})
 </script>
