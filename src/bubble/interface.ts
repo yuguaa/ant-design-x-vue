@@ -16,14 +16,19 @@ export interface TypingOption {
   suffix?: VNode;
 }
 
-type SemanticType = 'avatar' | 'content' | 'header' | 'footer';
+export type SemanticType = 'avatar' | 'content' | 'header' | 'footer';
+
+export interface _AvatarProps extends AvatarProps {
+  class: string;
+  style: CSSProperties;
+}
 
 export interface BubbleProps extends /* @vue-ignore */ Omit<HTMLAttributes, 'content'> {
   prefixCls?: string;
   rootClassName?: string;
   styles?: Partial<Record<SemanticType, CSSProperties>>;
   classNames?: Partial<Record<SemanticType, string>>;
-  avatar?: AvatarProps | VNode;
+  avatar?: Partial<_AvatarProps> | VNode;
   placement?: 'start' | 'end';
   loading?: boolean;
   typing?: boolean | TypingOption;
