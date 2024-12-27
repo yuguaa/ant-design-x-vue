@@ -9,7 +9,7 @@ import type { BubbleProps } from './interface';
 import Loading from './loading.vue';
 import useStyle from './style';
 import { useBubbleContextInject } from './context';
-import { isVNode, ref, unref, useTemplateRef, watch, watchEffect } from 'vue';
+import { computed, isVNode, ref, toValue, unref, useTemplateRef, watch, watchEffect } from 'vue';
 import type { VNode } from 'vue'
 
 defineOptions({ name: "AXBubble" });
@@ -102,73 +102,76 @@ const avatarNode = isVNode(avatar) ? avatar : <Avatar {...avatar} />;
 const mergedContent = messageRender ? messageRender(typedContent as any) : typedContent;
 
 // ============================ Render ============================
-let contentNode: VNode;
-if (loading) {
-  contentNode = loadingRender ? loadingRender() : <Loading prefixCls={prefixCls} />;
-} else {
-  contentNode = (
-    <>
-      {mergedContent as VNode}
-      {isTyping && typingSuffix}
-    </>
-  );
-}
+const contentNode = computed<VNode>(() => {
+  if (loading) {
+    return loadingRender ? loadingRender() : <Loading prefixCls={prefixCls} />;
+  } else {
+    return (
+      <>
+        {mergedContent as VNode}
+        {isTyping && typingSuffix}
+      </>
+    );
+  }
+});
 
-let fullContent = (
-  <div
-    style={{
-      ...contextConfig.styles.content,
-      ...styles.content,
-    }}
-    class={classnames(
-      `${prefixCls}-content`,
-      `${prefixCls}-content-${variant}`,
-      shape && `${prefixCls}-content-${shape}`,
-      contextConfig.classNames.content,
-      classNames.content,
-    )}
-  >
-    {contentNode}
-  </div>
-);
-
-if (header || footer) {
-  fullContent = (
-    <div class={`${prefixCls}-content-wrapper`}>
-      {header && (
-        <div
-          class={classnames(
-            `${prefixCls}-header`,
-            contextConfig.classNames.header,
-            classNames.header,
-          )}
-          style={{
-            ...contextConfig.styles.header,
-            ...styles.header,
-          }}
-        >
-          {header}
-        </div>
+const fullContent = computed<VNode>(() => {
+  const _content = (
+    <div
+      style={{
+        ...contextConfig.styles.content,
+        ...styles.content,
+      }}
+      class={classnames(
+        `${prefixCls}-content`,
+        `${prefixCls}-content-${variant}`,
+        shape && `${prefixCls}-content-${shape}`,
+        contextConfig.classNames.content,
+        classNames.content,
       )}
-      {fullContent}
-      {footer && (
-        <div
-          class={classnames(
-            `${prefixCls}-footer`,
-            contextConfig.classNames.footer,
-            classNames.footer,
-          )}
-          style={{
-            ...contextConfig.styles.footer,
-            ...styles.footer,
-          }}
-        >
-          {footer}
-        </div>
-      )}
+    >
+      {toValue(contentNode)}
     </div>
   );
-}
+  if (header || footer) {
+    return (
+      <div class={`${prefixCls}-content-wrapper`}>
+        {header && (
+          <div
+            class={classnames(
+              `${prefixCls}-header`,
+              contextConfig.classNames.header,
+              classNames.header,
+            )}
+            style={{
+              ...contextConfig.styles.header,
+              ...styles.header,
+            }}
+          >
+            {header}
+          </div>
+        )}
+        {_content}
+        {footer && (
+          <div
+            class={classnames(
+              `${prefixCls}-footer`,
+              contextConfig.classNames.footer,
+              classNames.footer,
+            )}
+            style={{
+              ...contextConfig.styles.footer,
+              ...styles.footer,
+            }}
+          >
+            {footer}
+          </div>
+        )}
+      </div>
+    )
+  }
+  return _content;
+});
 
 defineRender(() => {
   return wrapCSSVar(
@@ -199,7 +202,7 @@ defineRender(() => {
       )}
 
       {/* Content */}
-      {fullContent}
+      {toValue(fullContent)}
     </div>,
   );
 });
