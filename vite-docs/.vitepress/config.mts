@@ -26,12 +26,18 @@ export default defineConfig({
 
     sidebar: [
       {
+        text: '通用',
+        items: [
+          { text: 'Bubble 对话气泡框', link: '/bubble' }
+        ]
+      },
+      {
         text: 'Examples',
         items: [
           { text: 'Markdown Examples', link: '/markdown-examples' },
           { text: 'Runtime API Examples', link: '/api-examples' }
         ]
-      }
+      },
     ],
 
     socialLinks: [
