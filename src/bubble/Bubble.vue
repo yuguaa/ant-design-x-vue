@@ -9,7 +9,7 @@ import type { BubbleProps } from './interface';
 import Loading from './loading.vue';
 import useStyle from './style';
 import { useBubbleContextInject } from './context';
-import { computed, isVNode, ref, toValue, unref, useTemplateRef, watch, watchEffect } from 'vue';
+import { computed, isVNode, ref, toRef, toValue, unref, useTemplateRef, watch, watchEffect } from 'vue';
 import type { VNode } from 'vue'
 
 defineOptions({ name: "AXBubble" });
@@ -26,7 +26,7 @@ const {
   loading = false,
   loadingRender,
   typing,
-  content = '',
+  content: contentProp = '',
   messageRender,
   variant = 'filled',
   shape,
@@ -35,6 +35,12 @@ const {
   footer,
   ...otherHtmlProps
 } = defineProps<BubbleProps>();
+
+const content = ref(contentProp);
+
+watch(() => contentProp, () => {
+  content.value = contentProp;
+})
 
 const { onUpdate } = unref(useBubbleContextInject());
 
@@ -51,7 +57,7 @@ const prefixCls = getPrefixCls('bubble', customizePrefixCls);
 const contextConfig = unref(useXComponentConfig('bubble'));
 
 // ============================ Typing ============================
-const [typingEnabled, typingStep, typingInterval, typingSuffix] = unref(useTypingConfig(typing));
+const [typingEnabled, typingStep, typingInterval, typingSuffix] = useTypingConfig(typing);
 
 const [typedContent, isTyping] = useTypedEffect(
   content,
@@ -62,12 +68,12 @@ const [typedContent, isTyping] = useTypedEffect(
 
 const triggerTypingCompleteRef = ref(false);
 
-watch(() => typedContent, () => {
+watch(typedContent, () => {
   onUpdate?.();
 });
 
 watchEffect(() => {
-  if (!isTyping && !loading) {
+  if (!isTyping.value && !loading) {
     // StrictMode will trigger this twice,
     // So we need a flag to avoid that
     if (!triggerTypingCompleteRef.value) {
@@ -82,7 +88,7 @@ watchEffect(() => {
 // ============================ Styles ============================
 const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 
-const mergedCls = classnames(
+const mergedCls = computed(() => classnames(
   prefixCls,
   rootClassName,
   contextConfig.className,
@@ -91,15 +97,15 @@ const mergedCls = classnames(
   `${prefixCls}-${placement}`,
   {
     [`${prefixCls}-rtl`]: direction.value === 'rtl',
-    [`${prefixCls}-typing`]: isTyping && !loading && !messageRender && !typingSuffix,
+    [`${prefixCls}-typing`]: isTyping.value && !loading && !messageRender && !typingSuffix.value,
   },
-);
+));
 
 // ============================ Avatar ============================
-const avatarNode = isVNode(avatar) ? avatar : <Avatar {...avatar} />;
+const avatarNode = computed(() => isVNode(avatar) ? avatar : <Avatar {...avatar} />);
 
 // =========================== Content ============================
-const mergedContent = messageRender ? messageRender(typedContent as any) : typedContent;
+const mergedContent = computed(() => messageRender ? messageRender(typedContent.value as any) : typedContent.value);
 
 // ============================ Render ============================
 const contentNode = computed<VNode>(() => {
@@ -108,8 +114,8 @@ const contentNode = computed<VNode>(() => {
   } else {
     return (
       <>
-        {mergedContent as VNode}
-        {isTyping && typingSuffix}
+        {mergedContent.value}
+        {isTyping.value && toValue(typingSuffix)}
       </>
     );
   }
@@ -180,7 +186,7 @@ defineRender(() => {
         ...(contextConfig.style as object),
         // ...(style as object),
       }}
-      class={mergedCls}
+      class={toValue(mergedCls)}
       {...otherHtmlProps}
       ref={divRef}
     >
@@ -197,7 +203,7 @@ defineRender(() => {
             classNames.avatar,
           )}
         >
-          {avatarNode}
+          {toValue(avatarNode)}
         </div>
       )}
 

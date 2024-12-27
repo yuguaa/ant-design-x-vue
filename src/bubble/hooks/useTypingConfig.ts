@@ -1,26 +1,25 @@
-import { computed,  } from 'vue';
-import type { Ref, VNode } from 'vue'
+import { computed, ref } from 'vue';
 import type { BubbleProps, TypingOption } from '../interface';
 
-function useTypingConfig(typing: BubbleProps['typing']): Ref<[boolean, number, number, VNode]> {
-  return computed(() => {
-    if (!typing) {
-      return [false, 0, 0, null];
-    }
+function useTypingConfig(typing: BubbleProps['typing']) {
+  const typingEnabled = ref(true);
+  const baseConfig: Required<TypingOption> = {
+    step: 1,
+    interval: 50,
+    // set default suffix is empty
+    suffix: null,
+  };
+  const config = computed(() => ({
+    ...baseConfig,
+    ...(typeof typing === 'object' ? typing : {})
+  }));
 
-    let baseConfig: Required<TypingOption> = {
-      step: 1,
-      interval: 50,
-      // set default suffix is empty
-      suffix: null,
-    };
-
-    if (typeof typing === 'object') {
-      baseConfig = { ...baseConfig, ...typing };
-    }
-
-    return [true, baseConfig.step, baseConfig.interval, baseConfig.suffix];
-  });
+  return [
+    typingEnabled,
+    computed(() => config.value.step),
+    computed(() => config.value.interval),
+    computed(() => config.value.suffix)
+  ] as const;
 }
 
 export default useTypingConfig;
