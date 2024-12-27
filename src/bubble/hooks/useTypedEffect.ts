@@ -33,7 +33,7 @@ const useTypedEffect = (
   });
 
   // Start typing
-  watch([typingIndex, typingEnabled, content], () => {
+  watch([typingIndex, () => typingEnabled, () => content], () => {
     if (mergedTypingEnabled && unref(typingIndex) < content.length) {
       const id = setTimeout(() => {
         setTypingIndex(unref(typingIndex) + typingStep);
