@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'node:path';
+import VueMacros from 'unplugin-vue-macros/vite'
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 
@@ -8,8 +9,13 @@ const externals = ['vue'];
 
 export default defineConfig({
   plugins: [
-    vue(),
-    vueJsx(),
+    VueMacros({
+      plugins: {
+        vue: vue(),
+        vueJsx: vueJsx(),
+      },
+      // 覆盖插件选项
+    }),
   ],
   build: {
     lib: {

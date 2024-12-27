@@ -1,0 +1,184 @@
+<script setup lang="tsx">
+import classNames from 'classnames';
+import { useEventCallback } from '../_util/hooks/use-event-callback';
+import pickAttrs from '../_util/pick-attrs';
+import { useXProviderContext } from '../x-provider';
+import Bubble from './Bubble.vue';
+import type { BubbleRef } from './interface';
+import useDisplayData from './hooks/useDisplayData';
+import useListData from './hooks/useListData';
+import type { BubbleListProps } from './interface';
+import useStyle from './style';
+import { computed, onWatcherCleanup, ref, unref, useTemplateRef, watch, watchEffect } from 'vue';
+import useState from '../_util/hooks/use-state';
+import BubbleContextProvider from './context';
+
+defineOptions({ name: "AXBubbleList" });
+
+const TOLERANCE = 1;
+
+const {
+  prefixCls: customizePrefixCls,
+  rootClassName,
+  items,
+  autoScroll = true,
+  roles,
+  ...restProps
+} = defineProps<BubbleListProps>();
+
+const domProps = pickAttrs(restProps, {
+  attr: true,
+  aria: true,
+});
+
+// ============================= Refs =============================
+const listRef = useTemplateRef<HTMLDivElement>(null);
+
+const bubbleRefs = ref<Record<string, BubbleRef>>({});
+
+// ============================ Prefix ============================
+const { getPrefixCls } = useXProviderContext();
+
+const prefixCls = getPrefixCls('bubble', customizePrefixCls);
+const listPrefixCls = `${prefixCls}-list`;
+
+const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+
+// ============================ Typing ============================
+const [initialized, setInitialized] = useState(false);
+
+watchEffect(() => {
+  setInitialized(true);
+  onWatcherCleanup(() => {
+    setInitialized(false);
+  })
+});
+
+// ============================= Data =============================
+const mergedData = useListData(items, roles);
+
+const [displayData, onTypingComplete] = useDisplayData(unref(mergedData));
+
+// ============================ Scroll ============================
+// Is current scrollTop at the end. User scroll will make this false.
+const [scrollReachEnd, setScrollReachEnd] = useState(true);
+
+const [updateCount, setUpdateCount] = useState(0);
+
+const onInternalScroll = (e: Event) => {
+  const target = e.target as HTMLElement;
+
+  setScrollReachEnd(
+    target.scrollHeight - Math.abs(target.scrollTop) - target.clientHeight <= TOLERANCE,
+  );
+};
+
+watch(updateCount, () => {
+  if (autoScroll && unref(listRef) && unref(scrollReachEnd)) {
+    unref(listRef).scrollTo({
+        top: unref(listRef).scrollHeight,
+      });
+    }
+});
+
+// Always scroll to bottom when data change
+watch(() => unref(displayData).length, () => {
+  if (autoScroll) {
+    // New date come, the origin last one is the second last one
+    const lastItemKey = unref(displayData)[unref(displayData).length - 2]?.key;
+    const bubbleInst = unref(bubbleRefs)[lastItemKey!];
+
+    // Auto scroll if last 2 item is visible
+    if (bubbleInst) {
+      const { nativeElement } = bubbleInst;
+      const { top, bottom } = nativeElement.getBoundingClientRect();
+      const { top: listTop, bottom: listBottom } = unref(listRef).getBoundingClientRect();
+
+      const isVisible = top < listBottom && bottom > listTop;
+      if (isVisible) {
+        setUpdateCount(unref(updateCount) + 1);
+        setScrollReachEnd(true);
+      }
+    }
+  }
+});
+
+// =========================== Context ============================
+// When bubble content update, we try to trigger `autoScroll` for sync
+const onBubbleUpdate = useEventCallback<void>(() => {
+  if (autoScroll) {
+    setUpdateCount(unref(updateCount) + 1);
+  }
+});
+
+const context = computed(() => ({
+  onUpdate: onBubbleUpdate,
+}));
+
+defineRender(() => {
+  return wrapCSSVar(
+    <BubbleContextProvider value={context.value}>
+      <div
+        {...domProps}
+        class={classNames(listPrefixCls, rootClassName, hashId, cssVarCls, {
+          [`${listPrefixCls}-reach-end`]: scrollReachEnd,
+        })}
+        ref={listRef}
+        onScroll={onInternalScroll}
+      >
+        {unref(displayData).map(({ key, ...bubble }) => (
+          <Bubble
+            {...bubble}
+            key={key}
+            ref={(node) => {
+              if (node) {
+                unref(bubbleRefs)[key] = node;
+              } else {
+                delete unref(bubbleRefs)[key];
+              }
+            }}
+            typing={initialized ? bubble.typing : false}
+            onTypingComplete={() => {
+              bubble.onTypingComplete?.();
+              onTypingComplete(key);
+            }}
+          />
+        ))}
+      </div>
+    </BubbleContextProvider>,
+  )
+})
+
+defineExpose({
+  nativeElement: unref(listRef),
+  scrollTo: ({ key, offset, behavior = 'smooth', block }: {
+    offset?: number;
+    key?: string | number;
+    behavior?: ScrollBehavior;
+    block?: ScrollLogicalPosition;
+  }) => {
+      if (typeof offset === 'number') {
+        // Offset scroll
+        unref(listRef)!.scrollTo({
+          top: offset,
+          behavior,
+        });
+      } else if (key !== undefined) {
+        // Key scroll
+        const bubbleInst = unref(bubbleRefs)[key];
+
+        if (bubbleInst) {
+          // Block current auto scrolling
+          const index = unref(displayData).findIndex((dataItem) => dataItem.key === key);
+          setScrollReachEnd(index === unref(displayData).length - 1);
+
+          // Do native scroll
+          bubbleInst.nativeElement.scrollIntoView({
+            behavior,
+            block,
+          });
+        }
+      }
+    }
+});
+</script>

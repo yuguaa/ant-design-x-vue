@@ -1,0 +1,207 @@
+<script setup lang="tsx">
+import classnames from 'classnames';
+import { Avatar } from 'ant-design-vue';
+import useXComponentConfig from '../_util/hooks/use-x-component-config';
+import { useXProviderContext } from '../x-provider';
+import useTypedEffect from './hooks/useTypedEffect';
+import useTypingConfig from './hooks/useTypingConfig';
+import type { BubbleProps } from './interface';
+import Loading from './loading.vue';
+import useStyle from './style';
+import { useBubbleContextInject } from './context';
+import { isVNode, ref, unref, useTemplateRef, watch, watchEffect } from 'vue';
+import type { VNode } from 'vue'
+
+defineOptions({ name: "AXBubble" });
+
+const {
+  prefixCls: customizePrefixCls,
+  rootClassName,
+  style = {},
+  classNames = {},
+  styles = {},
+  avatar,
+  placement = 'start',
+  loading = false,
+  loadingRender,
+  typing,
+  content = '',
+  messageRender,
+  variant = 'filled',
+  shape,
+  onTypingComplete,
+  header,
+  footer,
+  ...otherHtmlProps
+} = defineProps<BubbleProps>();
+
+const { onUpdate } = unref(useBubbleContextInject());
+
+const divRef = useTemplateRef<HTMLDivElement>(null);
+
+// ============================ Prefix ============================
+const { direction, getPrefixCls } = useXProviderContext();
+
+const prefixCls = getPrefixCls('bubble', customizePrefixCls);
+
+// ===================== Component Config =========================
+const contextConfig = unref(useXComponentConfig('bubble'));
+
+// ============================ Typing ============================
+const [typingEnabled, typingStep, typingInterval, typingSuffix] = unref(useTypingConfig(typing));
+
+const [typedContent, isTyping] = useTypedEffect(
+  content,
+  typingEnabled,
+  typingStep,
+  typingInterval,
+);
+
+const triggerTypingCompleteRef = ref(false);
+
+watch(() => typedContent, () => {
+  onUpdate?.();
+});
+
+watchEffect(() => {
+  if (!isTyping && !loading) {
+    // StrictMode will trigger this twice,
+    // So we need a flag to avoid that
+    if (!triggerTypingCompleteRef.value) {
+      triggerTypingCompleteRef.value = true;
+      onTypingComplete?.();
+    }
+  } else {
+    triggerTypingCompleteRef.value = false;
+  }
+});
+
+// ============================ Styles ============================
+const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+
+const mergedCls = classnames(
+  prefixCls,
+  rootClassName,
+  contextConfig.className,
+  hashId,
+  cssVarCls,
+  `${prefixCls}-${placement}`,
+  {
+    [`${prefixCls}-rtl`]: direction.value === 'rtl',
+    [`${prefixCls}-typing`]: isTyping && !loading && !messageRender && !typingSuffix,
+  },
+);
+
+// ============================ Avatar ============================
+const avatarNode = isVNode(avatar) ? avatar : <Avatar {...avatar} />;
+
+// =========================== Content ============================
+const mergedContent = messageRender ? messageRender(typedContent as any) : typedContent;
+
+// ============================ Render ============================
+let contentNode: VNode;
+if (loading) {
+  contentNode = loadingRender ? loadingRender() : <Loading prefixCls={prefixCls} />;
+} else {
+  contentNode = (
+    <>
+      {mergedContent as VNode}
+      {isTyping && typingSuffix}
+    </>
+  );
+}
+
+let fullContent = (
+  <div
+    style={{
+      ...contextConfig.styles.content,
+      ...styles.content,
+    }}
+    class={classnames(
+      `${prefixCls}-content`,
+      `${prefixCls}-content-${variant}`,
+      shape && `${prefixCls}-content-${shape}`,
+      contextConfig.classNames.content,
+      classNames.content,
+    )}
+  >
+    {contentNode}
+  </div>
+);
+
+if (header || footer) {
+  fullContent = (
+    <div class={`${prefixCls}-content-wrapper`}>
+      {header && (
+        <div
+          class={classnames(
+            `${prefixCls}-header`,
+            contextConfig.classNames.header,
+            classNames.header,
+          )}
+          style={{
+            ...contextConfig.styles.header,
+            ...styles.header,
+          }}
+        >
+          {header}
+        </div>
+      )}
+      {fullContent}
+      {footer && (
+        <div
+          class={classnames(
+            `${prefixCls}-footer`,
+            contextConfig.classNames.footer,
+            classNames.footer,
+          )}
+          style={{
+            ...contextConfig.styles.footer,
+            ...styles.footer,
+          }}
+        >
+          {footer}
+        </div>
+      )}
+    </div>
+  );
+}
+
+defineRender(() => {
+  return wrapCSSVar(
+    <div
+      style={{
+        ...(contextConfig.style as object),
+        ...(style as object),
+      }}
+      class={mergedCls}
+      {...otherHtmlProps}
+      ref={divRef}
+    >
+      {/* Avatar */}
+      {avatar && (
+        <div
+          style={{
+            ...contextConfig.styles.avatar,
+            ...styles.avatar,
+          }}
+          class={classnames(
+            `${prefixCls}-avatar`,
+            contextConfig.classNames.avatar,
+            classNames.avatar,
+          )}
+        >
+          {avatarNode}
+        </div>
+      )}
+
+      {/* Content */}
+      {fullContent}
+    </div>,
+  );
+});
+
+defineExpose({
+  nativeElement: divRef.value,
+});
+</script>

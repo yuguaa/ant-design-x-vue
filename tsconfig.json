@@ -8,11 +8,14 @@
     "jsxImportSource": "vue",
     "strictNullChecks": false,
     "baseUrl": "./",
+    "types": ["unplugin-vue-macros/macros-global"],
     "paths": {
       "@@/*": [".dumi/tmp/*"],
-      "wzc-init-vue": ["src"],
-      "wzc-init-vue/*": ["src/*", "*"]
+      "@ant-design-x-vue": ["src/index.ts"],
     }
+  },
+  "vueCompilerOptions": {
+    "plugins": ["unplugin-vue-macros/volar"]
   },
   "include": [".dumirc.ts", "src/**/*"]
 }
