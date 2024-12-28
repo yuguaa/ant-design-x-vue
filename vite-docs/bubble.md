@@ -7,6 +7,7 @@ import BubbleTyping from '../src/bubble/demo/typing.vue'
 import BubbleMarkdown from '../src/bubble/demo/markdown.vue'
 import BubbleVariant from '../src/bubble/demo/variant.vue'
 import BubbleShape from '../src/bubble/demo/shape.vue'
+import BubbleList from '../src/bubble/demo/list.vue'
 </script>
 
 # Bubble 对话气泡
@@ -66,3 +67,9 @@ import BubbleShape from '../src/bubble/demo/shape.vue'
 通过 `shape` 属性设置气泡的形状。
 
 <BubbleShape />
+
+### 气泡列表
+
+预设样式的气泡列表，支持自动滚动。使用 `roles` 设置气泡默认属性。
+
+<BubbleList />
