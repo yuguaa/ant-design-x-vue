@@ -33,7 +33,7 @@ export interface BubbleProps extends /* @vue-ignore */ Omit<HTMLAttributes, 'con
   loading?: boolean;
   typing?: boolean | TypingOption;
   content?: VNode | object | string;
-  messageRender?: (content: string) => VNode;
+  messageRender?: (content: string) => VNode | string;
   loadingRender?: () => VNode;
   variant?: 'filled' | 'borderless' | 'outlined' | 'shadow';
   shape?: 'round' | 'corner';
