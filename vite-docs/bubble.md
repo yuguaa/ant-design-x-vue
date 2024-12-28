@@ -10,6 +10,7 @@ import BubbleShape from '../src/bubble/demo/shape.vue'
 import BubbleList from '../src/bubble/demo/list.vue'
 import BubbleCustom from '../src/bubble/demo/bubble-custom.vue'
 import BubbleListCustom from '../src/bubble/demo/list-custom.vue'
+import BubbleGptVis from '../src/bubble/demo/gpt-vis.vue'
 </script>
 
 # Bubble 对话气泡
@@ -87,3 +88,11 @@ import BubbleListCustom from '../src/bubble/demo/list-custom.vue'
 自定义气泡列表内容，这对于个性化定制场景非常有用。
 
 <BubbleListCustom />
+
+### 使用 GPT-Vis 渲染图表 (no support)
+
+@antv/GPT-Vis 仅支持React。
+
+~~配合 @antv/GPT-Vis 实现大模型输出的图表渲染，支持模型流式输出。~~
+
+<BubbleGptVis />
