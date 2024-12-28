@@ -8,6 +8,7 @@ import BubbleMarkdown from '../src/bubble/demo/markdown.vue'
 import BubbleVariant from '../src/bubble/demo/variant.vue'
 import BubbleShape from '../src/bubble/demo/shape.vue'
 import BubbleList from '../src/bubble/demo/list.vue'
+import BubbleCustom from '../src/bubble/demo/bubble-custom.vue'
 </script>
 
 # Bubble 对话气泡
@@ -73,3 +74,9 @@ import BubbleList from '../src/bubble/demo/list.vue'
 预设样式的气泡列表，支持自动滚动。使用 `roles` 设置气泡默认属性。
 
 <BubbleList />
+
+### 语义化自定义
+
+示例通过语义化以及加载定制，来调整气泡效果。
+
+<BubbleCustom />
