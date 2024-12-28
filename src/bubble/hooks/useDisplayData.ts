@@ -5,10 +5,10 @@ import { ListItemType } from './useListData';
 
 type UseDisplayDataReturn = [Ref<ListItemType[]>, (value: string | number) => void];
 
-export default function useDisplayData(items: ListItemType[]): UseDisplayDataReturn {
-  const [displayCount, setDisplayCount] = useState(items.length);
+export default function useDisplayData(items: Ref<ListItemType[]>): UseDisplayDataReturn {
+  const [displayCount, setDisplayCount] = useState(items.value.length);
 
-  const displayList = computed(() => items.slice(0, unref(displayCount)));
+  const displayList = computed(() => items.value.slice(0, unref(displayCount)));
 
   const displayListLastKey = computed(() => {
     const lastItem = unref(displayList)[unref(displayList).length - 1];
@@ -19,7 +19,7 @@ export default function useDisplayData(items: ListItemType[]): UseDisplayDataRet
   watch(
     items,
     () => {
-      if (unref(displayList).length && unref(displayList).every((item, index) => item.key === items[index]?.key)) {
+      if (unref(displayList).length && unref(displayList).every((item, index) => item.key === items.value[index]?.key)) {
         return;
       }
 
@@ -28,7 +28,7 @@ export default function useDisplayData(items: ListItemType[]): UseDisplayDataRet
       } else {
         // Find diff index
         for (let i = 0; i < unref(displayList).length; i += 1) {
-          if (unref(displayList)[i].key !== items[i]?.key) {
+          if (unref(displayList)[i].key !== items.value[i]?.key) {
             setDisplayCount(i);
             break;
           }

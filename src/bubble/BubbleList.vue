@@ -9,7 +9,7 @@ import useDisplayData from './hooks/useDisplayData';
 import useListData from './hooks/useListData';
 import type { BubbleListProps } from './interface';
 import useStyle from './style';
-import { computed, onWatcherCleanup, ref, unref, useTemplateRef, watch, watchEffect } from 'vue';
+import { computed, onWatcherCleanup, ref, unref, watch, watchEffect } from 'vue';
 import useState from '../_util/hooks/use-state';
 import BubbleContextProvider from './context';
 
@@ -20,7 +20,7 @@ const TOLERANCE = 1;
 const {
   prefixCls: customizePrefixCls,
   rootClassName,
-  items,
+  items: itemsProp,
   autoScroll = true,
   roles,
   ...restProps
@@ -31,8 +31,15 @@ const domProps = pickAttrs(restProps, {
   aria: true,
 });
 
+const items = ref<BubbleListProps['items']>(itemsProp);
+
+watch(() => itemsProp, () => {
+  items.value = itemsProp;
+})
+
 // ============================= Refs =============================
-const listRef = useTemplateRef<HTMLDivElement>(null);
+// const listRef = useTemplateRef<HTMLDivElement>(null);
+const listRef = ref<HTMLDivElement>(null);
 
 const bubbleRefs = ref<Record<string, BubbleRef>>({});
 
@@ -57,7 +64,7 @@ watchEffect(() => {
 // ============================= Data =============================
 const mergedData = useListData(items, roles);
 
-const [displayData, onTypingComplete] = useDisplayData(unref(mergedData));
+const [displayData, onTypingComplete] = useDisplayData(mergedData);
 
 // ============================ Scroll ============================
 // Is current scrollTop at the end. User scroll will make this false.
@@ -121,7 +128,7 @@ defineRender(() => {
       <div
         {...domProps}
         class={classNames(listPrefixCls, rootClassName, hashId, cssVarCls, {
-          [`${listPrefixCls}-reach-end`]: scrollReachEnd,
+          [`${listPrefixCls}-reach-end`]: scrollReachEnd.value,
         })}
         ref={listRef}
         onScroll={onInternalScroll}
@@ -132,12 +139,12 @@ defineRender(() => {
             key={key}
             ref={(node) => {
               if (node) {
-                unref(bubbleRefs)[key] = node;
+                bubbleRefs.value[key] = node;
               } else {
-                delete unref(bubbleRefs)[key];
+                delete bubbleRefs.value[key];
               }
             }}
-            typing={initialized ? bubble.typing : false}
+            typing={initialized.value ? bubble.typing : false}
             onTypingComplete={() => {
               bubble.onTypingComplete?.();
               onTypingComplete(key);
@@ -150,7 +157,7 @@ defineRender(() => {
 })
 
 defineExpose({
-  nativeElement: unref(listRef),
+  nativeElement: listRef,
   scrollTo: ({ key, offset, behavior = 'smooth', block }: {
     offset?: number;
     key?: string | number;
