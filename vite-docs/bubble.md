@@ -5,6 +5,7 @@ import BubbleHeaderAndFooter from '../src/bubble/demo/header-and-footer.vue'
 import BubbleLoading from '../src/bubble/demo/loading.vue'
 import BubbleTyping from '../src/bubble/demo/typing.vue'
 import BubbleMarkdown from '../src/bubble/demo/markdown.vue'
+import BubbleVariant from '../src/bubble/demo/variant.vue'
 </script>
 
 # Bubble 对话气泡
@@ -52,3 +53,9 @@ import BubbleMarkdown from '../src/bubble/demo/markdown.vue'
 配合 `markdown-it` 实现自定义渲染内容。
 
 <BubbleMarkdown />
+
+### 变体
+
+通过 `variant` 属性设置气泡的样式变体。
+
+<BubbleVariant />
