@@ -32,6 +32,7 @@ defineRender(() => {
     <Bubble
       variant="borderless"
       avatar={{ icon: <UserOutlined /> }}
+      content={<div>waiting for support</div>}
       // content={<Prompts title="variant: borderless to customize" items={items} vertical />}
     />
   </Flex>

@@ -9,6 +9,7 @@ import BubbleVariant from '../src/bubble/demo/variant.vue'
 import BubbleShape from '../src/bubble/demo/shape.vue'
 import BubbleList from '../src/bubble/demo/list.vue'
 import BubbleCustom from '../src/bubble/demo/bubble-custom.vue'
+import BubbleListCustom from '../src/bubble/demo/list-custom.vue'
 </script>
 
 # Bubble 对话气泡
@@ -80,3 +81,9 @@ import BubbleCustom from '../src/bubble/demo/bubble-custom.vue'
 示例通过语义化以及加载定制，来调整气泡效果。
 
 <BubbleCustom />
+
+### 自定义列表内容
+
+自定义气泡列表内容，这对于个性化定制场景非常有用。
+
+<BubbleListCustom />
