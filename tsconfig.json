@@ -12,10 +12,11 @@
     "paths": {
       "@@/*": [".dumi/tmp/*"],
       "@ant-design-x-vue": ["src/index.ts"],
+      "@ant-design-x-vue/*": ["src/*"],
     }
   },
   "vueCompilerOptions": {
     "plugins": ["unplugin-vue-macros/volar"]
   },
-  "include": [".dumirc.ts", "src/**/*"]
+  "include": [".dumirc.ts", "src/**/*", "vite-docs/**/*"]
 }

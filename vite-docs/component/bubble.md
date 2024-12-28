@@ -1,16 +1,16 @@
 <script setup>
-import BubbleBasic from '../src/bubble/demo/basic.vue'
-import BubbleAvatarAndPlacement from '../src/bubble/demo/avatar-and-placement.vue'
-import BubbleHeaderAndFooter from '../src/bubble/demo/header-and-footer.vue'
-import BubbleLoading from '../src/bubble/demo/loading.vue'
-import BubbleTyping from '../src/bubble/demo/typing.vue'
-import BubbleMarkdown from '../src/bubble/demo/markdown.vue'
-import BubbleVariant from '../src/bubble/demo/variant.vue'
-import BubbleShape from '../src/bubble/demo/shape.vue'
-import BubbleList from '../src/bubble/demo/list.vue'
-import BubbleCustom from '../src/bubble/demo/bubble-custom.vue'
-import BubbleListCustom from '../src/bubble/demo/list-custom.vue'
-import BubbleGptVis from '../src/bubble/demo/gpt-vis.vue'
+import BubbleBasic from '@ant-design-x-vue/bubble/demo/basic.vue'
+import BubbleAvatarAndPlacement from '@ant-design-x-vue/bubble/demo/avatar-and-placement.vue'
+import BubbleHeaderAndFooter from '@ant-design-x-vue/bubble/demo/header-and-footer.vue'
+import BubbleLoading from '@ant-design-x-vue/bubble/demo/loading.vue'
+import BubbleTyping from '@ant-design-x-vue/bubble/demo/typing.vue'
+import BubbleMarkdown from '@ant-design-x-vue/bubble/demo/markdown.vue'
+import BubbleVariant from '@ant-design-x-vue/bubble/demo/variant.vue'
+import BubbleShape from '@ant-design-x-vue/bubble/demo/shape.vue'
+import BubbleList from '@ant-design-x-vue/bubble/demo/list.vue'
+import BubbleCustom from '@ant-design-x-vue/bubble/demo/bubble-custom.vue'
+import BubbleListCustom from '@ant-design-x-vue/bubble/demo/list-custom.vue'
+import BubbleGptVis from '@ant-design-x-vue/bubble/demo/gpt-vis.vue'
 </script>
 
 # Bubble 对话气泡
