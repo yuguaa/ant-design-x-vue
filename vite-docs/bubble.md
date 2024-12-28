@@ -4,6 +4,7 @@ import BubbleAvatarAndPlacement from '../src/bubble/demo/avatar-and-placement.vu
 import BubbleHeaderAndFooter from '../src/bubble/demo/header-and-footer.vue'
 import BubbleLoading from '../src/bubble/demo/loading.vue'
 import BubbleTyping from '../src/bubble/demo/typing.vue'
+import BubbleMarkdown from '../src/bubble/demo/markdown.vue'
 </script>
 
 # Bubble 对话气泡
@@ -45,3 +46,9 @@ import BubbleTyping from '../src/bubble/demo/typing.vue'
 通过设置 `typing` 属性，开启打字效果。更新 `content` 如果是之前的子集，则会继续输出，否则会重新输出。
 
 <BubbleTyping />
+
+### 自定义渲染
+
+配合 `markdown-it` 实现自定义渲染内容。
+
+<BubbleMarkdown />
