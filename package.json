@@ -6,8 +6,8 @@
     "build": "vite build && vue-tsc --project ./tsconfig.build.json",
     "build:watch": "vite build --watch",
     "dev": "dumi dev",
-    "docs:build": "vitepress build vite-docs",
-    "docs:preview": "vitepress preview vite-docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
     "lint": "npm run lint:es && npm run lint:css",
     "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
     "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx,vue}\"",
@@ -17,7 +17,7 @@
     "test": "vitest",
     "test:cov": "vitest --coverage",
     "typecheck": "vue-tsc --noEmit",
-    "docs:dev": "vitepress dev vite-docs"
+    "docs:dev": "vitepress dev docs"
   },
   "author": {
     "name": "wzc520pyfm",

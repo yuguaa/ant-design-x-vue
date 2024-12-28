@@ -18,5 +18,5 @@
   "vueCompilerOptions": {
     "plugins": ["unplugin-vue-macros/volar"]
   },
-  "include": [".dumirc.ts", "src/**/*", "vite-docs/**/*"]
+  "include": [".dumirc.ts", "src/**/*", "docs/**/*"]
 }
