@@ -11,8 +11,8 @@
     "types": ["unplugin-vue-macros/macros-global"],
     "paths": {
       "@@/*": [".dumi/tmp/*"],
-      "@ant-design-x-vue": ["src/index.ts"],
-      "@ant-design-x-vue/*": ["src/*"],
+      "ant-design-x-vue": ["src/index.ts"],
+      "ant-design-x-vue/*": ["src/*"],
     }
   },
   "vueCompilerOptions": {

@@ -1,8 +1,8 @@
 <script setup lang="tsx">
 import { UserOutlined } from '@ant-design/icons-vue';
-import { BubbleList } from '@ant-design-x-vue';
+import { BubbleList } from 'ant-design-x-vue';
 import { Button, Flex } from 'ant-design-vue';
-import type { BubbleListProps } from '@ant-design-x-vue';
+import type { BubbleListProps } from 'ant-design-x-vue';
 import { ref } from 'vue';
 
 defineOptions({ name: 'BubbleList' });

@@ -1,8 +1,8 @@
 <script setup lang="tsx">
 import { CoffeeOutlined, FireOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons-vue';
-import { BubbleList } from '@ant-design-x-vue';
+import { BubbleList } from 'ant-design-x-vue';
 import { Typography } from 'ant-design-vue';
-import type { BubbleListProps } from '@ant-design-x-vue';
+import type { BubbleListProps } from 'ant-design-x-vue';
 
 defineOptions({ name: 'BubbleListCustom' });
 

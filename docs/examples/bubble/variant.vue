@@ -1,6 +1,6 @@
 <script setup lang="tsx">
 import { UserOutlined } from '@ant-design/icons-vue';
-import { Bubble } from '@ant-design-x-vue';
+import { Bubble } from 'ant-design-x-vue';
 import { Flex } from 'ant-design-vue';
 
 defineOptions({ name: 'BubbleVariant' });

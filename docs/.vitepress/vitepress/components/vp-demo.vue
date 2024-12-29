@@ -2,7 +2,7 @@
 import { computed, getCurrentInstance, ref, toRef } from 'vue'
 import { isClient, useClipboard, useToggle } from '@vueuse/core'
 import { Divider, Tooltip, theme } from 'ant-design-vue'
-import { XProvider } from '@ant-design-x-vue'
+import { XProvider } from 'ant-design-x-vue'
 import { CaretUpFilled, CodepenOutlined, ThunderboltOutlined, FunctionOutlined } from '@ant-design/icons-vue'
 // import { useLang } from '../composables/lang'
 import { useSourceCode } from '../composables/source-code'

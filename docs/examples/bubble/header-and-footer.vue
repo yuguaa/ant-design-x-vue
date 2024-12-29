@@ -1,6 +1,6 @@
 <script setup lang="tsx">
 import { CopyOutlined, SyncOutlined, UserOutlined } from '@ant-design/icons-vue';
-import { Bubble } from '@ant-design-x-vue';
+import { Bubble } from 'ant-design-x-vue';
 import { Button, Space, theme } from 'ant-design-vue';
 
 defineOptions({ name: 'BubbleHeaderAndFooter' });
