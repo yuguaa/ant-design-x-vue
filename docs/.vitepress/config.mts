@@ -29,10 +29,10 @@ export default defineConfig({
   },
   title: "Ant Design X Vue",
   description: "Ant Design X For Vue",
+  appearance: 'force-dark',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: 'https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*eco6RrQhxbMAAAAAAAAAAAAADgCCAQ/original',
-
     nav: [
       { text: '组件', link: '/component/overview' }
     ],
