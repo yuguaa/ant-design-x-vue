@@ -40,7 +40,7 @@ function createDemoContainer(md: MarkdownIt): ContainerOpts {
         if (!source) throw new Error(`Incorrect source file: ${sourceFile}`)
 
         return `<Demo source="${encodeURIComponent(
-          md.render(`\`\`\` vue\n${source}\`\`\``)
+          md.render(`\`\`\` ts\n${source}\`\`\``)
         )}" path="${sourceFile}" raw-source="${encodeURIComponent(
           source
         )}" description="${encodeURIComponent(md.render(description))}">
