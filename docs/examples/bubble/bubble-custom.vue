@@ -1,8 +1,8 @@
 <script setup lang="tsx">
 import { FrownOutlined, SmileOutlined, SyncOutlined, UserOutlined } from '@ant-design/icons-vue';
-import { BubbleList } from '../../index';
+import { BubbleList } from '@ant-design-x-vue';
 import { Button, Flex, Space, Spin } from 'ant-design-vue';
-import type { BubbleListProps } from '../interface';
+import type { BubbleListProps } from '@ant-design-x-vue';
 import { ref } from 'vue';
 
 defineOptions({ name: 'BubbleCustom' });

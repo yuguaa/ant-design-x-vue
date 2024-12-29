@@ -1,0 +1,178 @@
+<script setup lang="ts">
+import { computed, getCurrentInstance, ref, toRef } from 'vue'
+import { isClient, useClipboard, useToggle } from '@vueuse/core'
+import { Divider, Tooltip } from 'ant-design-vue'
+import { CaretUpFilled, CodepenOutlined, ThunderboltOutlined, FunctionOutlined } from '@ant-design/icons-vue'
+// import { useLang } from '../composables/lang'
+import { useSourceCode } from '../composables/source-code'
+// import { usePlayground } from '../composables/use-playground'
+// import demoBlockLocale from '../../i18n/component/demo-block.json'
+import SourceCode from './demo/vp-source-code.vue'
+
+const props = defineProps<{
+  source: string
+  path: string
+  rawSource: string
+  description: string
+}>()
+
+const vm = getCurrentInstance()!
+
+const { copy, isSupported } = useClipboard({
+  source: decodeURIComponent(props.rawSource),
+  read: false,
+})
+
+const [sourceVisible, toggleSourceVisible] = useToggle()
+// const lang = useLang()
+const demoSourceUrl = useSourceCode(toRef(props, 'path'))
+
+const sourceCodeRef = ref<HTMLButtonElement>()
+
+// const locale = computed(() => demoBlockLocale[lang.value])
+const locale = computed(() => ({}));
+const decodedDescription = computed(() => decodeURIComponent(props.description))
+
+const onPlaygroundClick = () => {
+  // const { link } = usePlayground(props.rawSource)
+  if (!isClient) return
+  // window.open(link)
+}
+
+const onSourceVisibleKeydown = (e: KeyboardEvent) => {
+  if (['Enter', 'Space'].includes(e.code)) {
+    e.preventDefault()
+    toggleSourceVisible(false)
+    sourceCodeRef.value?.focus()
+  }
+}
+
+const copyCode = async () => {
+  const { $message } = vm.appContext.config.globalProperties
+  if (!isSupported) {
+    // $message.error(locale.value['copy-error'])
+  }
+  try {
+    await copy()
+    // $message.success(locale.value['copy-success'])
+  } catch (e: any) {
+    // $message.error(e.message)
+  }
+}
+</script>
+
+<template>
+  <!-- danger here DO NOT USE INLINE SCRIPT TAG -->
+  <div style="margin-top: 16px; margin-bottom: 16px;" v-html="decodedDescription" />
+
+  <div class="example">
+    <div class="example-showcase">
+      <slot name="source" />
+    </div>
+
+    <Divider style="margin: 0;" />
+
+    <div class="op-btns">
+      <!-- <Tooltip>
+        <template #title>在 Stackblitz 中打开</template>
+          <ThunderboltOutlined
+            tabindex="0"
+            role="link"
+            class="op-btn"
+            @click="onPlaygroundClick"
+            @keydown.prevent.enter="onPlaygroundClick"
+            @keydown.prevent.space="onPlaygroundClick"
+          />
+      </Tooltip> -->
+      <!-- <Tooltip>
+        <template #title>在 CodePen 中打开</template>
+        <CodepenOutlined
+          tabindex="0"
+          role="link"
+          class="op-btn"
+          @click="onPlaygroundClick"
+          @keydown.prevent.enter="onPlaygroundClick"
+          @keydown.prevent.space="onPlaygroundClick"
+        />
+      </Tooltip> -->
+      <Tooltip>
+        <template #title>查看源代码</template>
+        <button ref="sourceCodeRef" :aria-label="sourceVisible ? '隐藏源代码' : '查看源代码'
+          " class="op-btn" @click="toggleSourceVisible()">
+          <FunctionOutlined />
+        </button>
+      </Tooltip>
+    </div>
+
+    <Transition name="fade-in-linear">
+      <SourceCode :visible="sourceVisible" :source="source" />
+    </Transition>
+
+    <Transition name="fade-in-linear">
+      <div v-show="sourceVisible" class="example-float-control" tabindex="0" role="button"
+        @click="toggleSourceVisible(false)" @keydown="onSourceVisibleKeydown">
+        <CaretUpFilled />
+        <span>隐藏源代码</span>
+      </div>
+    </Transition>
+  </div>
+</template>
+
+<style scoped lang="scss">
+.example {
+  border: 1px solid var(--vp-border-color);
+  border-radius: 8px;
+
+  .example-showcase {
+    padding: 1.5rem;
+    margin: 0.5px;
+  }
+
+  .op-btns {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 2.5rem;
+
+    .op-btn {
+      margin: 0 0.5rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+  }
+
+  &-float-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid var(--vp-border-color);
+    height: 44px;
+    box-sizing: border-box;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    margin-top: -1px;
+    cursor: pointer;
+    position: sticky;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+
+    span {
+      font-size: 14px;
+      margin-left: 10px;
+    }
+  }
+}
+
+.fade-in-linear-enter-active,
+.fade-in-linear-leave-active {
+  transition: opacity 0.2s linear;
+}
+
+.fade-in-linear-enter-from,
+.fade-in-linear-leave-to {
+  opacity: 0;
+}
+</style>

@@ -1,17 +1,3 @@
-<script setup>
-import BubbleBasic from '@ant-design-x-vue/bubble/demo/basic.vue'
-import BubbleAvatarAndPlacement from '@ant-design-x-vue/bubble/demo/avatar-and-placement.vue'
-import BubbleHeaderAndFooter from '@ant-design-x-vue/bubble/demo/header-and-footer.vue'
-import BubbleLoading from '@ant-design-x-vue/bubble/demo/loading.vue'
-import BubbleTyping from '@ant-design-x-vue/bubble/demo/typing.vue'
-import BubbleMarkdown from '@ant-design-x-vue/bubble/demo/markdown.vue'
-import BubbleVariant from '@ant-design-x-vue/bubble/demo/variant.vue'
-import BubbleShape from '@ant-design-x-vue/bubble/demo/shape.vue'
-import BubbleList from '@ant-design-x-vue/bubble/demo/list.vue'
-import BubbleCustom from '@ant-design-x-vue/bubble/demo/bubble-custom.vue'
-import BubbleListCustom from '@ant-design-x-vue/bubble/demo/list-custom.vue'
-import BubbleGptVis from '@ant-design-x-vue/bubble/demo/gpt-vis.vue'
-</script>
 
 # Bubble 对话气泡
 
@@ -25,77 +11,101 @@ import BubbleGptVis from '@ant-design-x-vue/bubble/demo/gpt-vis.vue'
 
 ### 基本
 
-基础用法。
+:::demo 基础用法。
 
-<BubbleBasic />
+bubble/basic
+
+:::
 
 ### 支持位置和头像
 
-通过 `avatar` 设置自定义头像，通过 `placement` 设置位置，提供了 `start`、`end` 两个选项。
+:::demo 通过 `avatar` 设置自定义头像，通过 `placement` 设置位置，提供了 `start`、`end` 两个选项。
 
-<BubbleAvatarAndPlacement />
+bubble/avatar-and-placement
+
+:::
 
 ### 头和尾
 
-通过 `header` 和 `footer` 属性设置气泡的头部和底部。
+:::demo 通过 `header` 和 `footer` 属性设置气泡的头部和底部。
 
-<BubbleHeaderAndFooter />
+bubble/header-and-footer
+
+:::
 
 ### 加载中
 
-通过 `loading` 属性控制加载状态。
+:::demo 通过 `loading` 属性控制加载状态。
 
-<BubbleLoading />
+bubble/loading
+
+:::
 
 ### 打字效果
 
-通过设置 `typing` 属性，开启打字效果。更新 `content` 如果是之前的子集，则会继续输出，否则会重新输出。
+:::demo 通过设置 `typing` 属性，开启打字效果。更新 `content` 如果是之前的子集，则会继续输出，否则会重新输出。
 
-<BubbleTyping />
+bubble/typing
+
+:::
 
 ### 自定义渲染
 
-配合 `markdown-it` 实现自定义渲染内容。
+:::demo 配合 `markdown-it` 实现自定义渲染内容。
 
-<BubbleMarkdown />
+bubble/markdown
+
+:::
 
 ### 变体
 
-通过 `variant` 属性设置气泡的样式变体。
+:::demo 通过 `variant` 属性设置气泡的样式变体。
 
-<BubbleVariant />
+bubble/variant
+
+:::
 
 ### 形状
 
-通过 `shape` 属性设置气泡的形状。
+:::demo 通过 `shape` 属性设置气泡的形状。
 
-<BubbleShape />
+bubble/shape
+
+:::
 
 ### 气泡列表
 
-预设样式的气泡列表，支持自动滚动。使用 `roles` 设置气泡默认属性。
+:::demo 预设样式的气泡列表，支持自动滚动。使用 `roles` 设置气泡默认属性。
 
-<BubbleList />
+bubble/list
+
+:::
 
 ### 语义化自定义
 
-示例通过语义化以及加载定制，来调整气泡效果。
+:::demo 示例通过语义化以及加载定制，来调整气泡效果。
 
-<BubbleCustom />
+bubble/bubble-custom
+
+:::
 
 ### 自定义列表内容
 
-自定义气泡列表内容，这对于个性化定制场景非常有用。
+:::demo 自定义气泡列表内容，这对于个性化定制场景非常有用。
 
-<BubbleListCustom />
+bubble/list-custom
+
+:::
 
 ### 使用 GPT-Vis 渲染图表 (no support)
 
 @antv/GPT-Vis 仅支持React。
 
-~~配合 @antv/GPT-Vis 实现大模型输出的图表渲染，支持模型流式输出。~~
+:::demo 配合 @antv/GPT-Vis 实现大模型输出的图表渲染，支持模型流式输出。
 
-<BubbleGptVis />
+bubble/gpt-vis
+
+:::
 
 
 ## API

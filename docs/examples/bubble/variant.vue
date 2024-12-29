@@ -1,6 +1,6 @@
 <script setup lang="tsx">
 import { UserOutlined } from '@ant-design/icons-vue';
-import { Bubble } from '../../index';
+import { Bubble } from '@ant-design-x-vue';
 import { Flex } from 'ant-design-vue';
 
 defineOptions({ name: 'BubbleVariant' });
@@ -26,16 +26,16 @@ defineOptions({ name: 'BubbleVariant' });
 defineRender(() => {
   return (
     <Flex vertical gap="middle">
-    <Bubble variant="filled" avatar={{ icon: <UserOutlined /> }} content="variant: filled" />
-    <Bubble variant="outlined" avatar={{ icon: <UserOutlined /> }} content="variant: outlined" />
-    <Bubble variant="shadow" avatar={{ icon: <UserOutlined /> }} content="variant: shadow" />
-    <Bubble
-      variant="borderless"
-      avatar={{ icon: <UserOutlined /> }}
-      content={<div>waiting for support</div>}
+      <Bubble variant="filled" avatar={{ icon: <UserOutlined /> }} content="variant: filled" />
+      <Bubble variant="outlined" avatar={{ icon: <UserOutlined /> }} content="variant: outlined" />
+      <Bubble variant="shadow" avatar={{ icon: <UserOutlined /> }} content="variant: shadow" />
+      <Bubble
+        variant="borderless"
+        avatar={{ icon: <UserOutlined /> }}
+        content={<div>waiting for support</div>}
       // content={<Prompts title="variant: borderless to customize" items={items} vertical />}
-    />
-  </Flex>
+      />
+    </Flex>
   )
 });
 </script>

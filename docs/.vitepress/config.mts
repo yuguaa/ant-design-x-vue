@@ -1,8 +1,10 @@
 import { defineConfig } from 'vitepress'
 import VueMacros from 'unplugin-vue-macros/vite'
 import path from 'node:path';
+import { mdPlugin } from './config/plugins'
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import { MarkdownTransform } from './plugins/markdown-transform';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -19,7 +21,11 @@ export default defineConfig({
         },
         // 覆盖插件选项
       }),
+      MarkdownTransform(),
     ],
+  },
+  markdown: {
+    config: (md) => mdPlugin(md),
   },
   title: "Ant Design X Vue",
   description: "Ant Design X For Vue",
