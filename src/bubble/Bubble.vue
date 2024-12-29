@@ -54,7 +54,7 @@ const { direction, getPrefixCls } = useXProviderContext();
 const prefixCls = getPrefixCls('bubble', customizePrefixCls);
 
 // ===================== Component Config =========================
-const contextConfig = unref(useXComponentConfig('bubble'));
+const contextConfig = useXComponentConfig('bubble');
 
 // ============================ Typing ============================
 const [typingEnabled, typingStep, typingInterval, typingSuffix] = useTypingConfig(typing);
@@ -86,12 +86,12 @@ watchEffect(() => {
 });
 
 // ============================ Styles ============================
-const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+const [wrapCSSVar, hashId, cssVarCls] = useStyle(() => prefixCls);
 
 const mergedCls = computed(() => classnames(
   prefixCls,
   rootClassName,
-  contextConfig.className,
+  contextConfig.value.className,
   hashId,
   cssVarCls,
   `${prefixCls}-${placement}`,
@@ -125,14 +125,14 @@ const fullContent = computed<VNode>(() => {
   const _content = (
     <div
       style={{
-        ...contextConfig.styles.content,
+        ...contextConfig.value.styles.content,
         ...styles.content,
       }}
       class={classnames(
         `${prefixCls}-content`,
         `${prefixCls}-content-${variant}`,
         shape && `${prefixCls}-content-${shape}`,
-        contextConfig.classNames.content,
+        contextConfig.value.classNames.content,
         classNames.content,
       )}
     >
@@ -146,11 +146,11 @@ const fullContent = computed<VNode>(() => {
           <div
             class={classnames(
               `${prefixCls}-header`,
-              contextConfig.classNames.header,
+              contextConfig.value.classNames.header,
               classNames.header,
             )}
             style={{
-              ...contextConfig.styles.header,
+              ...contextConfig.value.styles.header,
               ...styles.header,
             }}
           >
@@ -162,11 +162,11 @@ const fullContent = computed<VNode>(() => {
           <div
             class={classnames(
               `${prefixCls}-footer`,
-              contextConfig.classNames.footer,
+              contextConfig.value.classNames.footer,
               classNames.footer,
             )}
             style={{
-              ...contextConfig.styles.footer,
+              ...contextConfig.value.styles.footer,
               ...styles.footer,
             }}
           >
@@ -183,7 +183,7 @@ defineRender(() => {
   return wrapCSSVar(
     <div
       style={{
-        ...(contextConfig.style as object),
+        ...(contextConfig.value.style as object),
         // ...(style as object),
       }}
       class={toValue(mergedCls)}
@@ -194,12 +194,12 @@ defineRender(() => {
       {avatar && (
         <div
           style={{
-            ...contextConfig.styles.avatar,
+            ...contextConfig.value.styles.avatar,
             ...styles.avatar,
           }}
           class={classnames(
             `${prefixCls}-avatar`,
-            contextConfig.classNames.avatar,
+            contextConfig.value.classNames.avatar,
             classNames.avatar,
           )}
         >

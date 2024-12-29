@@ -4,9 +4,6 @@ import XProviderContextProvider from './context';
 import type { XProviderProps } from './context';
 import useXProviderContext from './hooks/use-x-provider-context';
 import { ConfigProvider as AntdConfigProvider } from 'ant-design-vue';
-import type { ConfigProviderProps as AntdConfigProviderProps } from 'ant-design-vue/es/config-provider';
-
-interface XProviderWithAntdConfigProviderProps extends /* @vue-ignore */ XProviderProps,AntdConfigProviderProps {}
 
 defineOptions({ name: 'AXConfigProvider', inheritAttrs: false });
 
@@ -19,9 +16,9 @@ const {
   // suggestion,
   // thoughtChain,
   // welcome,
-  theme,
+  antd,
   ...antdConfProps
-} = defineProps<XProviderWithAntdConfigProviderProps>();
+} = defineProps<XProviderProps>();
 
 const slots = defineSlots<{
   default(props?: any): any
@@ -41,11 +38,11 @@ const xProviderProps = computed(() => ({
 const { theme: parentTheme } = useXProviderContext();
 
 const mergedTheme = computed(() => ({
-  ...parentTheme,
-  ...theme,
+  ...(parentTheme?.value || {}),
+  ...antd.theme,
 }));
 
-const childNode = slots.default?.();
+const childNode = computed(() => slots.default?.());
 
 defineRender(() => {
   return (
@@ -59,7 +56,7 @@ defineRender(() => {
         // theme={{ cssVar: true, ...antdConfProps?.theme }}
         theme={mergedTheme.value}
       >
-        {childNode}
+        {childNode.value}
       </AntdConfigProvider>
     </XProviderContextProvider>
   )

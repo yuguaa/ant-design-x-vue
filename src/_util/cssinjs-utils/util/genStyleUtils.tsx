@@ -23,7 +23,7 @@ import getDefaultComponentToken from './getDefaultComponentToken';
 import genMaxMin from './maxmin';
 import statisticToken, { merge as mergeToken } from './statistic';
 
-import { unref, type VNode } from 'vue'
+import { MaybeRefOrGetter, toValue, unref, type VNode } from 'vue'
 import useUniqueMemo from '../_util/hooks/useUniqueMemo';
 import type { UseCSP } from '../hooks/useCSP';
 import useDefaultCSP from '../hooks/useCSP';
@@ -221,8 +221,8 @@ function genStyleUtils<
       mergedOptions,
     );
 
-    return (prefixCls: string, rootCls: string = prefixCls) => {
-      const [, hashId] = useStyle(prefixCls, rootCls);
+    return (prefixCls: MaybeRefOrGetter<string>, rootCls: string = toValue(prefixCls)) => {
+      const [, hashId] = useStyle(toValue(prefixCls), rootCls);
       const [wrapCSSVar, cssVarCls] = useCSSVar(rootCls);
 
       return [wrapCSSVar, hashId, cssVarCls] as const;

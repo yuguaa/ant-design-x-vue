@@ -5,6 +5,6 @@ import XProvider from './index.vue';
 
 export type { XProviderProps } from './context';
 
-export { defaultPrefixCls, useXProviderContext };
+export { XProvider, defaultPrefixCls, useXProviderContext };
 
 export default XProvider;

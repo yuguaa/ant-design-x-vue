@@ -2,6 +2,7 @@ import { objectType, type AnyObject } from '../_util/type';
 // import { AttachmentsProps } from '../attachments';
 import type { BubbleProps } from '../bubble';
 import { computed, ComputedRef, CSSProperties, defineComponent, inject, InjectionKey, provide, shallowRef, triggerRef, unref, watch } from 'vue';
+import type { ConfigProviderProps as AntdConfigProviderProps } from 'ant-design-vue/es/config-provider';
 // import type { ConversationsProps } from '../conversations';
 // import type { PromptsProps } from '../prompts';
 // import type { SenderProps } from '../sender';
@@ -23,7 +24,7 @@ type ComponentStyleConfig<
   PickType extends keyof CompProps = DefaultPickType,
 > = Pick<CompProps, PickType | DefaultPickType>;
 
-export interface XComponentsConfig {
+export interface XProviderProps {
   bubble?: ComponentStyleConfig<BubbleProps>;
   // conversations?: ComponentStyleConfig<ConversationsProps>;
   // prompts?: ComponentStyleConfig<PromptsProps>;
@@ -32,11 +33,10 @@ export interface XComponentsConfig {
   // thoughtChain?: ComponentStyleConfig<ThoughtChainProps>;
   // attachments?: ComponentStyleConfig<AttachmentsProps>;
   // welcome?: ComponentStyleConfig<WelcomeProps>;
+  antd?: AntdConfigProviderProps;
 }
 
-export interface XProviderProps extends XComponentsConfig {
-  // Non-component config props
-}
+export type XComponentsConfig = Omit<XProviderProps, 'antd'>
 
 const XProviderContextKey: InjectionKey<ComputedRef<XProviderProps>> =
   Symbol('XProviderContext');

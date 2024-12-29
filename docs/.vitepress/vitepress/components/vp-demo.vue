@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { computed, getCurrentInstance, ref, toRef } from 'vue'
 import { isClient, useClipboard, useToggle } from '@vueuse/core'
-import { Divider, Tooltip } from 'ant-design-vue'
+import { Divider, Tooltip, theme } from 'ant-design-vue'
+import XProvider from '../../../../src/x-provider/index.vue'
 import { CaretUpFilled, CodepenOutlined, ThunderboltOutlined, FunctionOutlined } from '@ant-design/icons-vue'
 // import { useLang } from '../composables/lang'
 import { useSourceCode } from '../composables/source-code'
 // import { usePlayground } from '../composables/use-playground'
 // import demoBlockLocale from '../../i18n/component/demo-block.json'
 import SourceCode from './demo/vp-source-code.vue'
+import { useData } from 'vitepress'
 
 const props = defineProps<{
   source: string
@@ -17,6 +19,10 @@ const props = defineProps<{
 }>()
 
 const vm = getCurrentInstance()!
+
+const { isDark } = useData()
+
+const algorithm = computed(() => isDark.value ? theme.darkAlgorithm: theme.defaultAlgorithm)
 
 const { copy, isSupported } = useClipboard({
   source: decodeURIComponent(props.rawSource),
@@ -65,26 +71,24 @@ const copyCode = async () => {
   <!-- danger here DO NOT USE INLINE SCRIPT TAG -->
   <div style="margin-top: 16px; margin-bottom: 16px;" v-html="decodedDescription" />
 
-  <div class="example">
-    <div class="example-showcase">
-      <slot name="source" />
-    </div>
+  <XProvider :antd="{
+    theme: { algorithm },
+  }">
 
-    <Divider style="margin: 0;" />
+    <div class="example">
+      <div class="example-showcase">
+        <slot name="source" />
+      </div>
 
-    <div class="op-btns">
-      <!-- <Tooltip>
+      <Divider style="margin: 0;" />
+
+      <div class="op-btns">
+        <!-- <Tooltip>
         <template #title>在 Stackblitz 中打开</template>
-          <ThunderboltOutlined
-            tabindex="0"
-            role="link"
-            class="op-btn"
-            @click="onPlaygroundClick"
-            @keydown.prevent.enter="onPlaygroundClick"
-            @keydown.prevent.space="onPlaygroundClick"
-          />
-      </Tooltip> -->
-      <!-- <Tooltip>
+<ThunderboltOutlined tabindex="0" role="link" class="op-btn" @click="onPlaygroundClick"
+  @keydown.prevent.enter="onPlaygroundClick" @keydown.prevent.space="onPlaygroundClick" />
+</Tooltip> -->
+        <!-- <Tooltip>
         <template #title>在 CodePen 中打开</template>
         <CodepenOutlined
           tabindex="0"
@@ -95,27 +99,28 @@ const copyCode = async () => {
           @keydown.prevent.space="onPlaygroundClick"
         />
       </Tooltip> -->
-      <Tooltip>
-        <template #title>查看源代码</template>
-        <button ref="sourceCodeRef" :aria-label="sourceVisible ? '隐藏源代码' : '查看源代码'
-          " class="op-btn" @click="toggleSourceVisible()">
-          <FunctionOutlined />
-        </button>
-      </Tooltip>
-    </div>
-
-    <Transition name="fade-in-linear">
-      <SourceCode :visible="sourceVisible" :source="source" />
-    </Transition>
-
-    <Transition name="fade-in-linear">
-      <div v-show="sourceVisible" class="example-float-control" tabindex="0" role="button"
-        @click="toggleSourceVisible(false)" @keydown="onSourceVisibleKeydown">
-        <CaretUpFilled />
-        <span>隐藏源代码</span>
+        <Tooltip>
+          <template #title>查看源代码</template>
+          <button ref="sourceCodeRef" :aria-label="sourceVisible ? '隐藏源代码' : '查看源代码'
+            " class="op-btn" @click="toggleSourceVisible()">
+            <FunctionOutlined />
+          </button>
+        </Tooltip>
       </div>
-    </Transition>
-  </div>
+
+      <Transition name="fade-in-linear">
+        <SourceCode :visible="sourceVisible" :source="source" />
+      </Transition>
+
+      <Transition name="fade-in-linear">
+        <div v-show="sourceVisible" class="example-float-control" tabindex="0" role="button"
+          @click="toggleSourceVisible(false)" @keydown="onSourceVisibleKeydown">
+          <CaretUpFilled />
+          <span>隐藏源代码</span>
+        </div>
+      </Transition>
+    </div>
+  </XProvider>
 </template>
 
 <style scoped lang="scss">
