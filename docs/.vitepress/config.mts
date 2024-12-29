@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 import VueMacros from 'unplugin-vue-macros/vite'
 import path from 'node:path';
+import { fileURLToPath, URL } from 'node:url'
 import { mdPlugin } from './config/plugins'
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
@@ -10,9 +11,18 @@ import { MarkdownTransform } from './plugins/markdown-transform';
 export default defineConfig({
   vite: {
     resolve: {
-      alias: {
-        '@ant-design-x-vue': path.resolve(__dirname, '../../src'),
-      },
+      alias: [
+        {
+          find: /^@ant-design-x-vue$/,
+          replacement: path.resolve(__dirname, '../../src')
+        },
+        {
+          find: /^.*\/VPHero\.vue$/,
+          replacement: fileURLToPath(
+            new URL('./vitepress/components/vp-hero.vue', import.meta.url)
+          )
+        }
+      ]
     },
     plugins: [
       VueMacros({
