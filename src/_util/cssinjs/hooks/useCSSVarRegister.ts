@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { removeCSS, updateCSS } from '../../../vc-util/Dom/dynamicCSS';
 import StyleContext, {
   ATTR_MARK,

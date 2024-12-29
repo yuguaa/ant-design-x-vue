@@ -68,7 +68,7 @@ export const getComputedToken = (
           {
             override: componentTokens,
           },
-          componentTheme,
+          componentTheme as unknown as Theme<any, any>,
         );
       }
       mergedDerivativeToken[key] = mergedComponentToken;
@@ -87,12 +87,20 @@ export function useInternalToken(): [
   const {
     token: rootDesignToken,
     hashed,
+    // @ts-expect-error
     theme = defaultTheme,
+    // @ts-expect-error
     override,
+    // @ts-expect-error
     cssVar,
   } = unref(useDesignTokenInject());
 
-  const [token, hashId, realToken] = unref(useCacheToken<GlobalToken, SeedToken>(
+  const [
+    token,
+    hashId,
+    // @ts-expect-error
+    realToken,
+  ] = unref(useCacheToken<GlobalToken, SeedToken>(
     ref(theme),
     ref([antdTheme.defaultSeed, rootDesignToken]),
     ref({

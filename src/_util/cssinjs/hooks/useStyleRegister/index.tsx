@@ -230,6 +230,7 @@ export const parseStyle = (
 
           styleStr += `${mergedKey}${parsedStr}`;
         } else {
+          // @ts-expect-error
           function appendStyle(cssKey: string, cssValue: any) {
             if (
               process.env.NODE_ENV !== 'production' &&

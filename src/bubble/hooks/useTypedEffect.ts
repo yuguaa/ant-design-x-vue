@@ -34,7 +34,7 @@ const useTypedEffect = (
 
   // Start typing
   watch([typingIndex, typingEnabled, content], () => {
-    if (mergedTypingEnabled.value && unref(typingIndex) < content.value.length) {
+    if (mergedTypingEnabled.value && isString(content.value) && unref(typingIndex) < content.value.length) {
       const id = setTimeout(() => {
         setTypingIndex(unref(typingIndex) + typingStep.value);
       }, typingInterval.value);
@@ -45,9 +45,9 @@ const useTypedEffect = (
     }
   }, { immediate: true });
 
-  const mergedTypingContent = computed(() => mergedTypingEnabled.value ? content.value.slice(0, unref(typingIndex)) : content.value);
+  const mergedTypingContent = computed(() => mergedTypingEnabled.value && isString(content.value) ? content.value.slice(0, unref(typingIndex)) : content.value);
 
-  return [mergedTypingContent, computed(() => mergedTypingEnabled.value && unref(typingIndex) < content.value.length)];
+  return [mergedTypingContent, computed(() => mergedTypingEnabled.value && isString(content.value) && unref(typingIndex) < content.value.length)];
 };
 
 export default useTypedEffect;

@@ -68,6 +68,7 @@ export default function pickAttrs(props: object, ariaOnly: boolean | PickConfig 
       // Attr
       (mergedConfig.attr && (propList.includes(key) || propList.includes(key.toLowerCase())))
     ) {
+      // @ts-ignore
       attrs[key] = props[key];
     }
   });

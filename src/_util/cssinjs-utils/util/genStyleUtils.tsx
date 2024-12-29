@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { CSSInterpolation, CSSObject, TokenType } from '../../cssinjs';
 
 import {
@@ -30,6 +31,7 @@ import useDefaultCSP from '../hooks/useCSP';
 import type { UsePrefix } from '../hooks/usePrefix';
 import type { UseToken } from '../hooks/useToken';
 
+// @ts-expect-error
 type LayerConfig = Parameters<typeof useStyleRegister>[0]['layer'];
 
 export interface StyleInfo {

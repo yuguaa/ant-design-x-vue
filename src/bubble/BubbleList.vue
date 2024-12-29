@@ -62,6 +62,7 @@ watchEffect(() => {
 });
 
 // ============================= Data =============================
+// @ts-expect-error
 const mergedData = useListData(items, roles);
 
 const [displayData, onTypingComplete] = useDisplayData(mergedData);

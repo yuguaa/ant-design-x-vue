@@ -1,3 +1,5 @@
+import { VNode } from 'vue';
+
 export type {
   OverrideTokenMap,
   TokenMap,
@@ -8,4 +10,4 @@ export type {
   GlobalToken,
 } from './components';
 
-export type UseComponentStyleResult = [(node: React.ReactNode) => React.ReactElement, string];
+export type UseComponentStyleResult = [(node: VNode) => VNode, string];

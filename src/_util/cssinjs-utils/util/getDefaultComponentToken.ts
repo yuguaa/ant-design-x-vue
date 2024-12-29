@@ -9,7 +9,7 @@ function getDefaultComponentToken<
   C extends TokenMapKey<CompTokenMap>,
 >(
   component: C,
-  token: GlobalToken<CompTokenMap, AliasToken> = {},
+  token: GlobalToken<CompTokenMap, AliasToken> = {} as any,
   getDefaultToken: GetDefaultToken<CompTokenMap, AliasToken, C>,
 ): any {
   if (typeof getDefaultToken === 'function') {

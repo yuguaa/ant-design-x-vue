@@ -14,7 +14,7 @@ function getComponentToken<
   C extends TokenMapKey<CompTokenMap>,
 >(
   component: C,
-  token: GlobalToken<CompTokenMap, AliasToken> = {},
+  token: GlobalToken<CompTokenMap, AliasToken> = {} as any,
   defaultToken: CompTokenMap[C],
   options?: {
     deprecatedTokens?: [

@@ -19,7 +19,7 @@ class ArrayKeyMap<T> {
   // We will clean up the cache when reach the limit
   accessBeat = 0;
 
-  set(keys: React.DependencyList, value: any) {
+  set(keys: unknown[], value: any) {
     // New set will trigger clear
     this.clear();
 
@@ -29,7 +29,7 @@ class ArrayKeyMap<T> {
     this.lastAccessBeat.set(compositeKey, Date.now());
   }
 
-  get(keys: React.DependencyList) {
+  get(keys: unknown[]) {
     const compositeKey = this.getCompositeKey(keys);
 
     const cache = this.map.get(compositeKey);
@@ -39,7 +39,7 @@ class ArrayKeyMap<T> {
     return cache;
   }
 
-  getCompositeKey(keys: React.DependencyList) {
+  getCompositeKey(keys: unknown[]) {
     const ids = keys.map<string>((key) => {
       if (key && typeof key === 'object') {
         return `obj_${this.getObjectID(key)}`;
@@ -82,7 +82,7 @@ const uniqueMap = new ArrayKeyMap();
 /**
  * Like `useMemo`, but this hook result will be shared across all instances.
  */
-function useUniqueMemo<T>(memoFn: () => T, deps: React.DependencyList) {
+function useUniqueMemo<T>(memoFn: () => T, deps: unknown[]) {
   return computed(() => {
     const cachedValue = uniqueMap.get(deps);
     if (cachedValue) {

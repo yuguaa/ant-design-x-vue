@@ -25,7 +25,7 @@ export function createCache() {
   // Tricky SSR: Move all inline style to the head.
   // PS: We do not recommend tricky mode.
   if (typeof document !== 'undefined' && document.head && document.body) {
-    const styles = document.body.querySelectorAll(`style[${ATTR_MARK}]`) || [];
+    const styles = document.body.querySelectorAll(`style[${ATTR_MARK}]`) || [] as unknown as NodeListOf<Element>;
     const { firstChild } = document.head;
 
     Array.from(styles).forEach(style => {
@@ -133,8 +133,9 @@ export const useStyleProvider = (props: UseStyleProviderProps) => {
       };
       const propsValue = unref(props);
       Object.keys(propsValue).forEach(key => {
-        const value = propsValue[key];
-        if (propsValue[key] !== undefined) {
+        const value = propsValue[key as keyof StyleContextProps];
+        if (propsValue[key as keyof StyleContextProps] !== undefined) {
+          // @ts-expect-error
           mergedContext[key] = value;
         }
       });
