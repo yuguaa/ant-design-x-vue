@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 
 
-const externals = ['vue'];
+const externals = ['vue', 'ant-design-vue'];
 
 export default defineConfig({
   plugins: [
@@ -28,13 +28,14 @@ export default defineConfig({
       output: {
         globals: {
           'vue': 'Vue',
+          'ant-design-vue': 'Antdv'
         },
       },
     },
     outDir: 'dist',
   },
   resolve: {
-    dedupe: ['vue'],
+    dedupe: ['vue', 'ant-design-vue'],
   },
   optimizeDeps: {
     include: [...externals],

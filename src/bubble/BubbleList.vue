@@ -1,5 +1,5 @@
 <script setup lang="tsx">
-import classNames from 'classnames';
+import classnames from 'classnames';
 import { useEventCallback } from '../_util/hooks/use-event-callback';
 import pickAttrs from '../_util/pick-attrs';
 import { useXProviderContext } from '../x-provider';
@@ -128,7 +128,7 @@ defineRender(() => {
     <BubbleContextProvider value={context.value}>
       <div
         {...domProps}
-        class={classNames(listPrefixCls, rootClassName, hashId, cssVarCls, {
+        class={classnames(listPrefixCls, rootClassName, hashId, cssVarCls, {
           [`${listPrefixCls}-reach-end`]: scrollReachEnd.value,
         })}
         ref={listRef}

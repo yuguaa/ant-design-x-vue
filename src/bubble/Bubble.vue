@@ -1,5 +1,4 @@
 <script setup lang="tsx">
-import classnames from 'classnames';
 import { Avatar } from 'ant-design-vue';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
@@ -88,7 +87,7 @@ watchEffect(() => {
 // ============================ Styles ============================
 const [wrapCSSVar, hashId, cssVarCls] = useStyle(() => prefixCls);
 
-const mergedCls = computed(() => classnames(
+const mergedCls = computed(() => [
   prefixCls,
   rootClassName,
   contextConfig.value.className,
@@ -97,9 +96,11 @@ const mergedCls = computed(() => classnames(
   `${prefixCls}-${placement}`,
   {
     [`${prefixCls}-rtl`]: direction.value === 'rtl',
+  },
+  {
     [`${prefixCls}-typing`]: isTyping.value && !loading && !messageRender && !typingSuffix.value,
   },
-));
+]);
 
 // ============================ Avatar ============================
 const avatarNode = computed(() => isVNode(avatar) ? avatar : <Avatar {...avatar} />);
@@ -128,13 +129,13 @@ const fullContent = computed<VNode>(() => {
         ...contextConfig.value.styles.content,
         ...styles.content,
       }}
-      class={classnames(
+      class={[
         `${prefixCls}-content`,
         `${prefixCls}-content-${variant}`,
-        shape && `${prefixCls}-content-${shape}`,
+        { [`${prefixCls}-content-${shape}`]: shape },
         contextConfig.value.classNames.content,
         classNames.content,
-      )}
+      ]}
     >
       {toValue(contentNode)}
     </div>
@@ -144,11 +145,11 @@ const fullContent = computed<VNode>(() => {
       <div class={`${prefixCls}-content-wrapper`}>
         {header && (
           <div
-            class={classnames(
+            class={[
               `${prefixCls}-header`,
               contextConfig.value.classNames.header,
               classNames.header,
-            )}
+            ]}
             style={{
               ...contextConfig.value.styles.header,
               ...styles.header,
@@ -160,11 +161,11 @@ const fullContent = computed<VNode>(() => {
         {_content}
         {footer && (
           <div
-            class={classnames(
+            class={[
               `${prefixCls}-footer`,
               contextConfig.value.classNames.footer,
               classNames.footer,
-            )}
+            ]}
             style={{
               ...contextConfig.value.styles.footer,
               ...styles.footer,
@@ -197,11 +198,11 @@ defineRender(() => {
             ...contextConfig.value.styles.avatar,
             ...styles.avatar,
           }}
-          class={classnames(
+          class={[
             `${prefixCls}-avatar`,
             contextConfig.value.classNames.avatar,
             classNames.avatar,
-          )}
+          ]}
         >
           {toValue(avatarNode)}
         </div>

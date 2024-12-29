@@ -17,12 +17,56 @@ export default defineConfig({
           replacement: path.resolve(__dirname, '../../src')
         },
         {
+          find: /^dayjs\/plugin\/quarterOfYear$/,
+          replacement: 'dayjs/esm/plugin/quarterOfYear'
+        },
+        {
+          find: /^dayjs\/plugin\/weekYear$/,
+          replacement: 'dayjs/esm/plugin/weekYear'
+        },
+        {
+          find: /^dayjs\/plugin\/weekOfYear$/,
+          replacement: 'dayjs/esm/plugin/weekOfYear'
+        },
+        {
+          find: /^dayjs\/plugin\/localeData$/,
+          replacement: 'dayjs/esm/plugin/localeData'
+        },
+        {
+          find: /^dayjs\/plugin\/weekday$/,
+          replacement: 'dayjs/esm/plugin/weekday'
+        },
+        {
+          find: /^dayjs\/plugin\/advancedFormat$/,
+          replacement: 'dayjs/esm/plugin/advancedFormat'
+        },
+        {
+          find: /^dayjs\/plugin\/customParseFormat$/,
+          replacement: 'dayjs/esm/plugin/customParseFormat'
+        },
+        {
+          find: /^dayjs$/,
+          replacement: 'dayjs/esm'
+        },
+        {
           find: /^.*\/VPHero\.vue$/,
           replacement: fileURLToPath(
             new URL('./vitepress/components/vp-hero.vue', import.meta.url)
           )
         }
       ]
+    },
+    ssr: {
+      noExternal: ['ant-design-vue', '@ant-design/icons-vue'], // 避免打包为 CommonJS
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          globals: {
+            'ant-design-vue': 'AntDesignVue',
+          },
+        },
+      },
     },
     plugins: [
       VueMacros({
