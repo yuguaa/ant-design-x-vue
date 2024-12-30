@@ -1,14 +1,14 @@
 <script setup lang="tsx">
 import classnames from 'classnames';
-import pickAttrs from 'ant-design-x-vue/_util/pick-attrs';
+import pickAttrs from '../_util/pick-attrs';
 import type { Conversation, ConversationsItemProps, ConversationsProps } from './interface';
 import ConversationsItem from './ConversationsItem.vue';
 import GroupTitle from './GroupTitle.vue';
 import { computed, ref } from 'vue';
-import useMergedState from 'ant-design-x-vue/_util/hooks/useMergedState';
-import { useXProviderContext } from 'ant-design-x-vue/x-provider';
+import useMergedState from '../_util/hooks/useMergedState';
+import { useXProviderContext } from '../x-provider';
 import useGroupable from './hooks/useGroupable';
-import useXComponentConfig from 'ant-design-x-vue/_util/hooks/use-x-component-config';
+import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import useStyle from './style';
 import GroupTitleContextProvider from './context';
 

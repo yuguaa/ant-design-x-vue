@@ -1,7 +1,7 @@
 import { shallowRef, provide, watch, unref, triggerRef, inject, computed, defineComponent } from 'vue';
 import type { ComputedRef, InjectionKey } from "vue";
 import type { GroupTitleContextProps } from './interface'
-import { objectType } from 'ant-design-x-vue/_util/type';
+import { objectType } from '../_util/type';
 
 const GroupTitleContextKey: InjectionKey<ComputedRef<GroupTitleContextProps>> =
   Symbol('GroupTitleContext');

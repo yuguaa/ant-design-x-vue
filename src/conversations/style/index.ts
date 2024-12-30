@@ -1,7 +1,7 @@
-import { unit } from 'ant-design-x-vue/_util/cssinjs';
+import { unit } from '../../_util/cssinjs';
 import type { FullToken, GenerateStyle, GetDefaultToken } from '../../theme/cssinjs-utils';
 import { genStyleHooks } from '../../theme/genStyleUtils';
-import { mergeToken } from 'ant-design-x-vue/_util/cssinjs-utils';
+import { mergeToken } from '../../_util/cssinjs-utils';
 
 // biome-ignore lint/suspicious/noEmptyInterface: ComponentToken need to be empty by default
 export interface ComponentToken {}

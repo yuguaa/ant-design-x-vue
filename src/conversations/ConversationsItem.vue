@@ -2,11 +2,11 @@
 import classnames from 'classnames';
 import type { EventHandler, MouseEventHandler } from 'ant-design-vue/es/_util/EventInterface';
 import type { ConversationsItemProps } from './interface';
-import pickAttrs from 'ant-design-x-vue/_util/pick-attrs';
+import pickAttrs from '../_util/pick-attrs';
 import { computed } from 'vue';
 import { Dropdown, Tooltip, Typography } from 'ant-design-vue';
 import { EllipsisOutlined } from '@ant-design/icons-vue';
-import useState from 'ant-design-x-vue/_util/hooks/use-state';
+import useState from '../_util/hooks/use-state';
 
 defineOptions({ name: 'AXConversationsItem' });
 
