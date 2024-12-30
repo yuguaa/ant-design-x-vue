@@ -8,7 +8,7 @@ export default defineConfig({
   // mako: {}, // error
   outputPath: 'docs-dist',
   themeConfig: {
-    name: 'wzc-init-vue',
+    name: 'ant-design-x-vue',
   },
-  presets: [require.resolve('@dumijs/preset-vue')],
+  // presets: [require.resolve('@dumijs/preset-vue')],
 });
