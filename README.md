@@ -1,7 +1,7 @@
 # wzc-init-vue
 
-[![NPM version](https://img.shields.io/npm/v/wzc-init-vue.svg?style=flat)](https://npmjs.org/package/wzc-init-vue)
-[![NPM downloads](http://img.shields.io/npm/dm/wzc-init-vue.svg?style=flat)](https://npmjs.org/package/wzc-init-vue)
+[![NPM version](https://img.shields.io/npm/v/ant-design-x-vue.svg?style=flat)](https://npmjs.org/package/ant-design-x-vue)
+[![NPM downloads](http://img.shields.io/npm/dm/ant-design-x-vue.svg?style=flat)](https://npmjs.org/package/ant-design-x-vue)
 
 Ant Design X For Vue.（WIP） 疯狂研发中🔥
 
