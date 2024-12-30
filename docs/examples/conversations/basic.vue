@@ -15,7 +15,7 @@ const { token } = theme.useToken();
 
 // Customize the style of the container
 const style = {
-  width: 256,
+  width: '256px',
   background: token.value.colorBgContainer,
   borderRadius: token.value.borderRadius,
 };
