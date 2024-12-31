@@ -84,7 +84,7 @@ const onConversationItemClick: ConversationsItemProps['onClick'] = (info) => {
 defineRender(() => {
   return wrapCSSVar(
     <ul
-      {...domProps}
+      {...domProps.value}
       style={{
         ...(typeof contextConfig.value.style === 'object' ? contextConfig.value.style : {}),
         ...(typeof style === 'object' ? style : {}),
