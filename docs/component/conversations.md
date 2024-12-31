@@ -10,8 +10,18 @@
 
 ## 代码演示
 
+### 基本
+
 :::demo 基础用法。
 
 conversations/basic
+
+:::
+
+### 会话操作
+
+:::demo 配合 `menu` 属性，配置操作菜单
+
+conversations/with-menu
 
 :::
