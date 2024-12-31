@@ -103,6 +103,12 @@ export default defineConfig({
           { text: 'Conversations 管理对话', link: '/component/conversations' }
         ]
       },
+      {
+        text: '唤醒',
+        items: [
+          { text: 'Welcome 欢迎', link: '/component/welcome' }
+        ]
+      },
     ],
 
     socialLinks: [
