@@ -4,7 +4,7 @@ import type { EventHandler, MouseEventHandler } from 'ant-design-vue/es/_util/Ev
 import type { ConversationsItemProps } from './interface';
 import pickAttrs from '../_util/pick-attrs';
 import { computed } from 'vue';
-import { Dropdown, Tooltip, Typography } from 'ant-design-vue';
+import { Dropdown, Menu, Tooltip, Typography } from 'ant-design-vue';
 import { EllipsisOutlined } from '@ant-design/icons-vue';
 import useState from '../_util/hooks/use-state';
 
@@ -41,7 +41,7 @@ const [inEllipsis, onEllipsis] = useState(false);
 const [opened, setOpened] = useState(false);
 
 // ============================ Style =============================
-const mergedCls = computed(() =>classnames(
+const mergedCls = computed(() => classnames(
   className,
   `${prefixCls}-item`,
   { [`${prefixCls}-item-active`]: active && !disabled.value },
@@ -77,23 +77,23 @@ defineRender(() => {
           ellipsis={{
             onEllipsis,
           }}
-        >
-          {info.label}
-        </Typography.Text>
+          content={info.label as string}
+        />
         {menu && !disabled.value && (
           <Dropdown
-            menu={menu}
             placement={direction === 'rtl' ? 'bottomLeft' : 'bottomRight'}
             trigger={['click']}
             disabled={disabled.value}
             onOpenChange={onOpenChange}
-          >
-            <EllipsisOutlined
+          >{{
+            default: () => <EllipsisOutlined
               onClick={stopPropagation}
               // @ts-expect-error
               disabled={disabled.value}
               class={`${prefixCls}-menu-icon`}
-            />
+            />,
+            overlay: () => <Menu { ...menu} />
+          }}
           </Dropdown>
         )}
       </li>
