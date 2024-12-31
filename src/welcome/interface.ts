@@ -15,7 +15,7 @@ export interface WelcomeProps {
 
   // Layout
   icon?: VNode | string;
-  title?: VNode;
-  description?: VNode;
+  title?: VNode | string;
+  description?: VNode | string;
   extra?: VNode;
 }
