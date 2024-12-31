@@ -15,8 +15,6 @@ const Demo = () => {
   const { message } = App.useApp();
   const { token } = theme.useToken();
 
-  console.log('token.value', token.value.colorBgContainer, token.value.borderRadius)
-
   const style = {
     width: '256px',
     background: token.value.colorBgContainer,
