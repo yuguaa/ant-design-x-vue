@@ -106,7 +106,8 @@ export default defineConfig({
       {
         text: '唤醒',
         items: [
-          { text: 'Welcome 欢迎', link: '/component/welcome' }
+          { text: 'Welcome 欢迎', link: '/component/welcome' },
+          { text: 'Prompts 提示集', link: '/component/prompts' }
         ]
       },
     ],
