@@ -8,7 +8,7 @@ import type { ConversationsProps } from '../conversations';
 // import type { SenderProps } from '../sender';
 // import type { SuggestionProps } from '../suggestion';
 // import type { ThoughtChainProps } from '../thought-chain';
-// import type { WelcomeProps } from '../welcome';
+import type { WelcomeProps } from '../welcome';
 
 export interface XComponentStyleConfig {
   classNames: Record<string, string>;
@@ -32,7 +32,7 @@ export interface XProviderProps {
   // suggestion?: ComponentStyleConfig<SuggestionProps>;
   // thoughtChain?: ComponentStyleConfig<ThoughtChainProps>;
   // attachments?: ComponentStyleConfig<AttachmentsProps>;
-  // welcome?: ComponentStyleConfig<WelcomeProps>;
+  welcome?: ComponentStyleConfig<WelcomeProps>;
   antd?: AntdConfigProviderProps;
 }
 
