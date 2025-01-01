@@ -60,6 +60,12 @@ $ pnpm lint
 
 除此之外，我们仍有很多事要做，您也可以参考Roadmap，从中挑选您感兴趣的部分。
 
+## Contributors
+
+<a href="https://github.com/wzc520pyfm/ohcolor/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=wzc520pyfm/ohcolor" />
+</a>
+
 ## LICENSE
 
 MIT
