@@ -3,3 +3,4 @@ export * from './bubble';
 export * from './conversations';
 export * from './welcome';
 export * from './prompts';
+export * from './suggestion';
