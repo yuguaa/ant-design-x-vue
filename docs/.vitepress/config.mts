@@ -110,6 +110,12 @@ export default defineConfig({
           { text: 'Prompts 提示集', link: '/component/prompts' }
         ]
       },
+      {
+        text: '表达',
+        items: [
+          { text: 'Suggestion 快捷指令', link: '/component/suggestion' }
+        ]
+      },
     ],
 
     socialLinks: [
