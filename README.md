@@ -47,6 +47,8 @@ $ pnpm lint
 
 ## Contributing
 
+您的贡献至关重要！
+
 现在Ant Desgin X Vue正在全力同步Ant Desgin X 的组件，因此，协助我们同步组件是最好的贡献方式，在开始您的工作前，请遵照如下流程：
 1. 在[Roadmap](https://github.com/wzc520pyfm/ant-design-x-vue/issues/1)中提及@wzc520pyfm认领一个组件，在得到答复后开始工作
 2. Fork本仓库，并为你认领的组件创建一个开发分支，分支名和commit请遵守《通用提交规范》，建议在完成一个阶段性工作时就进行一次commit，不建议单个commit积累太多内容。
