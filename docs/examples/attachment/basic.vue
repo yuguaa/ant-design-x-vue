@@ -1,0 +1,65 @@
+<script setup lang="tsx">
+import { CloudUploadOutlined, LinkOutlined } from '@ant-design/icons-vue';
+import { App, Button, Flex, Switch } from 'ant-design-vue';
+import { Attachments } from 'ant-design-x-vue';
+import { ref, useTemplateRef } from 'vue';
+
+defineOptions({ name: 'AXAttachmentBasic' });
+
+const Demo = () => {
+  const { message } = App.useApp();
+
+  const fullScreenDrop = ref(false);
+  const customContent = ref(true);
+  const divRef = ref<HTMLDivElement>(null);
+
+  const triggerFullScreenDrop = (v: boolean) => {
+    fullScreenDrop.value = v
+  }
+  const triggerCustomContent = (v: boolean) => {
+    customContent.value = v
+  }
+
+  return (
+    <Flex vertical gap="middle" align="flex-start" ref={divRef}>
+      <Attachments
+        beforeUpload={() => false}
+        onChange={({ file }) => {
+          message.info(`Mock upload: ${file.name}`);
+        }}
+        getDropContainer={() => (fullScreenDrop.value ? document.body : divRef.value)}
+        placeholder={{
+          icon: <CloudUploadOutlined />,
+          title: 'Drag & Drop files here',
+          description: 'Support file type: image, video, audio, document, etc.',
+        }}
+        children={customContent.value && <Button type="text" icon={<LinkOutlined />} />}
+      />
+      <Switch
+        checked={fullScreenDrop.value}
+        onChange={(checked) => {
+          triggerFullScreenDrop(checked as boolean)
+        }}
+        checkedChildren="Full screen drop"
+        unCheckedChildren="Full screen drop"
+      />
+      <Switch
+        checked={customContent.value}
+        onChange={(checked) => {
+          triggerCustomContent(checked as boolean)
+        }}
+        checkedChildren="use default content"
+        unCheckedChildren="custom content"
+      />
+    </Flex>
+  )
+}
+
+defineRender(() => {
+  return (
+    <App>
+      <Demo />
+    </App>
+  )
+});
+</script>

@@ -113,6 +113,7 @@ export default defineConfig({
       {
         text: '表达',
         items: [
+          { text: 'Attachment 输入附件', link: '/component/attachment' },
           { text: 'Suggestion 快捷指令', link: '/component/suggestion' }
         ]
       },
