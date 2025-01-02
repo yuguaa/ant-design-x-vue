@@ -1,0 +1,206 @@
+<script setup lang="tsx">
+import classnames from 'classnames';
+import { computed, ref, useTemplateRef, watch } from 'vue';
+import useXComponentConfig from '../_util/hooks/use-x-component-config';
+import { useXProviderContext } from '../x-provider';
+import type { Attachment, AttachmentsProps, AttachmentsRef, PlaceholderProps } from './interface';
+import PlaceholderUploader from './PlaceholderUploader.vue';
+import type { Upload, UploadProps } from 'ant-design-vue';
+import DropArea from './DropArea.vue';
+import SilentUploader from './SilentUploader.vue';
+import { FileList } from './FileList';
+import useStyle from './style';
+import useState from '../_util/hooks/use-state';
+import AttachmentContextProvider from './context';
+
+defineOptions({ name: 'AXAttachments' });
+
+const {
+  prefixCls: customizePrefixCls,
+  rootClassName,
+  rootStyle,
+  className,
+  style,
+  items = [],
+  children,
+  getDropContainer,
+  placeholder,
+  onChange,
+  overflow,
+  disabled,
+  classNames = {},
+  styles = {},
+  ...uploadProps
+} = defineProps<AttachmentsProps>();
+
+// ============================ PrefixCls ============================
+const { getPrefixCls, direction } = useXProviderContext();
+
+const prefixCls = getPrefixCls('attachment', customizePrefixCls);
+
+// ===================== Component Config =========================
+const contextConfig = useXComponentConfig('attachments');
+
+const contextClassNames = computed(() => contextConfig.value.classNames);
+const contextStyles = computed(() => contextConfig.value.styles);
+
+// ============================= Ref =============================
+// const containerRef = useTemplateRef<HTMLDivElement>('attachments-container');
+const containerRef = ref<HTMLDivElement>(null);
+
+// const uploadRef = useTemplateRef<InstanceType<typeof Upload>>('attachments-upload');
+const uploadRef = ref<InstanceType<typeof Upload>>(null);
+
+// ============================ Style ============================
+const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+
+const cssinjsCls = computed(() => classnames(hashId, cssVarCls));
+
+// ============================ Upload ============================
+const [fileList, setFileList] = useState(() => items);
+
+const triggerChange: AttachmentsProps['onChange'] = (info) => {
+  setFileList(info.fileList);
+  onChange?.(info);
+};
+
+const mergedUploadProps = computed<UploadProps>(() => ({
+  ...uploadProps,
+  fileList: fileList.value,
+  onChange: triggerChange,
+}));
+
+const onItemRemove = (item: Attachment) => {
+  const newFileList = fileList.value.filter((fileItem) => fileItem.uid !== item.uid);
+  triggerChange({
+    file: item,
+    fileList: newFileList,
+  });
+};
+
+const getPlaceholderNode = (
+  type: 'inline' | 'drop',
+  props?: Pick<PlaceholderProps, 'style'>,
+  ref?: InstanceType<typeof Upload>,
+) => {
+  const placeholderContent = typeof placeholder === 'function' ? placeholder(type) : placeholder;
+
+  return (
+    <PlaceholderUploader
+      placeholder={placeholderContent}
+      upload={mergedUploadProps.value}
+      prefixCls={prefixCls}
+      className={classnames(contextClassNames.value.placeholder, classNames.placeholder)}
+      style={{
+        ...contextStyles.value.placeholder,
+        ...styles.placeholder,
+        ...props?.style,
+      }}
+    // ref={ref}
+    />
+  );
+};
+
+const renderChildren = computed(() => {
+  // TODO: render
+  if (children) {
+    return (
+      <>
+        <SilentUploader
+          upload={mergedUploadProps.value}
+          rootClassName={rootClassName}
+          // ref={uploadRef}
+          // TODO: need support slot alse
+          children={children}
+        />
+        <DropArea
+          getDropContainer={getDropContainer}
+          prefixCls={prefixCls}
+          className={classnames(cssinjsCls.value, rootClassName)}
+          // TODO: need support slot alse
+          children={getPlaceholderNode('drop')}
+        />
+      </>
+    )
+  }
+
+  const hasFileList = fileList.value.length > 0;
+  return (
+    <div
+      class={classnames(
+        prefixCls,
+        cssinjsCls,
+        {
+          [`${prefixCls}-rtl`]: direction.value === 'rtl',
+        },
+        className,
+        rootClassName,
+      )}
+      style={{
+        ...rootStyle,
+        ...style,
+      }}
+      dir={direction.value || 'ltr'}
+      // ref={containerRef}
+    >
+      <FileList
+        prefixCls={prefixCls}
+        items={fileList.value}
+        onRemove={onItemRemove}
+        overflow={overflow}
+        upload={mergedUploadProps.value}
+        listClassName={classnames(contextClassNames.value.list, classNames.list)}
+        listStyle={{
+          ...contextStyles.value.list,
+          ...styles.list,
+          ...(!hasFileList && { display: 'none' }),
+        }}
+        itemClassName={classnames(contextClassNames.value.item, classNames.item)}
+        itemStyle={{
+          ...contextStyles.value.item,
+          ...styles.item,
+        }}
+      />
+      {getPlaceholderNode('inline', hasFileList ? { style: { display: 'none' } } : {}, uploadRef.value)}
+      <DropArea
+        getDropContainer={getDropContainer || (() => containerRef.value)}
+        prefixCls={prefixCls}
+        className={cssinjsCls.value}
+      >
+        {getPlaceholderNode('drop')}
+      </DropArea>
+    </div>
+  )
+});
+
+defineExpose<AttachmentsRef>({
+  nativeElement: containerRef.value,
+  upload: (file) => {
+    // TODO: get native element
+    const fileInput =
+      // @ts-expect-error
+      uploadRef.value?.nativeElement?.querySelector<HTMLInputElement>('input[type="file"]');
+
+    // Trigger native change event
+    if (fileInput) {
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(file);
+      fileInput.files = dataTransfer.files;
+
+      fileInput.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+  },
+});
+
+defineRender(() => {
+  return wrapCSSVar(
+    <AttachmentContextProvider
+      value={{
+        disabled,
+      }}
+    >
+      {renderChildren.value}
+    </AttachmentContextProvider>
+  )
+});
+</script>

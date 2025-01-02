@@ -1,5 +1,5 @@
 import { objectType, type AnyObject } from '../_util/type';
-// import { AttachmentsProps } from '../attachments';
+import { AttachmentsProps } from '../attachments';
 import type { BubbleProps } from '../bubble';
 import { computed, ComputedRef, CSSProperties, defineComponent, inject, InjectionKey, provide, shallowRef, triggerRef, unref, watch } from 'vue';
 import type { ConfigProviderProps as AntdConfigProviderProps } from 'ant-design-vue/es/config-provider';
@@ -31,7 +31,7 @@ export interface XProviderProps {
   // sender?: ComponentStyleConfig<SenderProps>;
   suggestion?: ComponentStyleConfig<SuggestionProps>;
   // thoughtChain?: ComponentStyleConfig<ThoughtChainProps>;
-  // attachments?: ComponentStyleConfig<AttachmentsProps>;
+  attachments?: ComponentStyleConfig<AttachmentsProps>;
   welcome?: ComponentStyleConfig<WelcomeProps>;
   antd?: AntdConfigProviderProps;
 }

@@ -1,4 +1,4 @@
-// import type { ComponentToken as AttachmentsToken } from '../attachments/style';
+import type { ComponentToken as AttachmentsToken } from '../attachments/style';
 import type { ComponentToken as BubbleComponentToken } from '../bubble/style';
 import type { ComponentToken as ConversationsComponentToken } from '../conversations/style';
 import type { ComponentToken as PromptsComponentToken } from '../prompts/style';
@@ -8,7 +8,7 @@ import type { ComponentToken as SuggestionComponentToken } from '../suggestion/s
 import type { ComponentToken as WelcomeComponentToken } from '../welcome/style';
 
 export interface ComponentTokenMap {
-  // Attachments?: AttachmentsToken;
+  Attachments?: AttachmentsToken;
   Bubble?: BubbleComponentToken;
   Conversations?: ConversationsComponentToken;
   Prompts?: PromptsComponentToken;
