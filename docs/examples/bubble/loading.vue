@@ -14,7 +14,7 @@ defineRender(() => {
       <Bubble loading={loading.value} content="hello world !" avatar={{ icon: <UserOutlined /> }} />
       <Flex gap="large" wrap="wrap">
         Loading state:
-        <Switch v-model:  checked={  loading.value  } />
+        <Switch v-model:checked={loading.value} />
       </Flex>
     </Flex>
   )
