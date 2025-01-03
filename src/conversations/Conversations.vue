@@ -4,7 +4,7 @@ import pickAttrs from '../_util/pick-attrs';
 import type { Conversation, ConversationsItemProps, ConversationsProps } from './interface';
 import ConversationsItem from './ConversationsItem.vue';
 import GroupTitle from './GroupTitle.vue';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import useMergedState from '../_util/hooks/useMergedState';
 import { useXProviderContext } from '../x-provider';
 import useGroupable from './hooks/useGroupable';
@@ -45,6 +45,11 @@ const [mergedActiveKey, setMergedActiveKey] = useMergedState<ConversationsProps[
     value: activeKey,
   },
 );
+
+// hack for useMergedState error
+watch(() => activeKeyProp, () => {
+  activeKey.value = activeKeyProp
+});
 
 // ============================ Groupable ============================
 const groupSate = useGroupable(() => groupable, () => items);
