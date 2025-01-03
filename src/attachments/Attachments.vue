@@ -45,11 +45,11 @@ const contextClassNames = computed(() => contextConfig.value.classNames);
 const contextStyles = computed(() => contextConfig.value.styles);
 
 // ============================= Ref =============================
-// const containerRef = useTemplateRef<HTMLDivElement>('attachments-container');
-const containerRef = ref<HTMLDivElement>(null);
+const containerRef = useTemplateRef<HTMLDivElement>('attachments-container');
+// const containerRef = ref<HTMLDivElement>(null);
 
-// const uploadRef = useTemplateRef<InstanceType<typeof Upload>>('attachments-upload');
-const uploadRef = ref<InstanceType<typeof Upload>>(null);
+const uploadRef = useTemplateRef<InstanceType<typeof Upload>>('attachments-upload');
+// const uploadRef = ref<InstanceType<typeof Upload>>(null);
 
 // ============================ Style ============================
 const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
@@ -96,7 +96,8 @@ const getPlaceholderNode = (
         ...styles.placeholder,
         ...props?.style,
       }}
-    // ref={ref}
+      // TODO: Fix Dom Ref Err
+      // ref={ref}
     />
   );
 };
@@ -109,7 +110,7 @@ const renderChildren = computed(() => {
         <SilentUploader
           upload={mergedUploadProps.value}
           rootClassName={rootClassName}
-          // ref={uploadRef}
+          ref="attachments-upload"
           // TODO: need support slot alse
           children={children}
         />
@@ -129,7 +130,7 @@ const renderChildren = computed(() => {
     <div
       class={classnames(
         prefixCls,
-        cssinjsCls,
+        cssinjsCls.value,
         {
           [`${prefixCls}-rtl`]: direction.value === 'rtl',
         },
@@ -141,7 +142,7 @@ const renderChildren = computed(() => {
         ...style,
       }}
       dir={direction.value || 'ltr'}
-      // ref={containerRef}
+      ref="attachments-container"
     >
       <FileList
         prefixCls={prefixCls}

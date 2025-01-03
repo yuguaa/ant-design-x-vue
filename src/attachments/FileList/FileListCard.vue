@@ -1,7 +1,7 @@
 <script setup lang="tsx">
 import classnames from 'classnames';
 import { CloseCircleFilled, FileExcelFilled, FileImageFilled, FileMarkdownFilled, FilePdfFilled, FilePptFilled, FileTextFilled, FileWordFilled, FileZipFilled } from '@ant-design/icons-vue';
-import { computed, onWatcherCleanup, watch, type VNode } from 'vue';
+import { computed, onWatcherCleanup, useTemplateRef, watch, type VNode } from 'vue';
 import AudioIcon from './AudioIcon.vue';
 import VideoIcon from './VideoIcon.vue';
 import type { FileListCardProps } from '../interface';
@@ -104,6 +104,9 @@ const cardCls = `${prefixCls.value}-list-card`;
 
 // ============================= Style ==============================
 const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+
+// ============================= Ref =============================
+const containerRef = useTemplateRef<HTMLDivElement>('file-list-card-container');
 
 // ============================== Name ==============================
 const nameState = computed(() => {
@@ -214,6 +217,10 @@ const content = computed(() => {
   );
 });
 
+defineExpose({
+  nativeElement: containerRef
+});
+
 defineRender(() => {
   return wrapCSSVar(
     <div
@@ -229,7 +236,7 @@ defineRender(() => {
         cssVarCls,
       )}
       style={style}
-      // ref={ref}
+      ref="file-list-card-container"
     >
       {content.value}
 

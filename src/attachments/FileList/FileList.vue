@@ -27,8 +27,8 @@ const {
 
 const listCls = computed(() => `${prefixCls}-list`);
 
-// const containerRef = useTemplateRef<HTMLDivElement>('file-list-container');
-const containerRef = ref<HTMLDivElement>(null);
+const containerRef = useTemplateRef<HTMLDivElement>('file-list-container');
+// const containerRef = ref<HTMLDivElement>(null);
 
 const [firstMount, setFirstMount] = useState(false);
 
@@ -101,7 +101,7 @@ defineRender(() => {
         },
         listClassName,
       )}
-      ref={containerRef}
+      ref="file-list-container"
       onScroll={checkPing}
       style={listStyle}
     >
