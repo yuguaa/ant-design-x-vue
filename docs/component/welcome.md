@@ -16,3 +16,11 @@
 welcome/basic
 
 :::
+
+### 变体
+
+:::demo 通过 `variant` 属性设置样式变体。
+
+welcome/variant
+
+:::
