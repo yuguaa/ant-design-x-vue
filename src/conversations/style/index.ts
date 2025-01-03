@@ -27,6 +27,7 @@ const genConversationsStyle: GenerateStyle<ConversationsToken> = (token) => {
         display: 'flex',
         gap: token.paddingXXS,
         flexDirection: 'column',
+        paddingLeft: 0,
 
         [`& ${componentCls}-item`]: {
           paddingInlineStart: token.paddingXL,
