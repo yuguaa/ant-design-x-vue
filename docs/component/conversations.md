@@ -33,3 +33,11 @@ conversations/with-menu
 conversations/controlled-mode
 
 :::
+
+### 分组展示
+
+:::demo 使用 `groupable` 属性开启分组，开启后默认按 [Conversation.group](#) 字段分组
+
+conversations/group
+
+:::
