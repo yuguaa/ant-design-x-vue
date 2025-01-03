@@ -125,10 +125,11 @@ const copyCode = async () => {
 
 <style lang="scss">
 // reset vitepress style
-.example-showcase {
-  ul {
-    list-style: none !important;
-    padding-left: 12px !important;
+.example {
+  .example-showcase {
+    ul {
+      list-style: none;
+    }
   }
 }
 </style>
