@@ -24,3 +24,11 @@ welcome/basic
 welcome/variant
 
 :::
+
+### 背景定制
+
+:::demo 自定义部分样式。
+
+welcome/background
+
+:::
