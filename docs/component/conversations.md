@@ -41,3 +41,11 @@ conversations/controlled-mode
 conversations/group
 
 :::
+
+### 分组排序
+
+:::demo 通过 `groupable.sort` 属性对分组排序, 通过 `groupable.title` 自定义渲染分组
+
+conversations/group-sort
+
+:::
