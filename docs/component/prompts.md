@@ -32,3 +32,11 @@ prompts/disabled
 prompts/flex-vertical
 
 :::
+
+### 可换行
+
+:::demo 使用 `wrap` 属性，控制 Prompts 超出区域长度时是否可以换行。
+
+prompts/flex-wrap-fixed
+
+:::
