@@ -24,3 +24,11 @@ prompts/basic
 prompts/disabled
 
 :::
+
+### 纵向展示
+
+:::demo 使用 `vertical` 属性，控制 Prompts 展示方向。
+
+prompts/flex-vertical
+
+:::
