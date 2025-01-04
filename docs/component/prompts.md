@@ -48,3 +48,11 @@ prompts/flex-wrap
 prompts/flex-wrap-fixed
 
 :::
+
+### 嵌套组合
+
+:::demo 嵌套组合。
+
+prompts/nest
+
+:::
