@@ -16,3 +16,11 @@ Prompts 组件用于显示一组与当前上下文相关的预定义的问题或
 prompts/basic
 
 :::
+
+### 不可用状态
+
+:::demo 要将 prompt 标记为禁用，请向 prompt 添加 `disabled` 属性。
+
+prompts/disabled
+
+:::
