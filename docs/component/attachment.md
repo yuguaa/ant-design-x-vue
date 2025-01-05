@@ -32,3 +32,11 @@ attachment/placeholder
 attachment/overflow
 
 :::
+
+### 文件卡片
+
+:::demo 单独的文件卡片，用于一些展示场景。
+
+attachment/files
+
+:::
