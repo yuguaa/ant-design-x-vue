@@ -43,7 +43,7 @@ attachment/files
 
 ## API
 
-通用属性参考：[通用属性](/docs/react/common-props)。
+<!-- 通用属性参考：[通用属性](/docs/react/common-props)。 -->
 
 ### Attachment Props
 
