@@ -16,3 +16,11 @@ Attachment 组件用于需要展示一组附件信息集合的场景。
 attachment/basic
 
 :::
+
+### 占位信息
+
+:::demo 修改占位信息。
+
+attachment/placeholder
+
+:::
