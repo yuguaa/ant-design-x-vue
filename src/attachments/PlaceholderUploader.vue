@@ -18,7 +18,7 @@ const {
 
 const placeholderCls = `${prefixCls}-placeholder`;
 
-const placeholderConfig = (placeholder || {}) as PlaceholderConfig;
+const placeholderConfig = computed(() => (placeholder || {}) as PlaceholderConfig);
 
 const uploadDraggerRef = useTemplateRef<InstanceType<typeof Upload.Dragger>>('upload-dragger');
 
@@ -58,21 +58,21 @@ const node = computed(() => {
         // @ts-expect-error
         class={`${placeholderCls}-icon`}
       >
-        {placeholderConfig.icon}
+        {placeholderConfig.value.icon}
       </Typography.Text>
       <Typography.Title
         // @ts-expect-error
         class={`${placeholderCls}-title`}
         level={5}
       >
-        {placeholderConfig.title}
+        {placeholderConfig.value.title}
       </Typography.Title>
       <Typography.Text
         // @ts-expect-error
         class={`${placeholderCls}-description`}
         type="secondary"
       >
-        {placeholderConfig.description}
+        {placeholderConfig.value.description}
       </Typography.Text>
     </Flex>
   )

@@ -94,7 +94,11 @@ const { prefixCls: customizePrefixCls, item, onRemove, className, style } = defi
 const context = useAttachmentContextInject();
 const disabled = computed(() => context.value.disabled);
 
-const { name, size, percent, status = 'done', description } = item;
+const name = computed(() => item.name);
+const size = computed(() => item.size);
+const percent = computed(() => item.percent);
+const status = computed(() => item.status || 'done');
+const description = computed(() => item.description);
 
 // ============================= Prefix =============================
 const { getPrefixCls } = useXProviderContext();
@@ -110,7 +114,7 @@ const containerRef = useTemplateRef<HTMLDivElement>('file-list-card-container');
 
 // ============================== Name ==============================
 const nameState = computed(() => {
-  const nameStr = name || '';
+  const nameStr = name.value || '';
   const match = nameStr.match(/^(.*)\.[^.]+$/);
   return {
     namePrefix: match ? match[1] : nameStr,
@@ -122,19 +126,19 @@ const isImg = computed(() => matchExt(nameState.value.nameSuffix, IMG_EXTS));
 
 // ============================== Desc ==============================
 const desc = computed(() => {
-  if (description) {
-    return description;
+  if (description.value) {
+    return description.value;
   }
 
-  if (status === 'uploading') {
-    return `${percent || 0}%`;
+  if (status.value === 'uploading') {
+    return `${percent.value || 0}%`;
   }
 
-  if (status === 'error') {
+  if (status.value === 'error') {
     return item.response || EMPTY;
   }
 
-  return size ? getSize(size) : EMPTY;
+  return size.value ? getSize(size.value) : EMPTY;
 });
 
 // ============================== Icon ==============================
@@ -183,12 +187,12 @@ const content = computed(() => {
       <>
         <img alt="preview" src={previewUrl.value} />
 
-        {status !== 'done' && (
+        {status.value !== 'done' && (
           <div class={`${cardCls}-img-mask`}>
-            {status === 'uploading' && percent !== undefined && (
-              <Progress percent={percent} prefixCls={cardCls} />
+            {status.value === 'uploading' && percent.value !== undefined && (
+              <Progress percent={percent.value} prefixCls={cardCls} />
             )}
-            {status === 'error' && (
+            {status.value === 'error' && (
               <div class={`${cardCls}-desc`}>
                 <div class={`${cardCls}-ellipsis-prefix`}>{desc.value}</div>
               </div>
@@ -227,7 +231,7 @@ defineRender(() => {
       class={classnames(
         cardCls,
         {
-          [`${cardCls}-status-${status}`]: status,
+          [`${cardCls}-status-${status.value}`]: status.value,
           [`${cardCls}-type-preview`]: isImgPreview.value,
           [`${cardCls}-type-overview`]: !isImgPreview.value,
         },
