@@ -84,7 +84,7 @@ defineRender(() => {
       class={classNames(
         placeholderCls,
         {
-          [`${placeholderCls}-drag-in`]: dragIn,
+          [`${placeholderCls}-drag-in`]: dragIn.value,
           [`${placeholderCls}-disabled`]: attachmentContext.value.disabled,
         },
         className,
