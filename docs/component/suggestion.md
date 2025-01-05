@@ -24,3 +24,11 @@ suggestion/basic
 suggestion/block
 
 :::
+
+### 自定义
+
+:::demo 根据输入动态展示建议项的多标签示例。
+
+suggestion/trigger
+
+:::
