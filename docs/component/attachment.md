@@ -40,3 +40,46 @@ attachment/overflow
 attachment/files
 
 :::
+
+## API
+
+通用属性参考：[通用属性](/docs/react/common-props)。
+
+### Attachment Props
+
+继承 antdv [Upload](https://www.antdv.com/components/upload-cn) 属性。
+
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| classNames | 自定义样式类名，[见下](#semantic-dom) | Record<string, string> | - | - |
+| disabled | 是否禁用 | boolean | false | - |
+| getDropContainer | 设置拖拽时，可以释放文件的区域 | () => HTMLElement | - | - |
+| items | 附件列表，同 Upload `fileList` | Attachment[] | - | - |
+| overflow | 文件列表超出时样式 | 'wrap' \| 'scrollX' \| 'scrollY' | - | - |
+| placeholder | 没有文件时的占位信息 | PlaceholderType \| ((type: 'inline' \| 'drop') => PlaceholderType) | - | - |
+| rootClassName | 根节点的样式类名 | string | - | - |
+| rootStyle | 根节点的样式对象 | CSSProperties | - | - |
+| styles | 自定义样式对象，[见下](#semantic-dom) | Record<string, CSSProperties> | - | - |
+
+```tsx | pure
+interface PlaceholderType {
+  icon?: VNode;
+  title?: VNode | string;
+  description?: VNode | string;
+}
+```
+
+### Attachments Expose
+
+| 属性          | 说明             | 类型                 | 版本 |
+| ------------- | ---------------- | -------------------- | ---- |
+| nativeElement | 获取原生节点     | HTMLElement          | -    |
+| upload        | 手工调用上传文件 | (file: File) => void | -    |
+
+## Semantic DOM
+
+<!-- <code src="./demo/_semantic.tsx" simplify="true"></code> -->
+
+## 主题变量（Design Token）
+
+<!-- <ComponentTokenTable component="Prompts"></ComponentTokenTable> -->
