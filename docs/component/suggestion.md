@@ -16,3 +16,11 @@
 suggestion/basic
 
 :::
+
+### 整行宽度
+
+:::demo 通过 `block` 改为整行展示，`extra` 可用于配置额外信息。
+
+suggestion/block
+
+:::
