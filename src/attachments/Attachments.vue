@@ -57,7 +57,10 @@ const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
 const cssinjsCls = computed(() => classnames(hashId, cssVarCls));
 
 // ============================ Upload ============================
-const [fileList, setFileList] = useState(() => items);
+const [fileList, setFileList] = useState(items);
+watch(() => items, () => {
+  setFileList(items);
+});
 
 const triggerChange: AttachmentsProps['onChange'] = (info) => {
   setFileList(info.fileList);
