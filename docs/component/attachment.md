@@ -24,3 +24,11 @@ attachment/basic
 attachment/placeholder
 
 :::
+
+### 超出样式
+
+:::demo 控制附件超出区域长度时的展示方式。
+
+attachment/overflow
+
+:::
