@@ -113,6 +113,7 @@ export default defineConfig({
       {
         text: '表达',
         items: [
+          { text: 'Sender 输入框', link: '/component/sender' },
           { text: 'Suggestion 快捷指令', link: '/component/suggestion' }
         ]
       },
