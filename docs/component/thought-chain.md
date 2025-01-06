@@ -33,3 +33,11 @@ thought-chain/size
 thought-chain/status
 
 :::
+
+### 可折叠的
+
+:::demo 配置 `collapsible` 可开启对思维链节点内容区域的折叠功能
+
+thought-chain/collapsible
+
+:::
