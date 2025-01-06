@@ -117,6 +117,12 @@ export default defineConfig({
           { text: 'Suggestion 快捷指令', link: '/component/suggestion' }
         ]
       },
+      {
+        text: '确认',
+        items: [
+          { text: 'ThoughtChain 思维链', link: '/component/thought-chain' }
+        ]
+      },
     ],
 
     socialLinks: [
