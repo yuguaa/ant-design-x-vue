@@ -164,6 +164,9 @@ const genThoughtChainItemStyle: GenerateThoughtChainItemStyle = (token) => {
           height: token.itemSize,
           width: token.itemSize,
           fontSize: token.itemFontSize,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         },
         [`& ${itemCls}-extra`]: {
           height: token.itemSize,
