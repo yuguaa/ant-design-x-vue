@@ -1,6 +1,6 @@
 import useState from "../../_util/hooks/use-state";
-import { computed, toRef } from "vue";
-import type { Ref } from "vue";
+import { computed, toRef, toValue } from "vue";
+import type { MaybeRefOrGetter, Ref } from "vue";
 
 export type CollapsibleOptions = {
   /**
@@ -21,7 +21,7 @@ export type Collapsible = boolean | CollapsibleOptions;
 type RequiredCollapsibleOptions = Required<CollapsibleOptions>;
 
 type UseCollapsible = (
-  collapsible?: Collapsible,
+  collapsible?: MaybeRefOrGetter<Collapsible>,
   prefixCls?: string,
   rootPrefixCls?: string,
 ) => [
@@ -34,19 +34,20 @@ type UseCollapsible = (
 const useCollapsible: UseCollapsible = (collapsible, prefixCls, rootPrefixCls) => {
   // ============================ Collapsible ============================
   const collapsibleState = computed(() => {
+    const _collapsible = toValue(collapsible);
     let baseConfig: RequiredCollapsibleOptions = {
       expandedKeys: [],
       onExpand: () => { },
     };
-    if (!collapsible) {
+    if (!_collapsible) {
       return {
         enableCollapse: false,
         customizeExpandedKeys: baseConfig.expandedKeys,
         customizeOnExpand: baseConfig.onExpand
       }
     }
-    if (typeof collapsible === 'object') {
-      baseConfig = { ...baseConfig, ...collapsible };
+    if (typeof _collapsible === 'object') {
+      baseConfig = { ...baseConfig, ..._collapsible };
     }
 
     return {

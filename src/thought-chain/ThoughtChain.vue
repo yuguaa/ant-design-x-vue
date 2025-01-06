@@ -48,7 +48,7 @@ const [
   onItemExpand,
   // collapseMotion
 ] = useCollapsible(
-  collapsible,
+  () => collapsible,
   prefixCls.value,
   rootPrefixCls.value,
 );

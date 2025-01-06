@@ -46,7 +46,8 @@ const itemCls = computed(() => `${prefixCls.value}-item`);
 const onThoughtChainNodeClick = () => onClick?.(key.value);
 
 // ============================ Content Open ============================
-const contentOpen = expandedKeys.value?.includes(key.value);
+const contentOpen = computed(() => expandedKeys.value?.includes(key.value));
+const contentVisible = computed(() => enableCollapse.value ? contentOpen.value : true);
 
 defineRender(() => {
   return (
@@ -89,12 +90,12 @@ defineRender(() => {
               (direction.value === 'rtl' ? (
                 <LeftOutlined
                   class={`${itemCls.value}-collapse-icon`}
-                  rotate={contentOpen ? -90 : 0}
+                  rotate={contentOpen.value ? -90 : 0}
                 />
               ) : (
                 <RightOutlined
                   class={`${itemCls.value}-collapse-icon`}
-                  rotate={contentOpen ? 90 : 0}
+                  rotate={contentOpen.value ? 90 : 0}
                 />
               ))}
             {title.value}
@@ -121,7 +122,8 @@ defineRender(() => {
       </div>
       {/* Content */}
       {content.value && (
-        <div
+        // TODO: add animation
+        contentVisible.value && (<div
           class={classnames(`${itemCls.value}-content`)}
         >
           <div
@@ -130,8 +132,8 @@ defineRender(() => {
           >
             {content.value}
           </div>
-        </div>
-        // <CSSMotion {...collapseMotion} visible={enableCollapse.value ? contentOpen : true}>
+        </div>)
+        // <CSSMotion {...collapseMotion} visible={enableCollapse.value ? contentOpen.value : true}>
         //   {({ className: motionClassName, style }, motionRef) => (
         //     <div
         //       className={classnames(`${itemCls}-content`, motionClassName)}
