@@ -17,3 +17,11 @@
 thought-chain/basic
 
 :::
+
+### 尺寸
+
+:::demo ThoughtChain 有大、中、小三种尺寸。默认尺寸为中 - `middle`。
+
+thought-chain/size
+
+:::
