@@ -5,3 +5,4 @@ export * from './welcome';
 export * from './prompts';
 export * from './suggestion';
 export * from './attachments';
+export * from './thought-chain';
