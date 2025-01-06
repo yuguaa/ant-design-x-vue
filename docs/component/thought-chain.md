@@ -25,3 +25,11 @@ thought-chain/basic
 thought-chain/size
 
 :::
+
+### 节点状态
+
+:::demo 思维链节点支持配置 `status` 属性来明显的表明当前节点的执行状态
+
+thought-chain/status
+
+:::
