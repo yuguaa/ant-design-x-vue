@@ -49,3 +49,11 @@ thought-chain/collapsible
 thought-chain/customization
 
 :::
+
+### 嵌套使用
+
+:::demo ThoughtChain 组件支持嵌套使用
+
+thought-chain/nested
+
+:::
