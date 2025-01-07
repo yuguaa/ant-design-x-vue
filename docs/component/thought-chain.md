@@ -41,3 +41,11 @@ thought-chain/status
 thought-chain/collapsible
 
 :::
+
+### 客制化
+
+:::demo `items` 属性支持灵活的客制化配置，详情参考 `ThoughtChainItem` 定义
+
+thought-chain/customization
+
+:::
