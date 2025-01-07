@@ -3,7 +3,6 @@ import { CheckCircleOutlined, MoreOutlined } from '@ant-design/icons-vue';
 import { Button, Card, Typography } from 'ant-design-vue';
 import { ThoughtChain, type ThoughtChainItem, type ThoughtChainProps } from 'ant-design-x-vue';
 
-
 defineOptions({ name: 'AXThoughtChainCustomization' });
 
 const { Paragraph, Text } = Typography;
