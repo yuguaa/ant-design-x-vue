@@ -123,6 +123,12 @@ export default defineConfig({
           { text: 'ThoughtChain 思维链', link: '/component/thought-chain' }
         ]
       },
+      {
+        text: '工具',
+        items: [
+          { text: 'XStream 流', link: '/component/x-stream' }
+        ]
+      },
     ],
 
     socialLinks: [
