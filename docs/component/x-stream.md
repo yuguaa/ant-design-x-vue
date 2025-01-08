@@ -48,3 +48,12 @@ x-stream/default-protocol
 x-stream/custom-protocol
 
 :::
+
+## API
+
+### XStreamOptions
+
+| 属性 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| readableStream | ReadableStream 实例 | ReadableStream<'Uint8Array'> | - | - |
+| transformStream | 自定义的 transformStream 用于转换流的处理 | TransformStream<string, T> | sseTransformStream | - |
