@@ -38,3 +38,13 @@ async function request() {
 x-stream/default-protocol
 
 :::
+
+### 自定义协议
+
+> 在本示例中，我们将演示如何解析 SIP 协议, 该协议常用于 P2P 音视频会话协商。
+
+:::demo 传入 `transformStream` 流转换器，该参数需接收一个 `new TransformStream(...)` 实例。
+
+x-stream/custom-protocol
+
+:::
