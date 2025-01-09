@@ -126,7 +126,8 @@ export default defineConfig({
       {
         text: '工具',
         items: [
-          { text: 'XStream 流', link: '/component/x-stream' }
+          { text: 'XStream 流', link: '/component/x-stream' },
+          { text: 'XRequest 请求', link: '/component/x-request' }
         ]
       },
     ],
