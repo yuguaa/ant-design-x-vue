@@ -16,3 +16,11 @@
 use-x-agent/preset
 
 :::
+
+### 自定义请求
+
+:::demo 通过定制能力，返回多个推荐内容。
+
+use-x-agent/custom
+
+:::
