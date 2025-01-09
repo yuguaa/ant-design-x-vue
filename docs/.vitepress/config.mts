@@ -126,6 +126,7 @@ export default defineConfig({
       {
         text: '工具',
         items: [
+          { text: 'useXAgent 模型调度', link: '/component/use-x-agent' },
           { text: 'XStream 流', link: '/component/x-stream' },
           { text: 'XRequest 请求', link: '/component/x-request' }
         ]
