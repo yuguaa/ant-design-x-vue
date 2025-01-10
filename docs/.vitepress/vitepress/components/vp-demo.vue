@@ -143,7 +143,7 @@ const copyCode = async () => {
     padding: 1.5rem;
     margin: 0.5px;
 
-    ::v-deep table {
+    :deep(table) {
       margin: 0;
 
       tr {
