@@ -1,65 +1,50 @@
 <script setup lang="tsx">
-import { RedditOutlined } from '@ant-design/icons-vue';
-import { Input } from 'ant-design-vue';
-import { Suggestion, type SuggestionProps } from 'ant-design-x-vue';
-import { ref } from 'vue';
+import { App, Flex } from 'ant-design-vue';
+import { Sender } from 'ant-design-x-vue';
+import { onWatcherCleanup, ref, watch } from 'vue';
 
-defineOptions({ name: 'AXSuggestionBasic' });
-
-type SuggestionItems = Exclude<SuggestionProps['items'], () => void>;
-
-const suggestions: SuggestionItems = [
-  { label: 'Write a report', value: 'report' },
-  { label: 'Draw a picture', value: 'draw' },
-  {
-    label: 'Check some knowledge',
-    value: 'knowledge',
-    icon: <RedditOutlined />,
-    children: [
-      {
-        label: 'About React',
-        value: 'react',
-      },
-      {
-        label: 'About Ant Design',
-        value: 'antd',
-      },
-    ],
-  },
-];
+defineOptions({ name: 'AXSenderBasic' });
 
 const Demo = () => {
-  const value = ref('')
+  const value = ref('Hello? this is X!');
+  const loading = ref<boolean>(false);
 
-  const updateValue = (v: string) => {
-    value.value = v
-  }
+  const { message } = App.useApp();
+
+  // Mock send message
+  watch([() => loading.value], () => {
+    if (loading.value) {
+      const timer = setTimeout(() => {
+        loading.value = false;
+        message.success('Send message successfully!');
+      }, 3000);
+      onWatcherCleanup(() => {
+        clearTimeout(timer);
+      })
+    }
+  }, { immediate: true, deep: true });
 
   return (
-    <Suggestion
-      items={suggestions}
-      onSelect={(itemVal) => {
-        updateValue(`[${itemVal}]:`);
-      }}
-      children={({ onTrigger, onKeyDown }) => {
-        return (
-          <Input
-            value={value.value}
-            onChange={(e) => {
-              const nextVal = e.target.value
-              if (nextVal === '/') {
-                onTrigger();
-              } else if (!nextVal) {
-                onTrigger(false);
-              }
-              updateValue(nextVal);
-            }}
-            onKeydown={onKeyDown}
-            placeholder="输入 / 获取建议"
-          />
-        );
-      }}
-    />
+    <Flex vertical gap="middle">
+      <Sender
+        loading={loading.value}
+        value={value.value}
+        onChange={(v) => {
+          value.value = v
+        }}
+        onSubmit={() => {
+          value.value = '';
+          loading.value = true
+          message.info('Send message!');
+        }}
+        onCancel={() => {
+          loading.value = false
+          message.error('Cancel sending!');
+        }}
+      />
+      <Sender value="Force as loading" loading readOnly />
+      <Sender disabled value="Set to disabled" />
+    </Flex>
   );
 };
 
@@ -68,4 +53,5 @@ defineRender(() => {
     <Demo />
   )
 });
+
 </script>
