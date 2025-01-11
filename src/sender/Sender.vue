@@ -1,86 +1,310 @@
 <script setup lang="tsx" generic="T = any">
+import { Flex, Input } from 'ant-design-vue';
 import classnames from 'classnames';
-import type { RenderChildrenProps, SenderItem, SenderProps } from './interface';
-import { useXProviderContext } from '../x-provider';
+import useMergedState from '../_util/hooks/useMergedState';
+import pickAttrs from '../_util/pick-attrs';
+// import getValue from 'rc-util/lib/utils/get';
+// import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
+import { useXProviderContext } from '../x-provider';
+import SenderHeader from './SenderHeader.vue';
+import SenderHeaderContextProvider, { useSenderHeaderContextInject } from './context';
+import ActionButtonContextProvider, { useActionButtonContextInject } from './components/ActionButton/context';
+import ClearButton from './components/ClearButton.vue';
+import LoadingButton from './components/LoadingButton.vue';
+import SendButton from './components/SendButton.vue';
+import SpeechButton from './components/SpeechButton/index.vue';
 import useStyle from './style';
-import { computed } from 'vue';
-import useState from '../_util/hooks/use-state';
-import { Cascader, type CascaderProps } from 'ant-design-vue';
-import useActive from './useActive';
+import useSpeech from './useSpeech';
+import type { SenderComponents, SenderProps } from './interface';
+import { computed, ref, type VNode } from 'vue';
+import getValue from '../_util/getValue';
+import type { ChangeEvent, ClipboardEventHandler, MouseEventHandler } from "ant-design-vue/es/_util/EventInterface";;
+
+function getComponent<T>(
+  components: SenderComponents | undefined,
+  path: string[],
+  defaultComponent: any,
+): any {
+  return getValue(components, path) || defaultComponent;
+}
 
 defineOptions({ name: 'AXSender' });
 
 const {
   prefixCls: customizePrefixCls,
+  styles = {},
+  classNames = {},
   className,
   rootClassName,
   style,
-  children,
-  open = false,
-  onOpenChange,
-  items,
-  onSelect,
-  block,
-} = defineProps<SenderProps<T>>();
+  defaultValue,
+  value,
+  readOnly,
+  submitType = 'enter',
+  onSubmit,
+  loading,
+  components,
+  onCancel,
+  onChange,
+  actions,
+  onKeyPress,
+  onKeyDown,
+  disabled,
+  allowSpeech,
+  prefix,
+  header,
+  onPaste,
+  onPasteFile,
+  ...rest
+} = defineProps<SenderProps>();
 
 // ============================= MISC =============================
 const { direction, getPrefixCls } = useXProviderContext();
-const prefixCls = computed(() => getPrefixCls('Sender', customizePrefixCls));
-const itemCls = `${prefixCls.value}-item`;
+const prefixCls = computed(() => {
+  return getPrefixCls('sender', customizePrefixCls)
+});
 
-const isRTL = computed(() => direction.value === 'rtl');
+// ============================= Refs =============================
+const containerRef = ref(null);
+const inputRef = ref(null);
 
-// ===================== Component Config =========================
-const contextConfig = useXComponentConfig('Sender');
+// ======================= Component Config =======================
+const contextConfig = useXComponentConfig('sender');
+const inputCls = `${prefixCls.value}-input`;
 
 // ============================ Styles ============================
 const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+const mergedCls = computed(() => {
+  return classnames(
+    prefixCls,
+    contextConfig.value.className,
+    className,
+    rootClassName,
+    hashId,
+    cssVarCls,
+    {
+      [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+      [`${prefixCls.value}-disabled`]: disabled,
+    },
+  );
+})
 
-// =========================== Trigger ============================
-const [mergedOpen, setOpen] = useState(open);
+const actionBtnCls = computed(() => `${prefixCls.value}-actions-btn`);
+const actionListCls = computed(() => `${prefixCls.value}-actions-list`);
 
-const [info, setInfo] = useState<T | undefined>();
-
-const triggerOpen = (nextOpen: boolean) => {
-  setOpen(nextOpen);
-  onOpenChange?.(nextOpen);
-};
-
-const onTrigger: RenderChildrenProps<T>['onTrigger'] = (nextInfo) => {
-  if (nextInfo === false) {
-    triggerOpen(false);
-  } else {
-    setInfo(nextInfo);
-    triggerOpen(true);
-  }
-};
-
-const onClose = () => {
-  triggerOpen(false);
-};
-
-// ============================ Items =============================
-const itemList = computed(() => {
-  return typeof items === 'function' ? items(info.value) : items
+// ============================ Value =============================
+const [innerValue, setInnerValue] = useMergedState(defaultValue || '', {
+  value,
 });
 
-const onInternalChange = (valuePath: string[]) => {
-  if (onSelect) {
-    onSelect(valuePath[valuePath.length - 1]);
+const triggerValueChange: SenderProps['onChange'] = (nextValue, event) => {
+  setInnerValue(nextValue);
+
+  if (onChange) {
+    onChange(nextValue, event);
   }
-  triggerOpen(false);
 };
 
-// ============================= a11y =============================
-const [activePath, onKeyDown] = useActive(itemList, mergedOpen, isRTL, onInternalChange, onClose);
+// ============================ Speech ============================
+const { speechPermission, triggerSpeech, recording: speechRecording } = useSpeech((transcript) => {
+  triggerValueChange(`${innerValue} ${transcript}`);
+}, allowSpeech);
 
-// =========================== Children ===========================
-const childNode = computed(() => children?.({ onTrigger, onKeyDown }));
+// ========================== Components ==========================
+const InputTextArea = getComponent(components, ['input'], Input.TextArea);
+
+const domProps = computed(() => pickAttrs(rest, {
+  attr: true,
+  aria: true,
+  data: true,
+}))
+
+const inputProps: typeof domProps.value = computed(() => {
+  return {
+    ...domProps.value,
+    ref: inputRef,
+  };
+})
+
+// ============================ Events ============================
+const triggerSend = () => {
+  if (innerValue && onSubmit && !loading) {
+    onSubmit(innerValue);
+  }
+};
+
+const triggerClear = () => {
+  triggerValueChange('');
+};
+
+// ============================ Submit ============================
+const isCompositionRef = ref(false);
+
+const onInternalCompositionStart = () => {
+  isCompositionRef.value = true;
+};
+
+const onInternalCompositionEnd = () => {
+  isCompositionRef.value = false;
+};
+
+const onInternalKeyPress: SenderProps['onKeyPress'] = (e) => {
+  const canSubmit = e.key === 'Enter' && !isCompositionRef.value;
+
+  // Check for `submitType` to submit
+  switch (submitType) {
+    case 'enter':
+      if (canSubmit && !e.shiftKey) {
+        e.preventDefault();
+        triggerSend();
+      }
+      break;
+
+    case 'shiftEnter':
+      if (canSubmit && e.shiftKey) {
+        e.preventDefault();
+        triggerSend();
+      }
+      break;
+  }
+
+  if (onKeyPress) {
+    onKeyPress(e);
+  }
+};
+
+// ============================ Paste =============================
+const onInternalPaste: ClipboardEventHandler = (e) => {
+  // Get file
+  const file = e.clipboardData?.files[0];
+  if (file && onPasteFile) {
+    onPasteFile(file);
+    e.preventDefault();
+  }
+
+  onPaste?.(e);
+};
+
+// ============================ Focus =============================
+const onContentMouseDown: MouseEventHandler = (e) => {
+  // If input focused but click on the container,
+  // input will lose focus.
+  // We call `preventDefault` to prevent this behavior
+  if (e.target !== containerRef.value?.querySelector(`.${inputCls}`)) {
+    e.preventDefault();
+  }
+
+  inputRef.value?.focus();
+};
+
+// ============================ Action ============================
+let actionNode: VNode = (
+  <Flex class={`${actionListCls.value}-presets`}>
+    {allowSpeech && <SpeechButton />}
+    {/* Loading or Send */}
+    {loading ? <LoadingButton /> : <SendButton />}
+  </Flex>
+);
+
+// Custom actions
+if (typeof actions === 'function') {
+  actionNode = actions(actionNode, {
+    components: {
+      SendButton,
+      ClearButton,
+      LoadingButton,
+    },
+  });
+} else if (actions) {
+  actionNode = actions;
+}
+
+// ============================ Render ============================
 
 defineRender(() => {
+  // ============================ Render ============================
   return wrapCSSVar(
-    'Sender'
-  )
+    <div ref={containerRef} class={mergedCls} style={{ ...contextConfig.value.style, ...style }}>
+      {/* Header */}
+      {header && (
+        <SenderHeaderContextProvider value={{ prefixCls: prefixCls.value }}>{header}</SenderHeaderContextProvider>
+      )}
+
+      <div class={`${prefixCls.value}-content`} onMousedown={onContentMouseDown}>
+        {/* Prefix */}
+        {prefix && (
+          <div
+            class={classnames(
+              `${prefixCls.value}-prefix`,
+              contextConfig.value.classNames.prefix,
+              classNames.prefix,
+            )}
+            style={{ ...contextConfig.value.styles.prefix, ...styles.prefix }}
+          >
+            {prefix}
+          </div>
+        )}
+
+        {/* Input */}
+        <InputTextArea
+          {...inputProps}
+          disabled={disabled}
+          style={{ ...contextConfig.value.styles.input, ...styles.input }}
+          className={classnames(inputCls, contextConfig.value.classNames.input, classNames.input)}
+          autoSize={{ maxRows: 8 }}
+          value={innerValue}
+          onChange={(event) => {
+            triggerValueChange(
+              (event.target as HTMLTextAreaElement).value,
+              event as ChangeEvent,
+            );
+            triggerSpeech(true);
+          }}
+          onPressEnter={onInternalKeyPress}
+          onCompositionStart={onInternalCompositionStart}
+          onCompositionEnd={onInternalCompositionEnd}
+          onKeyDown={onKeyDown}
+          onPaste={onInternalPaste}
+          variant="borderless"
+          readOnly={readOnly}
+        />
+
+        {/* Action List */}
+        <div
+          class={classnames(
+            actionListCls,
+            contextConfig.value.classNames.actions,
+            classNames.actions,
+          )}
+          style={{ ...contextConfig.value.styles.actions, ...styles.actions }}
+        >
+          <ActionButtonContextProvider
+            value={{
+              prefixCls: actionBtnCls.value,
+              onSend: triggerSend,
+              onSendDisabled: !innerValue,
+              onClear: triggerClear,
+              onClearDisabled: !innerValue,
+              onCancel,
+              onCancelDisabled: !loading,
+              onSpeech: () => triggerSpeech(false),
+              onSpeechDisabled: !speechPermission,
+              speechRecording: speechRecording.value,
+              disabled,
+            }}
+          >
+            {actionNode}
+          </ActionButtonContextProvider>
+        </div>
+      </div>
+    </div>,
+  );
+});
+
+defineExpose({
+  nativeElement: containerRef.value,
+  focus: inputRef.value?.focus!,
+  blur: inputRef.value?.blur!,
 });
 </script>

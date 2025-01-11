@@ -1,32 +1,109 @@
-import type { CSSProperties, VNode } from "vue";
+import { ButtonProps, type TextAreaProps } from "ant-design-vue";
+import type { ChangeEvent, ClipboardEventHandler, KeyboardEventHandler } from "ant-design-vue/es/_util/EventInterface";
+import { ConfigProviderProps } from "ant-design-vue/es/config-provider/context";
+import type { CSSProperties, VNode, } from "vue";
+import { AllowSpeech } from "./useSpeech";
+import type { InputRef } from "ant-design-vue/es/vc-input/inputProps";
 
-export type SenderItem = {
-  label: VNode | string;
-  value: string;
+export type SubmitType = 'enter' | 'shiftEnter' | false;
 
-  icon?: VNode;
 
-  children?: SenderItem[];
-
-  extra?: VNode;
-};
-
-export interface RenderChildrenProps<T> {
-  onTrigger: (info?: T | false) => void;
-  onKeyDown: (e: KeyboardEvent) => void;
+export interface SenderComponents {
+  input?: TextAreaProps;
 }
 
-export interface SenderProps<T = any> {
+export type ActionsRender = (
+  ori: VNode,
+  info: {
+    components: {
+      SendButton: ButtonProps;
+      ClearButton: ButtonProps;
+      LoadingButton: ButtonProps;
+    };
+  },
+) => VNode;
+
+export interface SenderProps extends Pick<TextAreaProps, 'placeholder'> {
+  onKeyPress?: KeyboardEventHandler;
+
   prefixCls?: string;
-  className?: string;
+  defaultValue?: string;
+  value?: string;
+  loading?: boolean;
+  readOnly?: boolean;
+  submitType?: SubmitType;
+  disabled?: boolean;
+  onSubmit?: (message: string) => void;
+  onChange?: (
+    value: string,
+    event?: ChangeEvent,
+    // event?: FormEvent | ChangeEvent,
+  ) => void;
+  onCancel?: VoidFunction;
+  onKeyDown?: KeyboardEventHandler;
+  onPaste?: ClipboardEventHandler;
+  onPasteFile?: (file: File) => void;
+  components?: SenderComponents;
+  styles?: {
+    prefix?: CSSProperties;
+    input?: CSSProperties;
+    actions?: CSSProperties;
+  };
   rootClassName?: string;
+  classNames?: {
+    prefix?: string;
+    input?: string;
+    actions?: string;
+  };
   style?: CSSProperties;
-  children?: (props: RenderChildrenProps<T>) => VNode;
+  className?: string;
+  actions?: VNode | ActionsRender;
+  allowSpeech?: AllowSpeech;
+  prefix?: VNode;
+  header?: VNode;
+}
+
+export type SenderRef = {
+  nativeElement: HTMLDivElement;
+} & Pick<InputRef, 'focus' | 'blur'>;
+
+export interface SenderHeaderContextProps {
+  prefixCls?: ConfigProviderProps['prefixCls'];
+}
+
+export type SemanticType = 'header' | 'content';
+
+export interface SenderHeaderProps {
+  forceRender?: boolean;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
-  items: SenderItem[] | ((info?: T) => SenderItem[]);
-  onSelect?: (value: string) => void;
-  block?: boolean;
-  styles?: Partial<Record<string, CSSProperties>>;
-  classNames?: Partial<Record<string, string>>;
+  title?: VNode;
+  children?: VNode;
+  className?: string;
+  style?: CSSProperties;
+  classNames?: Partial<Record<SemanticType, string>>;
+  styles?: Partial<Record<SemanticType, CSSProperties>>;
+  closable?: boolean;
+}
+
+export interface RecordingIconProps {
+  className?: string;
+}
+
+export interface ActionButtonContextProps {
+  prefixCls?: ConfigProviderProps['prefixCls'];
+  onSend?: VoidFunction;
+  onSendDisabled?: boolean;
+  onClear?: VoidFunction;
+  onClearDisabled?: boolean;
+  onCancel?: VoidFunction;
+  onCancelDisabled?: boolean;
+  onSpeech?: VoidFunction;
+  onSpeechDisabled?: boolean;
+  speechRecording?: boolean;
+  disabled?: boolean;
+}
+
+export interface ActionButtonProps extends ButtonProps {
+  action: 'onSend' | 'onClear' | 'onCancel' | 'onSpeech';
 }
