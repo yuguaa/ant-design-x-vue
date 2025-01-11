@@ -1,6 +1,6 @@
-import { computed, ComputedRef, defineComponent, inject, InjectionKey, provide, shallowRef, triggerRef, unref, watch } from "vue";
+import { computed, type ComputedRef, defineComponent, inject, type InjectionKey, provide, shallowRef, triggerRef, unref, watch } from "vue";
 import { objectType } from "../_util/type";
-import { ThoughtChainNodeContextProps } from "./interface";
+import type { ThoughtChainNodeContextProps } from "./interface";
 
 const ThoughtChainNodeContextKey: InjectionKey<ComputedRef<ThoughtChainNodeContextProps>> =
   Symbol('ThoughtChainNodeContext');
