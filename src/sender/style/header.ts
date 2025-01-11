@@ -1,5 +1,5 @@
 import type { GenerateStyle } from '../../theme/cssinjs-utils';
-import { SenderToken } from '.';
+import type { SenderToken } from '.';
 
 const genSenderHeaderStyle: GenerateStyle<SenderToken> = (token) => {
   const { componentCls, calc } = token;

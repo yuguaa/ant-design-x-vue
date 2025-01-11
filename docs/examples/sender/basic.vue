@@ -50,7 +50,9 @@ const Demo = () => {
 
 defineRender(() => {
   return (
-    <Demo />
+    <App>
+      <Demo />
+    </App>
   )
 });
 

@@ -44,7 +44,7 @@ defineRender(() => {
         }
       }}
       class={classNames(prefixCls.value, {
-        [`${prefixCls.value}-disabled`]: mergedDisabled,
+        [`${prefixCls.value}-disabled`]: mergedDisabled.value,
       })}
     />
   );

@@ -74,10 +74,10 @@ const contextConfig = useXComponentConfig('sender');
 const inputCls = `${prefixCls.value}-input`;
 
 // ============================ Styles ============================
-const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls);
+const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls.value);
 const mergedCls = computed(() => {
   return classnames(
-    prefixCls,
+    prefixCls.value,
     contextConfig.value.className,
     className,
     rootClassName,
@@ -95,7 +95,7 @@ const actionListCls = computed(() => `${prefixCls.value}-actions-list`);
 
 // ============================ Value =============================
 const [innerValue, setInnerValue] = useMergedState(defaultValue || '', {
-  value,
+  value: computed(() => value),
 });
 
 const triggerValueChange: SenderProps['onChange'] = (nextValue, event) => {
@@ -108,7 +108,7 @@ const triggerValueChange: SenderProps['onChange'] = (nextValue, event) => {
 
 // ============================ Speech ============================
 const { speechPermission, triggerSpeech, recording: speechRecording } = useSpeech((transcript) => {
-  triggerValueChange(`${innerValue} ${transcript}`);
+  triggerValueChange(`${innerValue.value} ${transcript}`);
 }, allowSpeech);
 
 // ========================== Components ==========================
@@ -129,8 +129,8 @@ const inputProps: typeof domProps.value = computed(() => {
 
 // ============================ Events ============================
 const triggerSend = () => {
-  if (innerValue && onSubmit && !loading) {
-    onSubmit(innerValue);
+  if (innerValue.value && onSubmit && !loading) {
+    onSubmit(innerValue.value);
   }
 };
 
@@ -225,7 +225,7 @@ if (typeof actions === 'function') {
 defineRender(() => {
   // ============================ Render ============================
   return wrapCSSVar(
-    <div ref={containerRef} class={mergedCls} style={{ ...contextConfig.value.style, ...style }}>
+    <div ref={containerRef} class={mergedCls.value} style={{ ...contextConfig.value.style, ...style }}>
       {/* Header */}
       {header && (
         <SenderHeaderContextProvider value={{ prefixCls: prefixCls.value }}>{header}</SenderHeaderContextProvider>
@@ -253,7 +253,7 @@ defineRender(() => {
           style={{ ...contextConfig.value.styles.input, ...styles.input }}
           className={classnames(inputCls, contextConfig.value.classNames.input, classNames.input)}
           autoSize={{ maxRows: 8 }}
-          value={innerValue}
+          value={innerValue.value}
           onChange={(event) => {
             triggerValueChange(
               (event.target as HTMLTextAreaElement).value,
@@ -273,7 +273,7 @@ defineRender(() => {
         {/* Action List */}
         <div
           class={classnames(
-            actionListCls,
+            actionListCls.value,
             contextConfig.value.classNames.actions,
             classNames.actions,
           )}
@@ -283,9 +283,9 @@ defineRender(() => {
             value={{
               prefixCls: actionBtnCls.value,
               onSend: triggerSend,
-              onSendDisabled: !innerValue,
+              onSendDisabled: !innerValue.value,
               onClear: triggerClear,
-              onClearDisabled: !innerValue,
+              onClearDisabled: !innerValue.value,
               onCancel,
               onCancelDisabled: !loading,
               onSpeech: () => triggerSpeech(false),

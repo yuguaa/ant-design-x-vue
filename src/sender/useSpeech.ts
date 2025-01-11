@@ -41,7 +41,7 @@ export default function useSpeech(
     });
 
 
-  const controlledRecording = allowSpeechItem.value.controlledRecording
+  const controlledRecording = computed(() => allowSpeechItem.value.controlledRecording)
   const onControlledRecordingChange = allowSpeechItem.value.onControlledRecordingChange
   const speechInControlled = allowSpeechItem.value.speechInControlled
 

@@ -1,9 +1,12 @@
-import { ButtonProps, type TextAreaProps } from "ant-design-vue";
+import type { ButtonProps, TextAreaProps } from "ant-design-vue";
 import type { ChangeEvent, ClipboardEventHandler, KeyboardEventHandler } from "ant-design-vue/es/_util/EventInterface";
-import { ConfigProviderProps } from "ant-design-vue/es/config-provider/context";
+import type { ConfigProviderProps } from "ant-design-vue/es/config-provider/context";
 import type { CSSProperties, VNode, } from "vue";
-import { AllowSpeech } from "./useSpeech";
+import type { AllowSpeech } from "./useSpeech";
 import type { InputRef } from "ant-design-vue/es/vc-input/inputProps";
+import SendButton from "./components/SendButton.vue";
+import ClearButton from "./components/ClearButton.vue";
+import LoadingButton from "./components/LoadingButton.vue";
 
 export type SubmitType = 'enter' | 'shiftEnter' | false;
 
@@ -16,9 +19,9 @@ export type ActionsRender = (
   ori: VNode,
   info: {
     components: {
-      SendButton: ButtonProps;
-      ClearButton: ButtonProps;
-      LoadingButton: ButtonProps;
+      SendButton: typeof SendButton;
+      ClearButton: typeof ClearButton;
+      LoadingButton: typeof LoadingButton;
     };
   },
 ) => VNode;
