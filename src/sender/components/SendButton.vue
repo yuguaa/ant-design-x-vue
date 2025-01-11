@@ -9,11 +9,12 @@ const props = defineProps<ButtonProps>();
 
 defineRender(() => {
   return <ActionButton
-    icon={<ArrowUpOutlined />}
     type="primary"
     shape="circle"
     {...props}
     action="onSend"
-  />;
+  >
+    <ArrowUpOutlined />
+  </ActionButton>;
 })
 </script>

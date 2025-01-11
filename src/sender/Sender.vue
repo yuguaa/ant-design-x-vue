@@ -199,26 +199,29 @@ const onContentMouseDown: MouseEventHandler = (e) => {
 };
 
 // ============================ Action ============================
-let actionNode: VNode = (
-  <Flex class={`${actionListCls.value}-presets`}>
-    {allowSpeech && <SpeechButton />}
-    {/* Loading or Send */}
-    {loading ? <LoadingButton /> : <SendButton />}
-  </Flex>
-);
+const actionNode = computed(() => {
+  let _actionNode: VNode = (
+    <Flex class={`${actionListCls.value}-presets`}>
+      {allowSpeech && <SpeechButton />}
+      {/* Loading or Send */}
+      {loading ? <LoadingButton /> : <SendButton />}
+    </Flex>
+  );
 
-// Custom actions
-if (typeof actions === 'function') {
-  actionNode = actions(actionNode, {
-    components: {
-      SendButton,
-      ClearButton,
-      LoadingButton,
-    },
-  });
-} else if (actions) {
-  actionNode = actions;
-}
+  // Custom actions
+  if (typeof actions === 'function') {
+    _actionNode = actions(_actionNode, {
+      components: {
+        SendButton,
+        ClearButton,
+        LoadingButton,
+      },
+    });
+  } else if (actions) {
+    _actionNode = actions;
+  }
+  return _actionNode;
+});
 
 // ============================ Render ============================
 
@@ -254,7 +257,7 @@ defineRender(() => {
           className={classnames(inputCls, contextConfig.value.classNames.input, classNames.input)}
           autoSize={{ maxRows: 8 }}
           value={innerValue.value}
-          onChange={(event) => {
+          onChange={(event: Event) => {
             triggerValueChange(
               (event.target as HTMLTextAreaElement).value,
               event as ChangeEvent,
@@ -294,7 +297,7 @@ defineRender(() => {
               disabled,
             }}
           >
-            {actionNode}
+            {actionNode.value}
           </ActionButtonContextProvider>
         </div>
       </div>

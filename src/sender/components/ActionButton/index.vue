@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import type { ActionButtonProps } from '../../interface';
 import { computed } from 'vue';
 
-
 defineOptions({ name: 'AXSenderActionButton' });
 
 const {
@@ -13,6 +12,10 @@ const {
   onClick: outClick,
   ...restProps
 } = defineProps<ActionButtonProps>();
+
+const slots = defineSlots<{
+  default(): any
+}>();
 
 const context = useActionButtonContextInject()
 
@@ -46,7 +49,9 @@ defineRender(() => {
       class={classNames(prefixCls.value, {
         [`${prefixCls.value}-disabled`]: mergedDisabled.value,
       })}
-    />
+    >
+      {{ icon: () => slots.default() }}
+    </Button>
   );
 })
 </script>

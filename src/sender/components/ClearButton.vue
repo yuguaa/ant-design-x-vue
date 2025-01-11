@@ -8,6 +8,8 @@ defineOptions({ name: 'AXSenderClearButton' });
 const props = defineProps<ButtonProps>();
 
 defineRender(() => {
-  return <ActionButton icon={<ClearOutlined />} {...props} action="onClear" />;
+  return <ActionButton {...props} action="onClear">
+    <ClearOutlined />
+  </ActionButton>;
 })
 </script>
