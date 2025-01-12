@@ -75,7 +75,7 @@ export default function useSpeech(
   });
 
   // Convert permission state to a simple type
-  const mergedAllowSpeech = SpeechRecognition && permissionState.value !== 'denied';
+  const mergedAllowSpeech = computed(() => SpeechRecognition && permissionState.value !== 'denied');
 
   // ========================== Speech Events ==========================
   const recognitionRef = ref<any | null>(null);
@@ -86,7 +86,7 @@ export default function useSpeech(
   const forceBreakRef = ref(false);
 
   const ensureRecognition = () => {
-    if (mergedAllowSpeech && !recognitionRef.value) {
+    if (mergedAllowSpeech.value && !recognitionRef.value) {
       const recognition = new SpeechRecognition();
 
       recognition.onstart = () => {
@@ -112,7 +112,7 @@ export default function useSpeech(
 
   const triggerSpeech = useEventCallback((forceBreak: boolean) => {
     // Ignore if `forceBreak` but is not recording
-    if (forceBreak && !recording) {
+    if (forceBreak && !recording.value) {
       return;
     }
 
@@ -120,12 +120,12 @@ export default function useSpeech(
 
     if (speechInControlled) {
       // If in controlled mode, do nothing
-      onControlledRecordingChange?.(!recording);
+      onControlledRecordingChange?.(!recording.value);
     } else {
       ensureRecognition();
 
       if (recognitionRef.value) {
-        if (recording) {
+        if (recording.value) {
           recognitionRef.value.stop();
           onControlledRecordingChange?.(false);
         } else {

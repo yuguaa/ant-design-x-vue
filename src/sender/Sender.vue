@@ -7,9 +7,8 @@ import pickAttrs from '../_util/pick-attrs';
 // import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
-import SenderHeader from './SenderHeader.vue';
-import SenderHeaderContextProvider, { useSenderHeaderContextInject } from './context';
-import ActionButtonContextProvider, { useActionButtonContextInject } from './components/ActionButton/context';
+import SenderHeaderContextProvider from './context';
+import ActionButtonContextProvider from './components/ActionButton/context';
 import ClearButton from './components/ClearButton.vue';
 import LoadingButton from './components/LoadingButton.vue';
 import SendButton from './components/SendButton.vue';
@@ -292,7 +291,7 @@ defineRender(() => {
               onCancel,
               onCancelDisabled: !loading,
               onSpeech: () => triggerSpeech(false),
-              onSpeechDisabled: !speechPermission,
+              onSpeechDisabled: !speechPermission.value,
               speechRecording: speechRecording.value,
               disabled,
             }}
