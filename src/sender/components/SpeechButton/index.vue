@@ -29,12 +29,14 @@ const icon = computed(() => {
 
 defineRender(() => {
   return <ActionButton
-    icon={icon.value}
+    icon={null}
     type='primary'
     // color="primary"
     // variant="text"
     {...props}
     action="onSpeech"
-  />
+  >
+    {icon.value}
+  </ActionButton>
 })
 </script>
