@@ -23,8 +23,8 @@ import type { ChangeEvent, ClipboardEventHandler, MouseEventHandler } from "ant-
 function getComponent<T>(
   components: SenderComponents | undefined,
   path: string[],
-  defaultComponent: any,
-): any {
+  defaultComponent: typeof Input.TextArea,
+): typeof Input.TextArea {
   return getValue(components, path) || defaultComponent;
 }
 
@@ -119,7 +119,7 @@ const domProps = computed(() => pickAttrs(rest, {
   data: true,
 }))
 
-const inputProps: typeof domProps.value = computed(() => {
+const inputProps = computed(() => {
   return {
     ...domProps.value,
     ref: inputRef,
@@ -250,10 +250,10 @@ defineRender(() => {
 
         {/* Input */}
         <InputTextArea
-          {...inputProps}
+          {...inputProps.value}
           disabled={disabled}
           style={{ ...contextConfig.value.styles.input, ...styles.input }}
-          className={classnames(inputCls, contextConfig.value.classNames.input, classNames.input)}
+          class={classnames(inputCls, contextConfig.value.classNames.input, classNames.input)}
           autoSize={{ maxRows: 8 }}
           value={innerValue.value}
           onChange={(event: Event) => {
@@ -264,11 +264,12 @@ defineRender(() => {
             triggerSpeech(true);
           }}
           onPressEnter={onInternalKeyPress}
-          onCompositionStart={onInternalCompositionStart}
-          onCompositionEnd={onInternalCompositionEnd}
-          onKeyDown={onKeyDown}
+          onCompositionstart={onInternalCompositionStart}
+          onCompositionend={onInternalCompositionEnd}
+          onKeydown={onKeyDown}
+          // @ts-expect-error
           onPaste={onInternalPaste}
-          variant="borderless"
+          bordered={false}
           readOnly={readOnly}
         />
 

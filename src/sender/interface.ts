@@ -1,4 +1,4 @@
-import type { ButtonProps, TextAreaProps } from "ant-design-vue";
+import type { ButtonProps, Input, TextAreaProps } from "ant-design-vue";
 import type { ChangeEvent, ClipboardEventHandler, KeyboardEventHandler } from "ant-design-vue/es/_util/EventInterface";
 import type { ConfigProviderProps } from "ant-design-vue/es/config-provider/context";
 import type { CSSProperties, VNode, } from "vue";
@@ -12,7 +12,7 @@ export type SubmitType = 'enter' | 'shiftEnter' | false;
 
 
 export interface SenderComponents {
-  input?: TextAreaProps;
+  input?: typeof Input.TextArea;
 }
 
 export type ActionsRender = (
