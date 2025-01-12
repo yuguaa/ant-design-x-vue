@@ -6,13 +6,16 @@ import type { SenderHeaderProps } from './interface';
 import { useSenderHeaderContextInject } from './context';
 import { computed } from 'vue';
 
+const slots = defineSlots<{
+  default(props?: any): any
+}>();
+
 defineOptions({ name: 'AXSenderHeader' });
 
 const {
   title,
   onOpenChange,
   open,
-  children,
   className,
   style,
   classNames: classes = {},
@@ -24,7 +27,7 @@ const {
 const SendHeaderContext = useSenderHeaderContextInject()
 
 const headerCls = computed(() => `${SendHeaderContext.value.prefixCls}-header`)
-
+console.log(open, 'open')
 defineRender(() => {
   return (
     <div
@@ -63,14 +66,14 @@ defineRender(() => {
       )}
 
       {/* Content */}
-      {children && (
+      {slots.default && (
         <div
           class={classNames(`${headerCls.value}-content`, classes.content)}
           style={{
             ...styles.content,
           }}
         >
-          {children}
+          {slots.default?.()}
         </div>
       )}
     </div>
