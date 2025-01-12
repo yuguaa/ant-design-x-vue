@@ -2,7 +2,7 @@
 import { EnterOutlined } from '@ant-design/icons-vue';
 import { App, Flex, Space, Switch, Typography } from 'ant-design-vue';
 import { Sender } from 'ant-design-x-vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 defineOptions({ name: 'AXSenderHeaderFixed' });
 
@@ -10,7 +10,7 @@ const Demo = () => {
   const { message } = App.useApp();
   const hasRef = ref(true);
 
-  const headerNode = (
+  const headerNode = computed(() => (
     <Sender.Header
       open={hasRef.value}
       title={
@@ -21,7 +21,7 @@ const Demo = () => {
       }
       onOpenChange={v => hasRef.value = v}
     />
-  );
+  ));
 
   return (
     <Flex vertical gap="middle" align="flex-start">
@@ -32,7 +32,7 @@ const Demo = () => {
         unCheckedChildren="With Reference"
       />
       <Sender
-        header={headerNode}
+        header={headerNode.value}
         onSubmit={() => {
           message.success('Send message successfully!');
         }}

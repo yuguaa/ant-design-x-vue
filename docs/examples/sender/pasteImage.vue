@@ -2,7 +2,7 @@
 import { LinkOutlined } from '@ant-design/icons-vue';
 import { App, Button, Flex } from 'ant-design-vue';
 import { Sender } from 'ant-design-x-vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 defineOptions({ name: 'AXSenderPasteImage' });
 
@@ -12,9 +12,9 @@ const Demo = () => {
   const text = ref('');
 
   const attachmentsRef = ref(null);
-  const senderRef = ref<typeof Sender>(null);
+  const senderRef = ref<InstanceType<typeof Sender>>(null);
 
-  const senderHeader = (
+  const senderHeader = computed(() => (
     <Sender.Header
       title="Attachments"
       styles={{
@@ -47,13 +47,13 @@ const Demo = () => {
         getDropContainer={() => senderRef.value?.nativeElement}
       /> */}
     </Sender.Header>
-  );
+  ));
 
   return (
     <Flex style={{ height: 220 }} align="end">
       <Sender
         ref={senderRef}
-        header={senderHeader}
+        header={senderHeader.value}
         prefix={
           <Button
             type="text"
