@@ -63,6 +63,9 @@ const useCollapsible: UseCollapsible = (collapsible, prefixCls, rootPrefixCls) =
 
   // ============================ Event ============================
   const onItemExpand = (curKey: string) => {
+    if (!collapsibleState.value.enableCollapse) {
+      return;
+    }
     const keys = mergedExpandedKeys.value.includes(curKey)
       ? mergedExpandedKeys.value.filter((key) => key !== curKey)
       : [...mergedExpandedKeys.value, curKey];
@@ -83,9 +86,9 @@ const useCollapsible: UseCollapsible = (collapsible, prefixCls, rootPrefixCls) =
 
   // ============================ Return ============================
   return [
-    toRef(() => collapsibleState.value.enableCollapse),
+    computed(() => collapsibleState.value.enableCollapse),
     mergedExpandedKeys,
-    collapsibleState.value.enableCollapse ? onItemExpand : undefined,
+    onItemExpand,
     // collapseMotion,
   ];
 }
