@@ -27,7 +27,6 @@ const {
 const SendHeaderContext = useSenderHeaderContextInject()
 
 const headerCls = computed(() => `${SendHeaderContext.value.prefixCls}-header`)
-console.log(open, 'open')
 defineRender(() => {
   return (
     <div
