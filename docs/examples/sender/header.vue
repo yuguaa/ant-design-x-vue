@@ -37,7 +37,7 @@ const Demo = () => {
   ));
 
   return (
-    <Flex style={{ height: 350 }} align="end" >
+    <Flex style={{ height: '350px' }} align="end" >
       <Sender
         header={headerNode.value}
         prefix={

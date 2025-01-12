@@ -50,7 +50,7 @@ const Demo = () => {
   ));
 
   return (
-    <Flex style={{ height: 220 }} align="end">
+    <Flex style={{ height: '220px' }} align="end">
       <Sender
         ref={senderRef}
         header={senderHeader.value}
