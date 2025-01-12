@@ -2,7 +2,7 @@
 import { App } from 'ant-design-vue';
 import { Sender } from 'ant-design-x-vue';
 
-defineOptions({ name: 'AXSenderBasic' });
+defineOptions({ name: 'AXSenderSubmitType' });
 
 const Demo = () => {
   const { message } = App.useApp();

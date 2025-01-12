@@ -4,7 +4,7 @@ import { App, Button, Flex, theme, Typography } from 'ant-design-vue';
 import { Sender } from 'ant-design-x-vue';
 import { ref } from 'vue';
 
-defineOptions({ name: 'AXSenderBasic' });
+defineOptions({ name: 'AXSenderHeader' });
 
 const Demo = () => {
   const { message } = App.useApp();

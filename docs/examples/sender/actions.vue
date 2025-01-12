@@ -3,7 +3,7 @@ import { App, Space, Spin, Typography } from 'ant-design-vue';
 import { Sender } from 'ant-design-x-vue';
 import { onWatcherCleanup, ref, watch } from 'vue';
 
-defineOptions({ name: 'AXSenderBasic' });
+defineOptions({ name: 'AXSenderActions' });
 
 const Demo = () => {
   const loading = ref(false);

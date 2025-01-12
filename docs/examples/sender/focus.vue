@@ -3,7 +3,7 @@ import { App, Button, Flex } from 'ant-design-vue';
 import { Sender } from 'ant-design-x-vue';
 import { ref } from 'vue';
 
-defineOptions({ name: 'AXSenderBasic' });
+defineOptions({ name: 'AXSenderFocus' });
 
 const Demo = () => {
   const senderRef = ref(null);

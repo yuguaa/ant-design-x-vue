@@ -4,7 +4,7 @@ import { App, Flex, Space, Switch, Typography } from 'ant-design-vue';
 import { Sender } from 'ant-design-x-vue';
 import { ref } from 'vue';
 
-defineOptions({ name: 'AXSenderBasic' });
+defineOptions({ name: 'AXSenderHeaderFixed' });
 
 const Demo = () => {
   const { message } = App.useApp();

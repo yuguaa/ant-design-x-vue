@@ -3,7 +3,7 @@ import { App } from 'ant-design-vue';
 import { Sender } from 'ant-design-x-vue';
 import { ref } from 'vue';
 
-defineOptions({ name: 'AXSenderBasic' });
+defineOptions({ name: 'AXSenderSpeechCustom' });
 
 const Demo = () => {
   const { message } = App.useApp();
