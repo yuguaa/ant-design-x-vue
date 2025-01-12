@@ -6,11 +6,10 @@ import { ref } from 'vue';
 defineOptions({ name: 'AXSenderFocus' });
 
 const Demo = () => {
-  const senderRef = ref(null);
+  const senderRef = ref<InstanceType<typeof Sender> | null>(null);
 
   const senderProps = {
     defaultValue: 'Hello, welcome to use Ant Design X!',
-    // TODO: ref 获取不到值
     ref: senderRef,
   };
 
@@ -19,7 +18,7 @@ const Demo = () => {
       <Button
         onClick={
           () => {
-            senderRef.value!.focus({
+            senderRef.value?.focus({
               cursor: 'start',
             });
           }
@@ -29,7 +28,7 @@ const Demo = () => {
       </Button>
       <Button
         onClick={() => {
-          senderRef.value!.focus({
+          senderRef.value?.focus({
             cursor: 'end',
           });
         }}
@@ -38,7 +37,7 @@ const Demo = () => {
       </Button>
       <Button
         onClick={() => {
-          senderRef.value!.focus({
+          senderRef.value?.focus({
             cursor: 'all',
           });
         }}
@@ -47,7 +46,7 @@ const Demo = () => {
       </Button>
       <Button
         onClick={() => {
-          senderRef.value!.focus({
+          senderRef.value?.focus({
             preventScroll: true,
           });
         }}
@@ -56,7 +55,7 @@ const Demo = () => {
       </Button>
       <Button
         onClick={() => {
-          senderRef.value!.blur();
+          senderRef.value?.blur();
         }}
       >
         Blur

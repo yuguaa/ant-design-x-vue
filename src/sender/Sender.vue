@@ -1,4 +1,4 @@
-<script setup lang="tsx" generic="T = any">
+<script setup lang="tsx">
 import { Flex, Input } from 'ant-design-vue';
 import classnames from 'classnames';
 import useMergedState from '../_util/hooks/useMergedState';
@@ -65,8 +65,8 @@ const prefixCls = computed(() => {
 });
 
 // ============================= Refs =============================
-const containerRef = ref(null);
-const inputRef = ref(null);
+const containerRef = ref<HTMLDivElement | null>(null);
+const inputRef = ref<InstanceType<typeof Input.TextArea> | null>(null);
 
 // ======================= Component Config =======================
 const contextConfig = useXComponentConfig('sender');
@@ -194,6 +194,7 @@ const onContentMouseDown: MouseEventHandler = (e) => {
     e.preventDefault();
   }
 
+  // @ts-expect-error
   inputRef.value?.focus();
 };
 
@@ -307,7 +308,9 @@ defineRender(() => {
 
 defineExpose({
   nativeElement: containerRef.value,
-  focus: inputRef.value?.focus!,
-  blur: inputRef.value?.blur!,
+  // @ts-expect-error
+  focus: (opt: any) => inputRef.value?.focus(opt),
+  // @ts-expect-error
+  blur: () => inputRef.value?.blur(),
 });
 </script>
