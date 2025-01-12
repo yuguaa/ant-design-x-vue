@@ -1,0 +1,89 @@
+<script setup lang="tsx">
+import { LinkOutlined } from '@ant-design/icons-vue';
+import { App, Button, Flex } from 'ant-design-vue';
+import { Sender } from 'ant-design-x-vue';
+import { ref } from 'vue';
+
+defineOptions({ name: 'AXSenderBasic' });
+
+const Demo = () => {
+  const open = ref(false);
+  const items = ref([]);
+  const text = ref('');
+
+  const attachmentsRef = ref(null);
+  const senderRef = ref<typeof Sender>(null);
+
+  const senderHeader = (
+    <Sender.Header
+      title="Attachments"
+      styles={{
+        content: {
+          padding: 0,
+        },
+      }}
+      open={open.value}
+      onOpenChange={v => open.value = v}
+      forceRender
+    >
+      {/*  TODO: 缺失 Attachments */}
+      {/* <Attachments
+        ref={attachmentsRef}
+        // Mock not real upload file
+        beforeUpload={() => false}
+        items={items}
+        onChange={({ fileList }) => items.value = fileList}
+        placeholder={(type) =>
+          type === 'drop'
+            ? {
+              title: 'Drop file here',
+            }
+            : {
+              icon: <CloudUploadOutlined />,
+              title: 'Upload files',
+              description: 'Click or drag files to this area to upload',
+            }
+        }
+        getDropContainer={() => senderRef.value?.nativeElement}
+      /> */}
+    </Sender.Header>
+  );
+
+  return (
+    <Flex style={{ height: 220 }} align="end">
+      <Sender
+        ref={senderRef}
+        header={senderHeader}
+        prefix={
+          <Button
+            type="text"
+            icon={<LinkOutlined />}
+            onClick={() => {
+              open.value = !open.value;
+            }}
+          />
+        }
+        value={text.value}
+        onChange={v => text.value = v}
+        onPasteFile={(file) => {
+          attachmentsRef.value.current?.upload(file);
+          open.value = (true);
+        }}
+        onSubmit={() => {
+          items.value = []
+          text.value = ''
+        }}
+      />
+    </Flex>
+  );
+};
+
+defineRender(() => {
+  return (
+    <App>
+      <Demo />
+    </App>
+  )
+});
+
+</script>
