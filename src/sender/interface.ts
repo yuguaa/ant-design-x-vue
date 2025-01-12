@@ -80,7 +80,7 @@ export interface SenderHeaderProps {
   forceRender?: boolean;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
-  title?: VNode;
+  title?: VNode | string;
   children?: VNode;
   className?: string;
   style?: CSSProperties;
