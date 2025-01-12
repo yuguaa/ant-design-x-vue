@@ -2,7 +2,7 @@
 import { CloudUploadOutlined, LinkOutlined } from '@ant-design/icons-vue';
 import { App, Button, Flex, theme, Typography } from 'ant-design-vue';
 import { Sender } from 'ant-design-x-vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 defineOptions({ name: 'AXSenderHeader' });
 
@@ -11,16 +11,20 @@ const Demo = () => {
   const { token } = theme.useToken();
   const open = ref(false);
 
-  const headerNode = (
+  const headerNode = computed(() => (
     <Sender.Header title="Upload Sample" open={open.value} onOpenChange={v => open.value = v}>
       <Flex vertical align="center" gap="small" style={{ marginBlock: token.value.paddingLG }}>
         <CloudUploadOutlined style={{ fontSize: '4em' }} />
-        <Typography.Title level={5} >
+        <Typography.Title
+          level={5}
+          // @ts-expect-error
+          style={{ margin: 0 }}
+        >
           Drag file here(just demo)
         </Typography.Title>
-        <Typography.Title type="secondary" >
+        <Typography.Text type="secondary" >
           Support pdf, doc, xlsx, ppt, txt, image file types
-        </Typography.Title >
+        </Typography.Text >
         < Button
           onClick={() => {
             message.info('Mock select file');
@@ -30,14 +34,14 @@ const Demo = () => {
         </Button>
       </Flex>
     </Sender.Header>
-  );
+  ));
 
   return (
     <Flex style={{ height: 350 }} align="end" >
       <Sender
-        header={headerNode}
+        header={headerNode.value}
         prefix={
-          < Button
+          <Button
             type="text"
             icon={< LinkOutlined />}
             onClick={() => {
