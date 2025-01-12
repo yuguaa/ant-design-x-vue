@@ -28,8 +28,9 @@ const SendHeaderContext = useSenderHeaderContextInject()
 
 const headerCls = computed(() => `${SendHeaderContext.value.prefixCls}-header`)
 defineRender(() => {
+  // TODO：未使用 CSSMotion，缺少展示动画
   return (
-    <div
+    open && <div
       class={classNames(headerCls.value, className)}
       style={{
         ...style,
