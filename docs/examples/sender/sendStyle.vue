@@ -12,7 +12,7 @@ const Demo = () => {
 
   const { message } = App.useApp();
 
-  watch([loading.value], () => {
+  watch(loading, () => {
     if (loading.value) {
       const timer = setTimeout(() => {
         loading.value = false;

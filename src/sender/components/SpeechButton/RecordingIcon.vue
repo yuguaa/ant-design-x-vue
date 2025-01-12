@@ -1,4 +1,4 @@
-<script setup lang="tsx" generic="T = any">
+<script setup lang="tsx">
 import type { RecordingIconProps } from '../../interface';
 
 const SIZE = 1000;
