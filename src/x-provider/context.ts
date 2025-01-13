@@ -5,7 +5,7 @@ import { computed, ComputedRef, CSSProperties, defineComponent, inject, Injectio
 import type { ConfigProviderProps as AntdConfigProviderProps } from 'ant-design-vue/es/config-provider';
 import type { ConversationsProps } from '../conversations';
 import type { PromptsProps } from '../prompts';
-// import type { SenderProps } from '../sender';
+import type { SenderProps } from '../sender';
 import type { SuggestionProps } from '../suggestion';
 import type { ThoughtChainProps } from '../thought-chain';
 import type { WelcomeProps } from '../welcome';
@@ -28,7 +28,7 @@ export interface XProviderProps {
   bubble?: ComponentStyleConfig<BubbleProps>;
   conversations?: ComponentStyleConfig<ConversationsProps>;
   prompts?: ComponentStyleConfig<PromptsProps>;
-  // sender?: ComponentStyleConfig<SenderProps>;
+  sender?: ComponentStyleConfig<SenderProps>;
   suggestion?: ComponentStyleConfig<SuggestionProps>;
   thoughtChain?: ComponentStyleConfig<ThoughtChainProps>;
   attachments?: ComponentStyleConfig<AttachmentsProps>;
