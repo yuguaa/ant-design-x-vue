@@ -8,7 +8,7 @@ export type SuggestionItem = {
 
   children?: SuggestionItem[];
 
-  extra?: VNode;
+  extra?: VNode | string;
 };
 
 export interface RenderChildrenProps<T> {

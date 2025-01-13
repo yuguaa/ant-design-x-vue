@@ -114,13 +114,28 @@ export default defineConfig({
         text: '表达',
         items: [
           { text: 'Sender 输入框', link: '/component/sender' },
+          { text: 'Attachment 输入附件', link: '/component/attachment' },
           { text: 'Suggestion 快捷指令', link: '/component/suggestion' }
+        ]
+      },
+      {
+        text: '确认',
+        items: [
+          { text: 'ThoughtChain 思维链', link: '/component/thought-chain' }
+        ]
+      },
+      {
+        text: '工具',
+        items: [
+          { text: 'useXAgent 模型调度', link: '/component/use-x-agent' },
+          { text: 'XStream 流', link: '/component/x-stream' },
+          { text: 'XRequest 请求', link: '/component/x-request' }
         ]
       },
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://github.com/wzc520pyfm/ant-design-x-vue' }
     ]
   }
 })

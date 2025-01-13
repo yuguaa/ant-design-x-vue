@@ -123,6 +123,17 @@ const copyCode = async () => {
   </XProvider>
 </template>
 
+<style lang="scss">
+// reset vitepress style
+.example {
+  .example-showcase {
+    ul {
+      list-style: none;
+    }
+  }
+}
+</style>
+
 <style scoped lang="scss">
 .example {
   border: 1px solid var(--vp-border-color);
@@ -131,6 +142,19 @@ const copyCode = async () => {
   .example-showcase {
     padding: 1.5rem;
     margin: 0.5px;
+
+    :deep(table) {
+      margin: 0;
+
+      tr {
+        border: unset;
+        background-color: unset;
+
+        td {
+          border: unset;
+        }
+      }
+    }
   }
 
   .op-btns {

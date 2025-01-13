@@ -1,6 +1,6 @@
 {
   "name": "ant-design-x-vue",
-  "version": "0.0.3",
+  "version": "0.0.8",
   "description": "A vue library developed with dumi",
   "scripts": {
     "build": "vite build && vue-tsc --project ./tsconfig.build.json",
@@ -116,6 +116,7 @@
     "vue-tsc": "^2.1.6"
   },
   "dependencies": {
+    "@ant-design/fast-color": "^2.0.6",
     "@emotion/hash": "^0.9.2",
     "@emotion/unitless": "^0.10.0",
     "classnames": "^2.5.1",

@@ -5,3 +5,8 @@ export * from './welcome';
 export * from './prompts';
 export * from './suggestion';
 export * from './sender';
+export * from './attachments';
+export * from './thought-chain';
+export * from './x-stream';
+export * from './x-request';
+export * from './use-x-agent';

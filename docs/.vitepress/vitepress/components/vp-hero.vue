@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { type Ref, inject } from 'vue'
 import type { DefaultTheme } from 'vitepress/theme'
-// @ts-expect-error
 import VPButton from 'vitepress/dist/client/theme-default/components/VPButton.vue'
 import Hero from './icons/hero.vue';
 

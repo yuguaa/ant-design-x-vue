@@ -8,14 +8,14 @@ import { ConfigProvider as AntdConfigProvider } from 'ant-design-vue';
 defineOptions({ name: 'AXConfigProvider', inheritAttrs: false });
 
 const {
-  // attachments,
+  attachments,
   bubble,
-  // conversations,
-  // prompts,
+  conversations,
+  prompts,
   // sender,
-  // suggestion,
-  // thoughtChain,
-  // welcome,
+  suggestion,
+  thoughtChain,
+  welcome,
   antd,
   ...antdConfProps
 } = defineProps<XProviderProps>();
@@ -25,14 +25,14 @@ const slots = defineSlots<{
 }>();
 
 const xProviderProps = computed(() => ({
-  // attachments,
+  attachments,
   bubble,
-  // conversations,
-  // prompts,
+  conversations,
+  prompts,
   // sender,
-  // suggestion,
-  // thoughtChain,
-  // welcome,
+  suggestion,
+  thoughtChain,
+  welcome,
 }));
 
 const { theme: parentTheme } = useXProviderContext();

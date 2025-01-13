@@ -103,7 +103,7 @@ defineRender(() => {
         }
       }}
       // optionRender={optionRender}
-      class={classnames(rootClassName, prefixCls, hashId, cssVarCls, {
+      class={classnames(rootClassName, prefixCls.value, hashId, cssVarCls, {
         [`${prefixCls.value}-block`]: block,
       })}
       onChange={onInternalChange as CascaderProps['onChange']}
@@ -112,7 +112,7 @@ defineRender(() => {
       {{
         default: () => <div
         class={classnames(
-          prefixCls,
+          prefixCls.value,
           contextConfig.value.className,
           rootClassName,
           className,
