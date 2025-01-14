@@ -129,7 +129,8 @@ export default defineConfig({
         items: [
           { text: 'useXAgent 模型调度', link: '/component/use-x-agent' },
           { text: 'XStream 流', link: '/component/x-stream' },
-          { text: 'XRequest 请求', link: '/component/x-request' }
+          { text: 'XRequest 请求', link: '/component/x-request' },
+          { text: 'XProvider 全局化配置', link: '/component/x-provider' }
         ]
       },
     ],
