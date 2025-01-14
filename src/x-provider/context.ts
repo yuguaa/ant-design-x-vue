@@ -24,7 +24,7 @@ type ComponentStyleConfig<
   PickType extends keyof CompProps = DefaultPickType,
 > = Pick<CompProps, PickType | DefaultPickType>;
 
-export interface XProviderProps {
+export interface XComponentsConfig {
   bubble?: ComponentStyleConfig<BubbleProps>;
   conversations?: ComponentStyleConfig<ConversationsProps>;
   prompts?: ComponentStyleConfig<PromptsProps>;
@@ -33,10 +33,11 @@ export interface XProviderProps {
   thoughtChain?: ComponentStyleConfig<ThoughtChainProps>;
   attachments?: ComponentStyleConfig<AttachmentsProps>;
   welcome?: ComponentStyleConfig<WelcomeProps>;
-  antd?: AntdConfigProviderProps;
 }
 
-export type XComponentsConfig = Omit<XProviderProps, 'antd'>
+export type XProviderProps = XComponentsConfig & AntdConfigProviderProps & {
+  // Non-component config props
+};
 
 const XProviderContextKey: InjectionKey<ComputedRef<XProviderProps>> =
   Symbol('XProviderContext');

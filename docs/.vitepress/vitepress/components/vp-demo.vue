@@ -22,7 +22,7 @@ const vm = getCurrentInstance()!
 
 const { isDark } = useData()
 
-const algorithm = computed(() => isDark.value ? theme.darkAlgorithm: theme.defaultAlgorithm)
+const algorithm = computed(() => isDark.value ? theme.darkAlgorithm : theme.defaultAlgorithm)
 
 const { copy, isSupported } = useClipboard({
   source: decodeURIComponent(props.rawSource),
@@ -71,8 +71,8 @@ const copyCode = async () => {
   <!-- danger here DO NOT USE INLINE SCRIPT TAG -->
   <div style="margin-top: 16px; margin-bottom: 16px;" v-html="decodedDescription" />
 
-  <XProvider :antd="{
-    theme: { algorithm },
+  <XProvider :theme="{
+    algorithm,
   }">
 
     <div class="example">

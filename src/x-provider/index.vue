@@ -16,7 +16,6 @@ const {
   suggestion,
   thoughtChain,
   welcome,
-  antd,
   ...antdConfProps
 } = defineProps<XProviderProps>();
 
@@ -39,7 +38,7 @@ const { theme: parentTheme } = useXProviderContext();
 
 const mergedTheme = computed(() => ({
   ...(parentTheme?.value || {}),
-  ...antd.theme,
+  ...antdConfProps.theme,
 }));
 
 const childNode = computed(() => slots.default?.());
