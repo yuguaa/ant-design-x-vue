@@ -1,4 +1,4 @@
-<script setup lang="tsx" generic="T = any">
+<script setup lang="tsx">
 import type { ButtonProps } from 'ant-design-vue';
 import ActionButton from './ActionButton/index.vue';
 import { ArrowUpOutlined } from '@ant-design/icons-vue';

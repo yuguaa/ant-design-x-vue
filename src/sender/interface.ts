@@ -10,7 +10,6 @@ import LoadingButton from "./components/LoadingButton.vue";
 
 export type SubmitType = 'enter' | 'shiftEnter' | false;
 
-
 export interface SenderComponents {
   input?: typeof Input.TextArea;
 }

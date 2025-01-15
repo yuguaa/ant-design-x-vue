@@ -1,6 +1,5 @@
-import { useEventCallback } from '../_util/hooks/use-event-callback';
 import useMergedState from '../_util/hooks/useMergedState';
-import { computed, ref, watchEffect } from 'vue';
+import { computed, ref, watchEffect, MaybeRefOrGetter, toValue, onWatcherCleanup } from 'vue';
 
 // Ensure that the SpeechRecognition API is available in the browser
 let SpeechRecognition: any;
@@ -18,18 +17,19 @@ export type AllowSpeech = boolean | ControlledSpeechConfig;
 
 export default function useSpeech(
   onSpeech: (transcript: string) => void,
-  allowSpeech?: AllowSpeech,
+  allowSpeech?: MaybeRefOrGetter<AllowSpeech>,
 ) {
-  const onEventSpeech = useEventCallback(onSpeech);
+  const onEventSpeech = onSpeech;
 
   // ========================== Speech Config ==========================
   const allowSpeechItem =
     computed(() => {
-      if (typeof allowSpeech === 'object') {
+      const allowSpeechRaw = toValue(allowSpeech);
+      if (typeof allowSpeechRaw === 'object') {
         return {
-          controlledRecording: allowSpeech.recording,
-          onControlledRecordingChange: allowSpeech.onRecordingChange,
-          speechInControlled: typeof allowSpeech.recording === 'boolean',
+          controlledRecording: allowSpeechRaw.recording,
+          onControlledRecordingChange: allowSpeechRaw.onRecordingChange,
+          speechInControlled: typeof allowSpeechRaw.recording === 'boolean',
         } as const;
       }
 
@@ -65,12 +65,12 @@ export default function useSpeech(
           lastPermission = permissionStatus;
         });
 
-      return () => {
+      onWatcherCleanup(() => {
         // Avoid memory leaks
         if (lastPermission) {
           lastPermission.onchange = null;
         }
-      };
+      });
     }
   });
 
@@ -110,7 +110,7 @@ export default function useSpeech(
     }
   };
 
-  const triggerSpeech = useEventCallback((forceBreak: boolean) => {
+  const triggerSpeech = (forceBreak: boolean) => {
     // Ignore if `forceBreak` but is not recording
     if (forceBreak && !recording.value) {
       return;
@@ -134,7 +134,7 @@ export default function useSpeech(
         }
       }
     }
-  });
+  };
 
   return { speechPermission: mergedAllowSpeech, triggerSpeech, recording }
 }

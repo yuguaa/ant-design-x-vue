@@ -12,7 +12,7 @@ const Demo = () => {
   const { message } = App.useApp();
 
   // Mock send message
-  watch([() => loading.value], () => {
+  watch(loading, () => {
     if (loading.value) {
       const timer = setTimeout(() => {
         loading.value = false;
@@ -22,7 +22,7 @@ const Demo = () => {
         clearTimeout(timer);
       })
     }
-  }, { immediate: true, deep: true });
+  });
 
   return (
     <Flex vertical gap="middle">

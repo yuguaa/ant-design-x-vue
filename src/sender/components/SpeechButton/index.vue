@@ -8,18 +8,20 @@ import RecordingIcon from './RecordingIcon.vue';
 import { computed } from 'vue';
 
 defineOptions({ name: 'AXSenderSpeechButton' });
-const context = useActionButtonContextInject()
 
 const props = defineProps<ButtonProps>();
+
+const context = useActionButtonContextInject();
+
+const speechRecording = computed(() => context.value.speechRecording);
+const prefixCls = computed(() => context.value.prefixCls);
+
 const icon = computed(() => {
-  const speechRecording = context.value.speechRecording
-  const onSpeechDisabled = context.value.onSpeechDisabled
-  const prefixCls = context.value.prefixCls
 
   let myIcon;
-  if (speechRecording) {
-    myIcon = <RecordingIcon className={`${prefixCls}-recording-icon`} />;
-  } else if (onSpeechDisabled) {
+  if (speechRecording.value) {
+    myIcon = <RecordingIcon className={`${prefixCls.value}-recording-icon`} />;
+  } else if (context.value.onSpeechDisabled) {
     myIcon = <AudioMutedOutlined />;
   } else {
     myIcon = <AudioOutlined />;

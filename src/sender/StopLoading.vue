@@ -1,4 +1,4 @@
-<script setup lang="tsx" generic="T = any">
+<script setup lang="tsx">
 defineOptions({ name: 'AXSenderStopLoading' });
 
 const props = defineProps<{ className: string }>();

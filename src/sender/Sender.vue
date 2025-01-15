@@ -70,7 +70,7 @@ const inputRef = ref<InstanceType<typeof Input.TextArea> | null>(null);
 
 // ======================= Component Config =======================
 const contextConfig = useXComponentConfig('sender');
-const inputCls = `${prefixCls.value}-input`;
+const inputCls = computed(() => `${prefixCls.value}-input`);
 
 // ============================ Styles ============================
 const [wrapCSSVar, hashId, cssVarCls] = useStyle(prefixCls.value);
@@ -108,7 +108,7 @@ const triggerValueChange: SenderProps['onChange'] = (nextValue, event) => {
 // ============================ Speech ============================
 const { speechPermission, triggerSpeech, recording: speechRecording } = useSpeech((transcript) => {
   triggerValueChange(`${innerValue.value} ${transcript}`);
-}, allowSpeech);
+}, () => allowSpeech);
 
 // ========================== Components ==========================
 const InputTextArea = getComponent(components, ['input'], Input.TextArea);
@@ -190,7 +190,7 @@ const onContentMouseDown: MouseEventHandler = (e) => {
   // If input focused but click on the container,
   // input will lose focus.
   // We call `preventDefault` to prevent this behavior
-  if (e.target !== containerRef.value?.querySelector(`.${inputCls}`)) {
+  if (e.target !== containerRef.value?.querySelector(`.${inputCls.value}`)) {
     e.preventDefault();
   }
 
@@ -223,10 +223,7 @@ const actionNode = computed(() => {
   return _actionNode;
 });
 
-// ============================ Render ============================
-
 defineRender(() => {
-  // ============================ Render ============================
   return wrapCSSVar(
     <div ref={containerRef} class={mergedCls.value} style={{ ...contextConfig.value.style, ...style }}>
       {/* Header */}
@@ -254,7 +251,7 @@ defineRender(() => {
           {...inputProps.value}
           disabled={disabled}
           style={{ ...contextConfig.value.styles.input, ...styles.input }}
-          class={classnames(inputCls, contextConfig.value.classNames.input, classNames.input)}
+          class={classnames(inputCls.value, contextConfig.value.classNames.input, classNames.input)}
           autoSize={{ maxRows: 8 }}
           value={innerValue.value}
           onChange={(event: Event) => {
