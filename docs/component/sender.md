@@ -14,24 +14,35 @@
 :::demo 基础用法，受控进行状态管理。自定义触发器。
 
 sender/basic
+
 :::
 
 ### 提交用法
+
 :::demo 通过 `submitType` 控制换行与提交模式。
+
 sender/submitType
+
 :::
 
 ### 语音输入
+
 :::demo 语音输入，需要用户同意麦克风权限。
+
 sender/speech
+
 :::
 
 ### 自定义语音输入
+
 :::demo 自定义语音逻辑，从而实现调用三方库的语音识别功能。
+
 sender/speechCustom
+
 :::
 
 ### 自定义按钮
+
 :::demo 通过 `actions` 属性，可以自定义发送按钮的行为。
 
 sender/actions
@@ -39,16 +50,23 @@ sender/actions
 :::
 
 ### 展开面板
+
 :::demo 使用 `header` 自定义文件上传示例。
+
 sender/header
+
 :::
 
 ### 引用
+
 :::demo 使用 `header` 做引用效果。
+
 sender/headerFixed
+
 :::
 
 ### 调整样式
+
 :::demo 通过 `actions` 属性，调整默认样式。
 
 sender/sendStyle
@@ -56,13 +74,19 @@ sender/sendStyle
 :::
 
 ### 黏贴图片
+
 :::demo 配合 Attachments 进行黏贴文件上传。
+
 sender/pasteImage
+
 :::
 
 ### 聚焦
+
 :::demo 使用 `ref` 选项控制聚焦。
+
 sender/focus
+
 :::
 
 ## API
