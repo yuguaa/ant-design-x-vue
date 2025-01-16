@@ -36,6 +36,7 @@ defineRender(() => {
     // color="primary"
     // variant="text"
     {...props}
+    style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
     action="onSpeech"
   >
     {icon.value}
