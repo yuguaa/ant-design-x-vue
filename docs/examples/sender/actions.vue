@@ -6,11 +6,12 @@ import { onWatcherCleanup, ref, watch } from 'vue';
 defineOptions({ name: 'AXSenderActions' });
 
 const Demo = () => {
-  const loading = ref(false);
-  const value = ref<string>('');
+  const value = ref('');
+  const loading = ref<boolean>(false);
 
   const { message } = App.useApp();
 
+  // Mock send message
   watch(loading, () => {
     if (loading.value) {
       const timer = setTimeout(() => {
@@ -18,25 +19,29 @@ const Demo = () => {
         value.value = '';
         message.success('Send message successfully!');
       }, 2000);
+
       onWatcherCleanup(() => {
         clearTimeout(timer);
       })
     }
-  }, { immediate: true });
+  });
 
   return (
     <Sender
       submitType="shiftEnter"
-      value={value.value}
       loading={loading.value}
-      onChange={v => value.value = v}
+      value={value.value}
+      onChange={(v) => {
+        console.log('Sender onChange', v)
+        value.value = v
+      }}
       onSubmit={() => {
         loading.value = true;
       }}
       onCancel={() => {
         loading.value = false;
       }}
-      actions={((_, info) => {
+      actions={(_, info) => {
         const { SendButton, LoadingButton, ClearButton } = info.components;
 
         return (
@@ -52,7 +57,7 @@ const Demo = () => {
             )}
           </Space>
         );
-      })}
+      }}
     />
   );
 };
@@ -64,4 +69,5 @@ defineRender(() => {
     </App>
   )
 });
+
 </script>

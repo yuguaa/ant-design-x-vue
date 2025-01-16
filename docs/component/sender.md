@@ -33,7 +33,9 @@ sender/speechCustom
 
 ### 自定义按钮
 :::demo 通过 `actions` 属性，可以自定义发送按钮的行为。
+
 sender/actions
+
 :::
 
 ### 展开面板
@@ -48,7 +50,9 @@ sender/headerFixed
 
 ### 调整样式
 :::demo 通过 `actions` 属性，调整默认样式。
+
 sender/sendStyle
+
 :::
 
 ### 黏贴图片
