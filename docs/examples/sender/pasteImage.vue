@@ -1,7 +1,7 @@
 <script setup lang="tsx">
-import { LinkOutlined } from '@ant-design/icons-vue';
+import { CloudUploadOutlined, LinkOutlined } from '@ant-design/icons-vue';
 import { App, Button, Flex } from 'ant-design-vue';
-import { Sender } from 'ant-design-x-vue';
+import { Attachments, Sender } from 'ant-design-x-vue';
 import { computed, ref } from 'vue';
 
 defineOptions({ name: 'AXSenderPasteImage' });
@@ -26,12 +26,11 @@ const Demo = () => {
       onOpenChange={v => open.value = v}
       forceRender
     >
-      {/*  TODO: 缺失 Attachments */}
-      {/* <Attachments
+      <Attachments
         ref={attachmentsRef}
         // Mock not real upload file
         beforeUpload={() => false}
-        items={items}
+        items={items.value}
         onChange={({ fileList }) => items.value = fileList}
         placeholder={(type) =>
           type === 'drop'
@@ -45,7 +44,7 @@ const Demo = () => {
             }
         }
         getDropContainer={() => senderRef.value?.nativeElement}
-      /> */}
+      />
     </Sender.Header>
   ));
 
