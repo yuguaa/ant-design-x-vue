@@ -5,10 +5,10 @@ import { onWatcherCleanup, ref, watch } from 'vue';
 
 defineOptions({ name: 'AXSenderBasic' });
 
-const Demo = () => {
-  const value = ref('Hello? this is X!');
-  const loading = ref<boolean>(false);
+const value = ref('Hello? this is X!');
+const loading = ref<boolean>(false);
 
+const Demo = () => {
   const { message } = App.useApp();
 
   // Mock send message

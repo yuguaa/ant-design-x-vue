@@ -5,10 +5,10 @@ import { onWatcherCleanup, ref, watch } from 'vue';
 
 defineOptions({ name: 'AXSenderActions' });
 
-const Demo = () => {
-  const value = ref('');
-  const loading = ref<boolean>(false);
+const value = ref('');
+const loading = ref<boolean>(false);
 
+const Demo = () => {
   const { message } = App.useApp();
 
   // Mock send message
@@ -22,7 +22,7 @@ const Demo = () => {
 
       onWatcherCleanup(() => {
         clearTimeout(timer);
-      })
+      });
     }
   });
 

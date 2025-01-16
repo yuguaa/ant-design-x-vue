@@ -5,9 +5,10 @@ import { ref } from 'vue';
 
 defineOptions({ name: 'AXSenderSpeechCustom' });
 
+const recording = ref(false);
+
 const Demo = () => {
   const { message } = App.useApp();
-  const recording = ref(false)
 
   return (
     <Sender

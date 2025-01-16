@@ -5,9 +5,9 @@ import { ref } from 'vue';
 
 defineOptions({ name: 'AXSenderFocus' });
 
-const Demo = () => {
-  const senderRef = ref<InstanceType<typeof Sender> | null>(null);
+const senderRef = ref<InstanceType<typeof Sender> | null>(null);
 
+const Demo = () => {
   const senderProps = {
     defaultValue: 'Hello, welcome to use Ant Design X!',
     ref: senderRef,

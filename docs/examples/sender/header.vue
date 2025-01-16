@@ -6,10 +6,11 @@ import { computed, ref } from 'vue';
 
 defineOptions({ name: 'AXSenderHeader' });
 
+const { token } = theme.useToken();
+const open = ref(false);
+
 const Demo = () => {
   const { message } = App.useApp();
-  const { token } = theme.useToken();
-  const open = ref(false);
 
   const headerNode = computed(() => (
     <Sender.Header title="Upload Sample" open={open.value} onOpenChange={v => open.value = v}>

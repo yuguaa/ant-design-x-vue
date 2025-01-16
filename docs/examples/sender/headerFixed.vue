@@ -6,9 +6,10 @@ import { computed, ref } from 'vue';
 
 defineOptions({ name: 'AXSenderHeaderFixed' });
 
+const hasRef = ref(true);
+
 const Demo = () => {
   const { message } = App.useApp();
-  const hasRef = ref(true);
 
   const headerNode = computed(() => (
     <Sender.Header

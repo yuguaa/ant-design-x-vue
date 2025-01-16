@@ -6,10 +6,10 @@ import { type CSSProperties, onWatcherCleanup, ref, watch } from 'vue';
 
 defineOptions({ name: 'AXSenderSendStyle' });
 
-const Demo = () => {
-  const value = ref('Ask something?');
-  const loading = ref(false);
+const value = ref('Ask something?');
+const loading = ref(false);
 
+const Demo = () => {
   const { message } = App.useApp();
 
   watch(loading, () => {
