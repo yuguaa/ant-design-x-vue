@@ -49,7 +49,7 @@ const {
   actions,
   onKeyPress,
   onKeyDown,
-  disabled,
+  disabled = undefined,
   allowSpeech,
   prefix,
   header,

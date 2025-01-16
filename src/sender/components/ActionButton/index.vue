@@ -1,4 +1,4 @@
-<script setup lang="tsx" generic="T = any">
+<script setup lang="tsx">
 import { Button } from 'ant-design-vue';
 import { useActionButtonContextInject } from './context'
 import classNames from 'classnames';
@@ -20,9 +20,12 @@ const slots = defineSlots<{
 const context = useActionButtonContextInject()
 
 const mergedDisabled = computed(() => {
-  const rootDisabled = context.value.disabled
-  return rootDisabled ?? restProps.disabled ?? context.value?.[`${action}Disabled`];
-})
+  const rootDisabled = context.value.disabled;
+  const propDisable = restProps.disabled;
+  const actionDisable = context.value?.[`${action}Disabled`];
+  return rootDisabled ?? propDisable ?? actionDisable;
+});
+
 const prefixCls = computed(() => {
   return context.value.prefixCls
 })

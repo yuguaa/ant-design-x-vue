@@ -2,7 +2,7 @@ import { computed, defineComponent, inject, provide, shallowRef, triggerRef, unr
 import type { ComputedRef, InjectionKey } from "vue";
 
 import { objectType } from "../../../_util/type";
-import { ActionButtonContextProps } from "../../interface";
+import type { ActionButtonContextProps } from "../../interface";
 
 const ActionButtonContextKey: InjectionKey<ComputedRef<ActionButtonContextProps>> =
   Symbol('ActionButtonContext');
