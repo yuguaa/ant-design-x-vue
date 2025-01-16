@@ -2,7 +2,7 @@
 import { SendOutlined } from '@ant-design/icons-vue';
 import { type ButtonProps, App, Flex, Tooltip } from 'ant-design-vue';
 import { Sender } from 'ant-design-x-vue';
-import { onWatcherCleanup, ref, watch } from 'vue';
+import { type CSSProperties, onWatcherCleanup, ref, watch } from 'vue';
 
 defineOptions({ name: 'AXSenderSendStyle' });
 
@@ -22,10 +22,10 @@ const Demo = () => {
         clearTimeout(timer);
       })
     }
-  }, { immediate: true });
+  });
 
   const renderSend = (
-    props: ButtonProps & { ignoreLoading?: boolean; placeholder?: string } = {},
+    props: ButtonProps & { ignoreLoading?: boolean; placeholder?: string; style?: CSSProperties } = {},
   ) => {
     const { ignoreLoading, placeholder, ...btnProps } = props;
 
@@ -46,7 +46,7 @@ const Demo = () => {
         actions={(_, info) => {
           const { SendButton, LoadingButton } = info.components;
 
-          if (!ignoreLoading && loading) {
+          if (!ignoreLoading && loading.value) {
             return (
               <Tooltip title="Click to cancel">
                 <LoadingButton />
@@ -73,10 +73,10 @@ const Demo = () => {
       {renderSend({
         shape: 'default',
         placeholder: 'Change button border radius',
-        //  style: { borderRadius: 12 },
+        style: { borderRadius: '12px' },
       })}
       {renderSend({
-        type: 'primary',
+        type: 'text',
         // variant: 'text',
         placeholder: 'Change button icon',
         // color: 'primary',
