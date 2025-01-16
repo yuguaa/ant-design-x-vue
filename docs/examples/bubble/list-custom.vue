@@ -1,7 +1,7 @@
 <script setup lang="tsx">
 import { CoffeeOutlined, FireOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons-vue';
-import { BubbleList } from 'ant-design-x-vue';
-import { Typography } from 'ant-design-vue';
+import { Attachments, BubbleList, Prompts } from 'ant-design-x-vue';
+import { Flex, Typography } from 'ant-design-vue';
 import type { BubbleListProps } from 'ant-design-x-vue';
 
 defineOptions({ name: 'BubbleListCustom' });
@@ -16,21 +16,19 @@ const roles: BubbleListProps['roles'] = {
     placement: 'start',
     avatar: { icon: <UserOutlined />, style: { visibility: 'hidden' } },
     variant: 'borderless',
-    messageRender: () => <div>waiting for support</div>
-    // messageRender: (items) => <Prompts vertical items={items as any} />,
+    messageRender: (items) => <Prompts vertical items={items as any} />,
   },
   file: {
     placement: 'start',
     avatar: { icon: <UserOutlined />, style: { visibility: 'hidden' } },
     variant: 'borderless',
-    messageRender: () => <div>waiting for support</div>
-    // messageRender: (items: any) => (
-    //   <Flex vertical gap="middle">
-    //     {(items as any[]).map((item) => (
-    //       <Attachments.FileCard key={item.uid} item={item} />
-    //     ))}
-    //   </Flex>
-    // ),
+    messageRender: (items: any) => (
+      <Flex vertical gap="middle">
+        {(items as any[]).map((item) => (
+          <Attachments.FileCard key={item.uid} item={item} />
+        ))}
+      </Flex>
+    ),
   },
 };
 
