@@ -16,7 +16,7 @@ import SpeechButton from './components/SpeechButton/index.vue';
 import useStyle from './style';
 import useSpeech from './useSpeech';
 import type { SenderComponents, SenderProps } from './interface';
-import { computed, ref, type VNode } from 'vue';
+import { computed, ref, watch, type VNode } from 'vue';
 import getValue from '../_util/getValue';
 import type { ChangeEvent, ClipboardEventHandler, MouseEventHandler } from "ant-design-vue/es/_util/EventInterface";;
 
@@ -93,8 +93,12 @@ const actionBtnCls = computed(() => `${prefixCls.value}-actions-btn`);
 const actionListCls = computed(() => `${prefixCls.value}-actions-list`);
 
 // ============================ Value =============================
-const [innerValue, setInnerValue] = useMergedState(defaultValue || '', {
-  value: computed(() => value),
+const innerValue = ref(value ?? defaultValue ?? '');
+const setInnerValue = (v: string) => {
+  innerValue.value = v;
+}
+watch(() => value, () => {
+  setInnerValue(value);
 });
 
 const triggerValueChange: SenderProps['onChange'] = (nextValue, event) => {
