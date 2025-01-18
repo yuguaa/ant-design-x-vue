@@ -66,8 +66,8 @@ $ pnpm lint
 
 ## Contributors
 
-<a href="https://github.com/wzc520pyfm/ohcolor/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=wzc520pyfm/ohcolor" />
+<a href="https://github.com/wzc520pyfm/ant-design-x-vue/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=wzc520pyfm/ant-design-x-vue" />
 </a>
 
 ## LICENSE
