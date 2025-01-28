@@ -101,7 +101,7 @@ watch(() => unref(displayData).length, () => {
     // Auto scroll if last 2 item is visible
     if (bubbleInst) {
       const { nativeElement } = bubbleInst;
-      const { top, bottom } = nativeElement.getBoundingClientRect();
+      const { top = 0, bottom = 0 } = nativeElement?.getBoundingClientRect() ?? {};
       const { top: listTop, bottom: listBottom } = unref(listRef).getBoundingClientRect();
 
       const isVisible = top < listBottom && bottom > listTop;
