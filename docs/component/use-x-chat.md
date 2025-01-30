@@ -16,3 +16,11 @@
 use-x-chat/basic
 
 :::
+
+### 流式输出
+
+:::demo 使用流式输出更新内容。
+
+use-x-chat/stream
+
+:::
