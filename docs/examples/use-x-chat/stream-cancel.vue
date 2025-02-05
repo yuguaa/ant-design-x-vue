@@ -4,6 +4,8 @@ import { Flex } from 'ant-design-vue';
 import { Bubble, Sender, useXAgent, useXChat, XStream, type BubbleListProps } from 'ant-design-x-vue';
 import { onWatcherCleanup, ref, watchEffect } from 'vue';
 
+defineOptions({ name: 'AXUseXChatStreamCancel' });
+
 const roles: BubbleListProps['roles'] = {
   ai: {
     placement: 'start',
