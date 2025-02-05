@@ -24,3 +24,11 @@ use-x-chat/basic
 use-x-chat/stream
 
 :::
+
+### 打断输出
+
+:::demo 打断正在流式输出的内容。
+
+use-x-chat/stream-cancel
+
+:::
