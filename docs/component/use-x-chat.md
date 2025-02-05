@@ -32,3 +32,11 @@ use-x-chat/stream
 use-x-chat/stream-cancel
 
 :::
+
+### 多项建议
+
+:::demo 通过定制能力，返回多个推荐内容。
+
+use-x-chat/suggestions
+
+:::
