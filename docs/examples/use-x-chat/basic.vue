@@ -25,6 +25,7 @@ const roles: BubbleListProps['roles'] = {
 
 const mockSuccess = ref(false);
 const content = ref('');
+const senderLoading = ref(false);
 
 const setContent = (v: string) => {
   content.value = v;
@@ -33,7 +34,10 @@ const setContent = (v: string) => {
 // Agent for request
 const {agent} = useXAgent({
   request: async ({ message }, { onSuccess, onError }) => {
+    senderLoading.value = true;
     await sleep();
+
+    senderLoading.value = false;
 
     mockSuccess.value = !mockSuccess.value;
 
@@ -66,7 +70,7 @@ defineRender(() => {
         }))}
       />
       <Sender
-        loading={agent.value.isRequesting()}
+        loading={senderLoading.value}
         value={content.value}
         onChange={setContent}
         onSubmit={(nextContent) => {

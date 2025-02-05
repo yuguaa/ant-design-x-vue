@@ -18,10 +18,12 @@ const roles: (typeof Bubble.List)['roles'] = {
 };
 
 const content = ref('');
+const senderLoading = ref(false);
 
 // Agent for request
 const { agent } = useXAgent({
   request: async ({ message }, { onSuccess, onUpdate }) => {
+    senderLoading.value = true;
     const fullContent = `Streaming output instead of Bubble typing effect. You typed: ${message}`;
     let currentContent = '';
 
@@ -30,6 +32,7 @@ const { agent } = useXAgent({
       onUpdate(currentContent);
 
       if (currentContent === fullContent) {
+        senderLoading.value = false;
         clearInterval(id);
         onSuccess(fullContent);
       }
@@ -55,7 +58,7 @@ defineRender(() => {
         }))}
       />
       <Sender
-        loading={agent.value.isRequesting()}
+        loading={senderLoading.value}
         value={content.value}
         onChange={(v) => content.value = v}
         onSubmit={(nextContent) => {
