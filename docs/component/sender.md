@@ -124,6 +124,13 @@ type SpeechConfig = {
 };
 ```
 
+### Sender Slots
+
+| 插槽名 | 说明 |
+| --- | --- |
+| header | 头部面板 |
+| prefix | 前缀内容 |
+
 #### Sender Ref
 
 | 属性 | 说明 | 类型 | 默认值 | 版本 |

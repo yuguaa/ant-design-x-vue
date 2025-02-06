@@ -1,10 +1,7 @@
 <script setup lang="tsx">
 import { Flex, Input } from 'ant-design-vue';
 import classnames from 'classnames';
-import useMergedState from '../_util/hooks/useMergedState';
 import pickAttrs from '../_util/pick-attrs';
-// import getValue from 'rc-util/lib/utils/get';
-// import useProxyImperativeHandle from '../_util/hooks/use-proxy-imperative-handle';
 import useXComponentConfig from '../_util/hooks/use-x-component-config';
 import { useXProviderContext } from '../x-provider';
 import SenderHeaderContextProvider from './context';
@@ -61,6 +58,21 @@ const {
 
 const emit = defineEmits<{
   'update:value': [value: string];
+}>();
+
+const slots = defineSlots<{
+  header?(): VNode;
+  prefix?(): VNode;
+  actions?(props?: {
+    ori?: VNode,
+    info?: {
+      components: {
+        SendButton: typeof SendButton;
+        ClearButton: typeof ClearButton;
+        LoadingButton: typeof LoadingButton;
+      };
+    }
+  }): VNode;
 }>();
 
 // ============================= MISC =============================
@@ -218,32 +230,50 @@ const actionNode = computed(() => {
     </Flex>
   );
 
+  const info = {
+    components: {
+      SendButton,
+      ClearButton,
+      LoadingButton,
+    },
+  }
+
   // Custom actions
-  if (typeof actions === 'function') {
-    _actionNode = actions(_actionNode, {
-      components: {
-        SendButton,
-        ClearButton,
-        LoadingButton,
-      },
-    });
+  if (slots.actions) {
+    _actionNode = slots.actions({ ori: _actionNode, info });
+  } else if (typeof actions === 'function') {
+    _actionNode = actions(_actionNode, info);
   } else if (actions) {
     _actionNode = actions;
   }
   return _actionNode;
 });
 
+const headerComp = computed(() => {
+  if (slots.header) {
+    return slots.header();
+  }
+  return header;
+});
+
+const prefixComp = computed(() => {
+  if (slots.prefix) {
+    return slots.prefix();
+  }
+  return prefix;
+});
+
 defineRender(() => {
   return wrapCSSVar(
     <div ref={containerRef} class={mergedCls.value} style={{ ...contextConfig.value.style, ...style }}>
       {/* Header */}
-      {header && (
-        <SenderHeaderContextProvider value={{ prefixCls: prefixCls.value }}>{header}</SenderHeaderContextProvider>
+      {headerComp.value && (
+        <SenderHeaderContextProvider value={{ prefixCls: prefixCls.value }}>{headerComp.value}</SenderHeaderContextProvider>
       )}
 
       <div class={`${prefixCls.value}-content`} onMousedown={onContentMouseDown}>
         {/* Prefix */}
-        {prefix && (
+        {prefixComp.value && (
           <div
             class={classnames(
               `${prefixCls.value}-prefix`,
@@ -252,7 +282,7 @@ defineRender(() => {
             )}
             style={{ ...contextConfig.value.styles.prefix, ...styles.prefix }}
           >
-            {prefix}
+            {prefixComp.value}
           </div>
         )}
 
