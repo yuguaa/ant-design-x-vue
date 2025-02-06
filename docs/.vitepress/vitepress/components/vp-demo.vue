@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, getCurrentInstance, ref, toRef } from 'vue'
 import { isClient, useClipboard, useToggle } from '@vueuse/core'
-import { Divider, Tooltip, theme } from 'ant-design-vue'
+import { App, Divider, Tooltip, theme } from 'ant-design-vue'
 import { XProvider } from 'ant-design-x-vue'
 import { CaretUpFilled, CodepenOutlined, ThunderboltOutlined, FunctionOutlined } from '@ant-design/icons-vue'
 // import { useLang } from '../composables/lang'
@@ -77,7 +77,9 @@ const copyCode = async () => {
 
     <div class="example">
       <div class="example-showcase">
-        <slot name="source" />
+        <App>
+          <slot name="source" />
+        </App>
       </div>
 
       <Divider style="margin: 0;" />
