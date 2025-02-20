@@ -1,7 +1,11 @@
 # Ant Design X Vue
 
-[![NPM version](https://img.shields.io/npm/v/ant-design-x-vue.svg?style=flat)](https://npmjs.org/package/ant-design-x-vue)
-[![NPM downloads](http://img.shields.io/npm/dm/ant-design-x-vue.svg?style=flat)](https://npmjs.org/package/ant-design-x-vue)
+[![npm version][npm-version-src]][npm-version-href]
+[![npm downloads][npm-downloads-src]][npm-downloads-href]
+[![bundle][bundle-src]][bundle-href]
+[![Github Actions][github-actions-src]][github-actions-href]
+![Netlify Build][netlify-build-src]
+[![License][license-src]][license-href]
 
 Ant Design X For Vue. 🔥
 
@@ -70,3 +74,17 @@ $ pnpm lint
 ## LICENSE
 
 MIT
+
+<!-- Badges -->
+
+[npm-version-src]: https://img.shields.io/npm/v/ant-design-x-vue.svg?style=flat
+[npm-version-href]: https://npmjs.com/package/ant-design-x-vue
+[npm-downloads-src]: https://img.shields.io/npm/dm/ant-design-x-vue.svg?style=flat
+[npm-downloads-href]: https://npmjs.com/package/ant-design-x-vue
+[bundle-src]: https://img.shields.io/bundlephobia/minzip/ant-design-x-vue?style=flat
+[bundle-href]: https://bundlephobia.com/result?p=ant-design-x-vue
+[github-actions-src]: https://img.shields.io/github/actions/workflow/status/wzc520pyfm/ant-design-x-vue/ci.yml?branch=main&style=flat
+[github-actions-href]: https://github.com/wzc520pyfm/ant-design-x-vue/actions?query=workflow%3Aci
+[netlify-build-src]: https://img.shields.io/netlify/cb006e4e-afce-4c3e-9652-6f8a065b5b6e
+[license-src]: https://img.shields.io/github/license/wzc520pyfm/ant-design-x-vue?style=flat
+[license-href]: https://github.com/wzc520pyfm/ant-design-x-vue/blob/main/LICENSE
