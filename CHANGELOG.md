@@ -1,6 +1,31 @@
 # Changelog
 
 
+## v0.1.4
+
+[compare changes](https://undefined/undefined/compare/v0.1.3...v0.1.4)
+
+### 🩹 Fixes
+
+- Fix prop type for defineProps (#72)
+- **sender:** Fix actions style (#78)
+
+### 📖 Documentation
+
+- **attachments:** Fix typo and add file-card props description (#59)
+
+### 🏡 Chore
+
+- Add more badge (#54)
+
+### 🤖 CI
+
+- Fix ci (#75)
+
+### ❤️ Contributors
+
+- Wzc520pyfm ([@wzc520pyfm](http://github.com/wzc520pyfm))
+
 ## v0.1.3
 
 [compare changes](https://undefined/undefined/compare/0.1.2...v0.1.3)
