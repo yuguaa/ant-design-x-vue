@@ -97,6 +97,7 @@ export default defineConfig({
         ]
       }
     ],
+    outline:[2,3],
 
     sidebar: {
       '/component/': [
