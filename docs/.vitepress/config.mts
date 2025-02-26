@@ -90,6 +90,12 @@ export default defineConfig({
     nav: [
       { text: '组件', link: '/component/overview' },
       { text: '演示', link: '/playground/independent' },
+      {
+        text: '更多',
+        items: [
+          { text: 'Ant Design X of React', link: 'https://x.ant.design/index-cn' },
+        ]
+      }
     ],
 
     sidebar: {
