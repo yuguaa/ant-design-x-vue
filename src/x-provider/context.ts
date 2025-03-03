@@ -44,9 +44,9 @@ export interface XComponentStyleConfig {
   style: CSSProperties;
 }
 
-type DefaultPickType = keyof XComponentStyleConfig;
+export type DefaultPickType = keyof XComponentStyleConfig;
 
-type ComponentStyleConfig<
+export type ComponentStyleConfig<
   CompProps extends AnyObject,
   PickType extends keyof CompProps = DefaultPickType,
 > = Pick<CompProps, PickType | DefaultPickType>;
