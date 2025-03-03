@@ -1,6 +1,37 @@
 # Changelog
 
 
+## v1.0.2
+
+[compare changes](https://undefined/undefined/compare/v1.0.1...v1.0.2)
+
+### 🚀 Enhancements
+
+- **bubble:** Add index to roles function for bubble list (#108)
+- Add stackblitz playground (#115)
+
+### 🩹 Fixes
+
+- **attachments:** Fix Attachments broken image (#94)
+- Fix the problem that the BubbleList component cannot trigger scrolling (#101)
+
+### 📦 Build
+
+- Fix pkg error (b0aa3da)
+
+### 🏡 Chore
+
+- Enhance readme (#106)
+- Remove react deps (#82)
+
+### ❤️ Contributors
+
+- Zoey Zhao ([@zoeyzhao19](http://github.com/zoeyzhao19))
+- Wzc520pyfm ([@wzc520pyfm](http://github.com/wzc520pyfm))
+- Wangyonghui0394 ([@wangyonghui0394](http://github.com/wangyonghui0394))
+- Linhf123 ([@linhf123](http://github.com/linhf123))
+- 李慧峰 ([@enootttt](http://github.com/enootttt))
+
 ## v1.0.1
 
 [compare changes](https://undefined/undefined/compare/v1.0.0...v1.0.1)
