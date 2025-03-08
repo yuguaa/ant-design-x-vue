@@ -91,7 +91,7 @@ interface PlaceholderType {
 
 ## Semantic DOM
 
-<!-- <code src="./demo/_semantic.tsx" simplify="true"></code> -->
+<vp-semantic component="Attachments"></vp-semantic>
 
 ## 主题变量（Design Token）
 
