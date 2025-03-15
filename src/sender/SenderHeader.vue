@@ -35,12 +35,14 @@ const headerCls = computed(() => `${SendHeaderContext.value.prefixCls}-header`)
 const attrs = useAttrs();
 defineRender(() => {
   return (
-    <TransitionCollapse 
+    <TransitionCollapse
       prefixCls={SendHeaderContext.value.prefixCls}
     >
       {
-        open && <div
+        <div
           {...attrs}
+          v-if={open || forceRender}
+          v-show={open}
           class={classNames(headerCls.value, className)}
           style={{
             ...style,
