@@ -4,9 +4,9 @@
 `ant-design-x-vue` 是遵循 Ant Design 设计体系的一个 Vue UI 库，是 `@ant-design/x` 的 Vue 实现，用于构建由 AI 驱动的界面，一键接入智能对话组件与 API 服务。
 
 <div style="display: flex; align-items: center; gap: 20px;">
-  <img width="150" src="./../public/images/x-logo.svg"/>
+  <img width="150" src="/images/x-logo.svg"/>
   <span style="color: rgb(170, 170, 170); font-size: 30px; use-select: none;">+</span>
-  <img width="160" src="./../public/images/vue.svg"/>
+  <img width="160" src="/images/vue.svg"/>
 </div>
 
 ---
