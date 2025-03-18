@@ -40,7 +40,7 @@
     "build": "vite build && vue-tsc --project ../../tsconfig.build.json",
     "build:watch": "vite build --watch",
     "changelog": "changelogen --release",
-    "release": "run-s test changelog build release",
+    "release": "run-s test changelog build publish",
     "publish": "npm publish && git push --follow-tags",
     "test": "pnpm --filter @ant-design-x-vue/components test"
   },
