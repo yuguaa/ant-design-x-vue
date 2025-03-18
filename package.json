@@ -10,6 +10,7 @@
   "scripts": {
     "build": "pnpm --filter ant-design-x-vue build",
     "build:watch": "pnpm --filter ant-design-x-vue build:watch",
+    "build:docs": "run-s build docs:build --continue-on-error",
     "docs:build": "pnpm run -C docs build",
     "docs:dev": "pnpm run -C docs dev",
     "docs:preview": "pnpm run -C docs preview",
