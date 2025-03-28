@@ -1,6 +1,36 @@
 # Changelog
 
 
+## v1.0.7
+
+[compare changes](https://undefined/undefined/compare/v1.0.5...v1.0.7)
+
+### 🚀 Enhancements
+
+- Add unplugin-vue-components resolver (#172)
+
+### 🩹 Fixes
+
+- **conversation:** Fixed display issue where long Conversation names would not be truncated (#166)
+- **bubble:** Fix avatar slot no work (#180)
+- **bubble:** Fix avatar visible err (#186)
+
+### 📖 Documentation
+
+- Update slogan (101db11)
+- Add auto import resolver doc (#179)
+- **sender:** Add basic setup demo (#181)
+
+### 🏡 Chore
+
+- **release:** V1.0.6 (5e743e9)
+
+### ❤️ Contributors
+
+- Wzc520pyfm ([@wzc520pyfm](http://github.com/wzc520pyfm))
+- Bao ([@Bao0630](http://github.com/Bao0630))
+- YuePeng ([@erupts](http://github.com/erupts))
+
 ## v1.0.6
 [compare changes](https://undefined/undefined/compare/v1.0.5...v1.0.6)
 ### 🚀 Enhancements
