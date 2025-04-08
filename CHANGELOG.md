@@ -1,6 +1,37 @@
 # Changelog
 
 
+## v1.0.8
+
+[compare changes](https://undefined/undefined/compare/v1.0.7...v1.0.8)
+
+### 🚀 Enhancements
+
+- **sender:** Add files param to the onPasteFile callback (#201)
+- Attachments add imageProps (#209)
+- **sender:** Add autoSize property (#212)
+
+### 🩹 Fixes
+
+- Fix resolver types path (#200)
+- **attachments:** Fix FileList scroll button is not shown (#203)
+- **attachments:** Fix onRemove no work (#204)
+- **sender:** Extend onFocus and onBlur events from TextAreaProps (#210)
+
+### 📖 Documentation
+
+- **conversations:** Fix with menu demo err (#197)
+- **conversations:** Add conversation setup demo (#192)
+
+### 🏡 Chore
+
+- Add pnpm9.x for play (#202)
+
+### ❤️ Contributors
+
+- Wzc520pyfm ([@wzc520pyfm](http://github.com/wzc520pyfm))
+- Bao ([@Bao0630](http://github.com/Bao0630))
+
 ## v1.0.7
 
 [compare changes](https://undefined/undefined/compare/v1.0.5...v1.0.7)
