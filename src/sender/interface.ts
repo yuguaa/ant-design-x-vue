@@ -70,6 +70,7 @@ export interface SenderProps {
   allowSpeech?: AvoidValidation<AllowSpeech>;
   prefix?: VNode;
   header?: VNode;
+  autoSize?: boolean | { minRows?: number; maxRows?: number };
 }
 
 export type SenderRef = {
