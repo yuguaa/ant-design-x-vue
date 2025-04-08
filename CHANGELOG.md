@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.0.9
+
+[compare changes](https://undefined/undefined/compare/v1.0.8...v1.0.9)
+
+### 🩹 Fixes
+
+- **sender:** Fix header transition err (#224)
+
+### 🏡 Chore
+
+- Update vue-macros version to 2.14.5 (#188)
+
+### ❤️ Contributors
+
+- Wzc520pyfm ([@wzc520pyfm](http://github.com/wzc520pyfm))
+
 ## v1.0.8
 
 [compare changes](https://undefined/undefined/compare/v1.0.7...v1.0.8)
