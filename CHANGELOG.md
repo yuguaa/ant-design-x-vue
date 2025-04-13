@@ -1,6 +1,39 @@
 # Changelog
 
 
+## v1.1.0
+
+[compare changes](https://undefined/undefined/compare/v1.0.9...v1.1.0)
+
+### 🚀 Enhancements
+
+- Add conversations's menu trigger (#217)
+- **sender:** Add footer (#213)
+
+### 🩹 Fixes
+
+- **build:** Define process.env.NODE_ENV to resolve "process is not defined" error (#229)
+- **sender:** Fix actions disabled logic (#221)
+
+### 💅 Refactors
+
+- **sender:** Refactor actions click logic (#222)
+
+### 📖 Documentation
+
+- Improve README (#228)
+- Add all prompts setup usage examples (#231)
+- **sender:** Add actions setup demo (#230)
+- **sender:** Add sender setup example (#233)
+- **sender:** Add setup demo for custom actions style (#234)
+
+### ❤️ Contributors
+
+- Wzc520pyfm ([@wzc520pyfm](http://github.com/wzc520pyfm))
+- Bao ([@Bao0630](http://github.com/Bao0630))
+- K.Os ([@chaosll](http://github.com/chaosll))
+- W2xi ([@w2xi](http://github.com/w2xi))
+
 ## v1.0.9
 
 [compare changes](https://undefined/undefined/compare/v1.0.8...v1.0.9)
