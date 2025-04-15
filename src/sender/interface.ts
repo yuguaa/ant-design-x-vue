@@ -77,7 +77,7 @@ export interface SenderProps {
   prefix?: VNode;
   footer?: VNode | FooterRender;
   header?: VNode;
-  autoSize?: boolean | { minRows?: number; maxRows?: number };
+  autoSize?: AvoidValidation<boolean | { minRows?: number; maxRows?: number }>;
 }
 
 export type SenderRef = {
