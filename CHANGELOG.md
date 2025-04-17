@@ -1,6 +1,36 @@
 # Changelog
 
 
+## v1.1.1
+
+[compare changes](https://undefined/undefined/compare/v1.1.0...v1.1.1)
+
+### 🩹 Fixes
+
+- **sender:** Fix auto-size prop type (927f19b)
+- **sender:** Sender header style (#242)
+- **playground:** Example showcase overflow style (#253)
+- **sender:** Fix actions and footer slot type (#250)
+- **sender:** Fix auto-size prop passed (#256)
+
+### 📖 Documentation
+
+- **x-provider:** Add x-provider setup demo (#243)
+- **attachments:** Fix with-sender setup demo err (#246)
+- **playground:** Add independent template+setup+ts demo. (#239)
+- **sender:** Add sender footer setup demo (#244)
+- **conversations:** Add conversations menu trigger setup demo (#245)
+
+### 🏡 Chore
+
+- Add requirement for vue version to be 3.5+ (#251)
+
+### ❤️ Contributors
+
+- Bao ([@Bao0630](http://github.com/Bao0630))
+- Wzc520pyfm ([@wzc520pyfm](http://github.com/wzc520pyfm))
+- Hihanley ([@hihanley](http://github.com/hihanley))
+
 ## v1.1.0
 
 [compare changes](https://undefined/undefined/compare/v1.0.9...v1.1.0)
