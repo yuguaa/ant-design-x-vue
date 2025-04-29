@@ -1,6 +1,27 @@
 # Changelog
 
 
+## v1.1.2
+
+[compare changes](https://undefined/undefined/compare/v1.1.1...v1.1.2)
+
+### 🩹 Fixes
+
+- **conversations:** Fix groupable type of conversations. (#257)
+- **x-provider & sender:** Fix type define resolver err (#262)
+- **attachments:** Fix img style (#268)
+
+### 📖 Documentation
+
+- Add favicon (#265)
+- Fix demo app warpper hydration (#260)
+
+### ❤️ Contributors
+
+- Wzc520pyfm ([@wzc520pyfm](http://github.com/wzc520pyfm))
+- Hihanley ([@hihanley](http://github.com/hihanley))
+- Clddup ([@clddup](http://github.com/clddup))
+
 ## v1.1.1
 
 [compare changes](https://undefined/undefined/compare/v1.1.0...v1.1.1)
