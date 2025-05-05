@@ -27,7 +27,7 @@ export interface _AvatarProps extends AvatarProps {
   style: CSSProperties;
 }
 
-export interface BubbleProps extends /* @vue-ignore */ Omit<HTMLAttributes, 'content'> {
+export interface BubbleProps<ContentType extends BubbleContentType = string> extends /* @vue-ignore */ Omit<HTMLAttributes, 'content'> {
   prefixCls?: string;
   rootClassName?: string;
   styles?: Partial<Record<SemanticType, CSSProperties>>;
@@ -36,8 +36,8 @@ export interface BubbleProps extends /* @vue-ignore */ Omit<HTMLAttributes, 'con
   placement?: 'start' | 'end';
   loading?: boolean;
   typing?: AvoidValidation<TypingOption | boolean>;
-  content?: VNode | object | string;
-  messageRender?: (content: string) => VNode | string;
+  content?: BubbleContentType;
+  messageRender?: (content: ContentType) => VNode | string;
   loadingRender?: () => VNode;
   variant?: 'filled' | 'borderless' | 'outlined' | 'shadow';
   shape?: 'round' | 'corner';
