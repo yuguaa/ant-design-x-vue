@@ -1,6 +1,35 @@
 # Changelog
 
 
+## v1.2.0
+
+[compare changes](https://undefined/undefined/compare/v1.1.2...v1.2.0)
+
+### 🚀 Enhancements
+
+- **bubble:** Footer support function (#285)
+
+### 🩹 Fixes
+
+- **sender:** Fix loading btn icon prop (#286)
+- **theme:** Fix theme system (#270)
+
+### 💅 Refactors
+
+- **bubble:** Type messageRender (#284)
+
+### 📦 Build
+
+- Improve build conf and dist (#272)
+
+### 🏡 Chore
+
+- Update lockfile (#283)
+
+### ❤️ Contributors
+
+- Wzc520pyfm ([@wzc520pyfm](http://github.com/wzc520pyfm))
+
 ## v1.1.2
 
 [compare changes](https://undefined/undefined/compare/v1.1.1...v1.1.2)
