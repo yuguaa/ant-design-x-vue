@@ -9,6 +9,7 @@
 [![License][license-src]][license-href]
 
 [![jsDelivr][jsdelivr-src]][jsdelivr-href]
+[![unpkg][unpkg-src]][unpkg-href]
 
 [![deepwiki][deepwiki-src]][deepwiki-href]
 
@@ -125,6 +126,7 @@ $ pnpm lint
 [license-href]: https://github.com/wzc520pyfm/ant-design-x-vue/blob/main/LICENSE
 [jsdelivr-src]: https://data.jsdelivr.com/v1/package/npm/ant-design-x-vue/badge
 [jsdelivr-href]: https://www.jsdelivr.com/package/npm/ant-design-x-vue
-
+[unpkg-src]: https://img.shields.io/badge/unpkg-white?style=flat-square
+[unpkg-href]: https://unpkg.com/ant-design-x-vue
 [deepwiki-src]: https://img.shields.io/badge/deepwiki-f8f7f6?style=flat
 [deepwiki-href]: https://deepwiki.com/wzc520pyfm/ant-design-x-vue
