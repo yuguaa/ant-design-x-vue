@@ -1,6 +1,34 @@
 # Changelog
 
 
+## v1.2.2
+
+[compare changes](https://undefined/undefined/compare/v1.2.1...v1.2.2)
+
+### 🩹 Fixes
+
+- **bubble:** Fix message slot type (73a9bc8)
+- **bubble:** Fix content param for footer func (#309)
+- **attachment:** Fix template ref value (#310)
+
+### 📖 Documentation
+
+- **bubble:** Update types about content (bd5ace2)
+- Update a new contributions charts (#304)
+
+### 📦 Build
+
+- External import starting with ant-design-vue (#316)
+
+### 🏡 Chore
+
+- Add unpkg badge (#289)
+
+### ❤️ Contributors
+
+- Wzc520pyfm ([@wzc520pyfm](http://github.com/wzc520pyfm))
+- Shinji-Li <1349021570@qq.com>
+
 ## v1.2.1
 
 [compare changes](https://undefined/undefined/compare/v1.2.0...v1.2.1)
