@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.2.3
+
+[compare changes](https://undefined/undefined/compare/v1.2.2...v1.2.3)
+
+### 🩹 Fixes
+
+- **attachments:** Fix maximum updates by ref transfer (#319)
+
+### ❤️ Contributors
+
+- Wzc520pyfm ([@wzc520pyfm](http://github.com/wzc520pyfm))
+
 ## v1.2.2
 
 [compare changes](https://undefined/undefined/compare/v1.2.1...v1.2.2)
