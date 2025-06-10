@@ -1,6 +1,35 @@
 # Changelog
 
 
+## v1.2.5
+
+[compare changes](https://undefined/undefined/compare/v1.2.4...v1.2.5)
+
+### 🚀 Enhancements
+
+- **bubble:** Header support function (#341)
+- **sender:** Header and prefix support getter (#324)
+
+### 🩹 Fixes
+
+- Passing Conversations menu.getPopupContainer to Dropdown (#303)
+- **thought-chain:** Fixed ellipsis not taking effect. (#254)
+
+### 📖 Documentation
+
+- Remove api key and add description for api key (#335)
+- **thought-chain:** Add controlled setup demo (#321)
+- **conversations:** Add editable demo (#91)
+- **bubble:** Add think demo (#138)
+- **bubble:** Add think setup demo (#299)
+
+### ❤️ Contributors
+
+- Superlollipop ([@quanbisen](http://github.com/quanbisen))
+- Wzc520pyfm ([@wzc520pyfm](http://github.com/wzc520pyfm))
+- InCBle ([@inCBle](http://github.com/inCBle))
+- Linhf123 ([@linhf123](http://github.com/linhf123))
+
 ## v1.2.4
 
 [compare changes](https://undefined/undefined/compare/v1.2.3...v1.2.4)
