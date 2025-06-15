@@ -1,6 +1,25 @@
 # Changelog
 
 
+## v1.2.6
+
+[compare changes](https://undefined/undefined/compare/v1.2.5...v1.2.6)
+
+### 🩹 Fixes
+
+- **bubble:** Fix header and footer warning of runtime prop checked (#353)
+- **bubble:** Fix display count reactive (#354)
+
+### 📖 Documentation
+
+- **playground:** Add playground copilot demo (#346)
+- Update basic demo stackblitz link (#355)
+
+### ❤️ Contributors
+
+- Wzc520pyfm ([@wzc520pyfm](http://github.com/wzc520pyfm))
+- Bao ([@Bao0630](http://github.com/Bao0630))
+
 ## v1.2.5
 
 [compare changes](https://undefined/undefined/compare/v1.2.4...v1.2.5)
