@@ -1,6 +1,32 @@
 # Changelog
 
 
+## v1.2.7
+
+[compare changes](https://undefined/undefined/compare/v1.2.6...v1.2.7)
+
+### 🚀 Enhancements
+
+- **prompts:** Title prop support vnode getter (#344)
+- Add install func for components (#329)
+
+### 🩹 Fixes
+
+- **sender:** Fix actions slot type (#357)
+- **bubble:** Fix slots type (#363)
+- **project:** Add require conf of resolver to support commonjs (#365)
+- **sender:** Fix sender define type err (#271)
+
+### 📦 Build
+
+- **project:** Remove antdv from external of umd conf (#367)
+- **project:** Add esm output of dist (#368)
+
+### ❤️ Contributors
+
+- Wzc520pyfm ([@wzc520pyfm](http://github.com/wzc520pyfm))
+- 雨溪 ([@yuxi-ovo](http://github.com/yuxi-ovo))
+
 ## v1.2.6
 
 [compare changes](https://undefined/undefined/compare/v1.2.5...v1.2.6)
