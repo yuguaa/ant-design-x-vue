@@ -13,6 +13,7 @@
 
 - **bubble:** Fix attrs reactive of bubble list (#393)
 - **bubble:** Improve bubble list scrollbar style (#389)
+- **suggestion:** Cascader dropdown popup height not auto (#398)
 
 ### 📦 Build
 
@@ -21,6 +22,7 @@
 ### ❤️ Contributors
 
 - Wzc520pyfm ([@wzc520pyfm](http://github.com/wzc520pyfm))
+- 雨溪 ([@yuxi-ovo](http://github.com/yuxi-ovo))
 
 ## v1.2.8
 
