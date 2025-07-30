@@ -113,7 +113,7 @@ interface PlaceholderType {
 | 属性          | 说明             | 类型                 | 版本 |
 | ------------- | ---------------- | -------------------- | ---- |
 | nativeElement | 获取原生节点     | HTMLElement          | -    |
-| upload        | 手工调用上传文件 | (file: File) => void | -    |
+| upload        | 手工调用上传文件 | (file: File \| File[] \| FileList) => void | -    |
 
 ### Attachments.FileCard Props
 

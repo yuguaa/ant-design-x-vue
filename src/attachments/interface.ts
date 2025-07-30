@@ -51,7 +51,6 @@ export interface FileListProps {
   itemStyle?: CSSProperties;
 }
 
-
 export interface FileListCardProps {
   prefixCls?: string;
   item: Attachment;
@@ -152,7 +151,7 @@ export interface AttachmentsProps extends AntdUploadProps {
 
 export interface AttachmentsRef {
   nativeElement: HTMLDivElement | null;
-  upload: (file: File) => void;
+  upload: (file: File | File[] | FileList) => void;
 }
 
 
