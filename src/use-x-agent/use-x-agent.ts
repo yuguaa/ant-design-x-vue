@@ -107,7 +107,7 @@ export default function useXAgent<
             baseURL: restConfig.baseURL!,
             model: restConfig.model,
             dangerouslyApiKey: restConfig.dangerouslyApiKey,
-          }).create,
+          }).value.create,
         ...restConfig,
       });
     });
