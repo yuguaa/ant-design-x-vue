@@ -1,6 +1,25 @@
 # Changelog
 
 
+## v1.3.1
+
+[compare changes](https://undefined/undefined/compare/v1.3.0...v1.3.1)
+
+### 🩹 Fixes
+
+- **bubble:** Remove memo to fix bubble update (#415)
+
+### 📖 Documentation
+
+- **style:** 修改演示demo 宽度 #411 (#413, #411)
+- **attachments:** Add high-quality preview example for image file (#370)
+- **sender:** Add custom input demo (#384)
+
+### ❤️ Contributors
+
+- Wzc520pyfm ([@wzc520pyfm](http://github.com/wzc520pyfm))
+- Clddup ([@clddup](http://github.com/clddup))
+
 ## v1.3.0
 
 [compare changes](https://undefined/undefined/compare/v1.2.9...v1.3.0)
