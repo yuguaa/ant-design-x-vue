@@ -10,13 +10,13 @@ defineOptions({ name: 'AXUseXChatModel' });
  * 🔔 Please replace the BASE_URL, PATH, MODEL, API_KEY with your own values.
  */
 
-const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_deepseekr1';
+const BASE_URL = 'https://api.x.ant.design/api/llm_siliconflow_deepSeek-r1-distill-1wen-7b';
 
 /**
  * 🔔 The MODEL is fixed in the current request, please replace it with your BASE_UR and MODEL
  */
 
-const MODEL = 'deepseek-ai/DeepSeek-R1';
+const MODEL = 'DeepSeek-R1-Distill-Qwen-7B';
 
 /**
  * 🔔 the API_KEY is a placeholder indicator interface that has a built-in real API_KEY
@@ -71,19 +71,34 @@ const { onRequest, messages } = useXChat({
   },
   transformMessage: (info) => {
     const { originMessage, chunk } = info || {};
-    let currentText = '';
+    let currentContent = '';
+    let currentThink = '';
     try {
-        if (chunk?.data && !chunk?.data.includes('DONE')) {
-          const message = JSON.parse(chunk?.data);
-          currentText = !message?.choices?.[0].delta?.reasoning_content
-            ? ''
-            : message?.choices?.[0].delta?.reasoning_content;
-        }
-      } catch (error) {
-        console.error(error);
+      if (chunk?.data && !chunk?.data.includes('DONE')) {
+        const message = JSON.parse(chunk?.data);
+        currentThink = message?.choices?.[0]?.delta?.reasoning_content || '';
+        currentContent = message?.choices?.[0]?.delta?.content || '';
       }
+    } catch (error) {
+      console.error(error);
+    }
+
+    let content = '';
+
+    if (!originMessage?.content && currentThink) {
+      content = `<think>${currentThink}`;
+    } else if (
+      originMessage?.content?.includes('<think>') &&
+      !originMessage?.content.includes('</think>') &&
+      currentContent
+    ) {
+      content = `${originMessage?.content}</think>${currentContent}`;
+    } else {
+      content = `${originMessage?.content || ''}${currentThink}${currentContent}`;
+    }
+
     return {
-      content: (originMessage?.content || '') + currentText,
+      content,
       role: 'assistant',
     };
   },
